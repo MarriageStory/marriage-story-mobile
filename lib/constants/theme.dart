@@ -27,3 +27,5 @@ const double defaultBorderRadius = 15.0;
 const double defaultPadding = 20.0;
 const double defaultPadding2 = 30.0;
 const double defaultPadding3 = 40.0;
+
+const double marginTop = 64.0;

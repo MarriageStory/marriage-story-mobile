@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/modules/home/views/home_client_view.dart';
 import '../modules/auth/auth.dart';
 import '../modules/role/role.dart';
 import '../modules/splash/splash.dart';
 import '../modules/landing/landing.dart';
+import '../modules/home/home.dart';
 
 part './app_routes.dart';
 
@@ -34,6 +36,11 @@ class AppPages {
       name: RouteName.register,
       page: () => RegisterScreen(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: RouteName.homeClient,
+      page: () => HomeClientView(),
+      binding: HomeClientBinding(),
     ),
   ];
 }

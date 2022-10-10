@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/modules/home/views/home_client_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'routes/routes.dart';
 
@@ -27,8 +28,9 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Nunito'
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: AppPages.initial,
+          // initialRoute: AppPages.initial,
           getPages: AppPages.pages,
+          initialRoute: '/home-client',
         );
       }
     );

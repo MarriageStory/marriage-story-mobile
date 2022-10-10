@@ -6,5 +6,6 @@ abstract class RouteName {
   static const landing = '/landing';
   static const login = '/login';
   static const register = '/register';
+  static const homeClient = '/home-client';
   
 }
