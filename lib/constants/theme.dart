@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // Colors
 const Color colorWhite = Color(0xFFFCFCFC);
+const Color colorGrey = Color(0xff828282);
 const Color colorBlack = Color(0xFF202124);
 const Color colorPink1 = Color(0xFFFBC0C0);
 const Color colorPink2 = Color(0xFFFB8DA0);
@@ -13,6 +14,7 @@ TextStyle fontNunito = const TextStyle(fontFamily: 'Nunito');
 
 // Font Weight
 FontWeight light = FontWeight.w300;
+FontWeight regular = FontWeight.w400;
 FontWeight medium = FontWeight.w500;
 FontWeight semiBold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
@@ -23,4 +25,5 @@ const double defaultBorderRadius = 15.0;
 
 // Padding
 const double defaultPadding = 20.0;
-const double defaultPadding2 = 40.0;
+const double defaultPadding2 = 30.0;
+const double defaultPadding3 = 40.0;

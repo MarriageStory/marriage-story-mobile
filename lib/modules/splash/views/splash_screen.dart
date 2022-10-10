@@ -11,14 +11,18 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 100.h,
+      width: 100.w,
       decoration: const BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [colorPink2, colorPink3])),
-    child: Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [colorPink2, colorPink3],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
           children: <Widget>[
             Center(
               child: Image.asset(
@@ -28,7 +32,7 @@ class SplashScreen extends StatelessWidget {
             )
           ],
         ),
-    ),
+      ),
     );
   }
 }
