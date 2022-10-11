@@ -17,80 +17,78 @@ class LandingScreen extends StatelessWidget {
       child: SizedBox(
         height: 100.h,
         width: 100.w,
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: defaultPadding, vertical: defaultPadding2),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 100.w,
-                      height: 6.h,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Get.toNamed(RouteName.login);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: colorPink2),
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: defaultPadding, vertical: defaultPadding2),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    width: 100.w,
+                    height: 6.h,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Get.toNamed(RouteName.login);
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: colorPink2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
                         ),
-                        child: Text(
-                          "Masuk",
-                          style: fontNunito.copyWith(
-                            fontSize: 14,
-                            fontWeight: bold,
-                            color: colorPink2,
-                          ),
+                      ),
+                      child: Text(
+                        "Masuk",
+                        style: fontNunito.copyWith(
+                          fontSize: 14,
+                          fontWeight: bold,
+                          color: colorPink2,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 2.h,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  Container(
+                    width: 100.w,
+                    height: 6.h,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [colorPink2, colorPink3],
+                      ),
+                      borderRadius:
+                          BorderRadius.circular(defaultBorderRadius),
                     ),
-                    Container(
-                      width: 100.w,
-                      height: 6.h,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [colorPink2, colorPink3],
-                        ),
-                        borderRadius:
-                            BorderRadius.circular(defaultBorderRadius),
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () => Get.toNamed(RouteName.register),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                          ),
-                        ),
-                        child: Text(
-                          "Daftar",
-                          style: fontNunito.copyWith(
-                            color: colorWhite,
-                            fontSize: 14,
-                            fontWeight: bold,
-                          ),
+                    child: ElevatedButton(
+                      onPressed: () => Get.toNamed(RouteName.register),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(defaultBorderRadius),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      child: Text(
+                        "Daftar",
+                        style: fontNunito.copyWith(
+                          color: colorWhite,
+                          fontSize: 14,
+                          fontWeight: bold,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

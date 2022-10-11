@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/modules/home/views/home_client_view.dart';
 import '../modules/auth/auth.dart';
 import '../modules/role/role.dart';
 import '../modules/splash/splash.dart';
 import '../modules/landing/landing.dart';
 import '../modules/home/home.dart';
+import '../modules/events/event.dart';
 
 part './app_routes.dart';
 
@@ -41,6 +41,11 @@ class AppPages {
       name: RouteName.homeClient,
       page: () => HomeClientView(),
       binding: HomeClientBinding(),
+    ),
+    GetPage(
+      name: RouteName.eventClient,
+      page: () => EventClientView(),
+      binding: EventClientBinding(),
     ),
   ];
 }

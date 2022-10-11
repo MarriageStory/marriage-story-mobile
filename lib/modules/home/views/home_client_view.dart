@@ -24,6 +24,8 @@ class HomeClientView extends StatelessWidget {
               top: marginTop,
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,14 +66,14 @@ class HomeClientView extends StatelessWidget {
                   padding: const EdgeInsets.all(defaultPadding2),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
                       colors: [colorPink2, colorPink3],
                     ),
                     boxShadow: [
                       BoxShadow(
-                        blurRadius: 6,
-                        offset: const Offset(1, 1),
+                        blurRadius: 2,
+                        offset: const Offset(0, 0),
                         color: colorGrey.withOpacity(0.25),
                       ),
                     ],
@@ -101,9 +103,189 @@ class HomeClientView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 2.h,
+                  height: 3.h,
                 ),
-                const HomeClientEmpty(),
+                Text(
+                  "Acara",
+                  style: fontNunito.copyWith(
+                    color: colorGrey,
+                    fontWeight: semiBold,
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(defaultBorderRadius),
+                    color: colorWhite,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 4,
+                        offset: const Offset(1, 1),
+                        color: colorGrey.withOpacity(0.25),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/poster-1.png",
+                          height: 12.h,
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Pernikahan ",
+                              style: fontNunito.copyWith(
+                                color: colorBlack,
+                                fontWeight: bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
+                              "23 Agustus 2022",
+                              style: fontNunito.copyWith(
+                                color: colorGrey,
+                                fontWeight: medium,
+                                fontSize: 12,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            SizedBox(
+                              width: 50.w,
+                              child: Wrap(
+                                spacing: 5.0,
+                                runSpacing: 5.0,
+                                direction: Axis.horizontal,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 3, horizontal: 6),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                        color: colorPink2,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Pre-wedding",
+                                      style: fontNunito.copyWith(
+                                        color: colorPink2,
+                                        fontWeight: semiBold,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 3,
+                                      horizontal: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                        color: colorPink2,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "Engagement",
+                                      style: fontNunito.copyWith(
+                                        color: colorPink2,
+                                        fontWeight: semiBold,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Text(
+                  "Agenda Selanjutnya",
+                  style: fontNunito.copyWith(
+                    color: colorGrey,
+                    fontWeight: semiBold,
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(
+                  height: 1.h,
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          color: colorGrey.withOpacity(0.25),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(defaultPadding),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kegiatan hari ini",
+                                style: fontNunito.copyWith(
+                                  color: colorBlack,
+                                  fontWeight: bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                "23 Agustus 2022",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: medium,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "20:00",
+                            style: fontNunito.copyWith(
+                              color: colorPink2,
+                              fontWeight: extraBold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

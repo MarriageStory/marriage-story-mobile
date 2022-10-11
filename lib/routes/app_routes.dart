@@ -7,5 +7,6 @@ abstract class RouteName {
   static const login = '/login';
   static const register = '/register';
   static const homeClient = '/home-client';
+  static const eventClient = '/event-client';
   
 }

@@ -21,11 +21,11 @@ class HomeClientEmpty extends StatelessWidget {
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: defaultPadding),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: colorPink3, width: 2),
+                    borderSide: const BorderSide(color: colorPink3, width: 1),
                     borderRadius: BorderRadius.circular(defaultBorderRadius),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: colorPink1, width: 1),
+                    borderSide: const BorderSide(color: colorPink1, width: 0.1),
                     borderRadius: BorderRadius.circular(defaultBorderRadius),
                   ),
                   hintText: 'Masukan Kode Acara',

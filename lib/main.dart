@@ -5,7 +5,6 @@ import 'package:marriage_story_mobile/modules/home/views/home_client_view.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'routes/routes.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -20,20 +19,15 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return ResponsiveSizer(
-      builder: (context,orientation, screenType) {
-        return GetMaterialApp(
-          title: 'Marriage Story',
-          theme: ThemeData(
-            fontFamily: 'Nunito'
-          ),
-          debugShowCheckedModeBanner: false,
-          // initialRoute: AppPages.initial,
-          getPages: AppPages.pages,
-          initialRoute: '/home-client',
-        );
-      }
-    );
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return GetMaterialApp(
+        title: 'Marriage Story',
+        theme: ThemeData(fontFamily: 'Nunito'),
+        debugShowCheckedModeBanner: false,
+        // initialRoute: AppPages.initial,
+        getPages: AppPages.pages,
+        initialRoute: '/event-client',
+      );
+    });
   }
 }
-
