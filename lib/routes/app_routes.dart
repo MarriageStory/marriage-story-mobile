@@ -10,8 +10,5 @@ abstract class RouteName {
   static const other = '/other';
   static const homeClient = '/home-client';
   static const eventClient = '/event-client';
-  static const detailEventClient = '/detail-event-client';
-  static const paymentClient = '/payment-client';
-  static const detailTaskClient = '/detail-task-client';
   
 }

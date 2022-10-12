@@ -75,6 +75,14 @@ class AppPages {
       name: RouteName.detailTaskClient,
       page: () => DetailTaskClientView(),
       binding: DetailTaskClientBinding(),
+      name: RouteName.homeWeddingOrganizer,
+      page: () => HomeWeddingOrganizerView(),
+      binding: HomeWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.eventWeddingOrganizer,
+      page: () => EventWeddingOrganizerView(),
+      binding: EventWeddingOrganizerBinding(),
     ),
   ];
 }
