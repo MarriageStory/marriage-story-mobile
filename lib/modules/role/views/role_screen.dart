@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/routes.dart';
 import 'package:marriage_story_mobile/widgets/background_welcome.dart';
-import '../controllers/role_controller.dart';
+import '../role.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RoleScreen extends StatelessWidget {
-  const RoleScreen({Key? key}) : super(key: key);
+  RoleScreen({Key? key}) : super(key: key);
+  final RoleController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWelcome(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/theme.dart';
+import '../home.dart';
+import '../../../constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomeClientEmpty extends StatelessWidget {
-  const HomeClientEmpty({Key? key}) : super(key: key);
+  HomeClientEmpty({Key? key}) : super(key: key);
+  final HomeClientController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

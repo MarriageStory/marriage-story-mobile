@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/modules/home/views/home_client_view.dart';
+import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'routes/routes.dart';
 
@@ -22,11 +22,14 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return GetMaterialApp(
         title: 'Marriage Story',
-        theme: ThemeData(fontFamily: 'Nunito'),
+        theme: ThemeData(
+          fontFamily: 'Nunito',
+          accentColor: colorWhite,
+        ),
         debugShowCheckedModeBanner: false,
         // initialRoute: AppPages.initial,
         getPages: AppPages.pages,
-        initialRoute: '/event-client',
+        initialRoute: '/detail-task-client',
       );
     });
   }

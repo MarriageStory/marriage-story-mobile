@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
-import 'package:marriage_story_mobile/widgets/home_client_empty.dart';
+import 'package:marriage_story_mobile/modules/home/views/home_client_empty.dart';
 import '../controllers/home_client_controller.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -14,8 +14,6 @@ class HomeClientView extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: 100.h,
-          width: 100.w,
           color: colorWhite,
           child: Padding(
             padding: const EdgeInsets.only(
@@ -42,11 +40,11 @@ class HomeClientView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "user.name,",
+                          "Afnan Amiludin",
                           style: fontNunito.copyWith(
                             color: colorPink3,
                             fontWeight: bold,
-                            fontSize: 25,
+                            fontSize: 20,
                           ),
                         ),
                       ],
@@ -92,7 +90,7 @@ class HomeClientView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Pengantin ",
+                        "Pengantin Afnan",
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: bold,
@@ -233,9 +231,172 @@ class HomeClientView extends StatelessWidget {
                 SizedBox(
                   height: 1.h,
                 ),
-                InkWell(
+                GestureDetector(
                   onTap: () {},
                   child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          color: colorGrey.withOpacity(0.25),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(defaultPadding),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kegiatan hari ini",
+                                style: fontNunito.copyWith(
+                                  color: colorBlack,
+                                  fontWeight: bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                "23 Agustus 2022",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: medium,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "20:00",
+                            style: fontNunito.copyWith(
+                              color: colorPink2,
+                              fontWeight: extraBold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          color: colorGrey.withOpacity(0.25),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(defaultPadding),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kegiatan hari ini",
+                                style: fontNunito.copyWith(
+                                  color: colorBlack,
+                                  fontWeight: bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                "23 Agustus 2022",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: medium,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "20:00",
+                            style: fontNunito.copyWith(
+                              color: colorPink2,
+                              fontWeight: extraBold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 3,
+                          color: colorGrey.withOpacity(0.25),
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(defaultPadding),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Kegiatan hari ini",
+                                style: fontNunito.copyWith(
+                                  color: colorBlack,
+                                  fontWeight: bold,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                "23 Agustus 2022",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: medium,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "20:00",
+                            style: fontNunito.copyWith(
+                              color: colorPink2,
+                              fontWeight: extraBold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(defaultBorderRadius),
                       color: colorWhite,
