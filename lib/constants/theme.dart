@@ -22,6 +22,7 @@ FontWeight extraBold = FontWeight.w800;
 
 // Border Radius
 const double defaultBorderRadius = 15.0;
+const double defaultBorderRadius2 = 30.0;
 
 // Padding
 const double defaultPadding = 20.0;

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // initialRoute: AppPages.initial,
         getPages: AppPages.pages,
-        initialRoute: '/event-client',
+        initialRoute: '/event-wedding-organizer',
       );
     });
   }

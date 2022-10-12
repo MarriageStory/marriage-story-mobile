@@ -47,5 +47,15 @@ class AppPages {
       page: () => EventClientView(),
       binding: EventClientBinding(),
     ),
+    GetPage(
+      name: RouteName.homeWeddingOrganizer,
+      page: () => HomeWeddingOrganizerView(),
+      binding: HomeWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.eventWeddingOrganizer,
+      page: () => EventWeddingOrganizerView(),
+      binding: EventWeddingOrganizerBinding(),
+    ),
   ];
 }
