@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../controllers/home_wo_controller.dart';
+import '../home.dart';
 
 class HomeWeddingOrganizerBinding extends Bindings {
   @override

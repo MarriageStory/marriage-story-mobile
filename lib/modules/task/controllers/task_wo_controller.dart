@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class DetailEventClientController extends GetxController {
+class TaskWeddingOrganizerController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit

@@ -24,14 +24,11 @@ class MyApp extends StatelessWidget {
         title: 'Marriage Story',
         theme: ThemeData(
           fontFamily: 'Nunito',
-          accentColor: colorWhite,
         ),
         debugShowCheckedModeBanner: false,
         // initialRoute: AppPages.initial,
         getPages: AppPages.pages,
-
-        initialRoute: '/detail-task-client',
-
+        initialRoute: '/detail-payment-wo',
       );
     });
   }

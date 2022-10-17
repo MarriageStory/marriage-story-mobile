@@ -4,9 +4,9 @@ import 'package:marriage_story_mobile/constants/theme.dart';
 import '../event.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class DetailEventClientView extends StatelessWidget {
-  DetailEventClientView({Key? key}) : super(key: key);
-  final EventClientController controller = Get.find();
+class DetailEventWeddingOrganizerView extends StatelessWidget {
+  DetailEventWeddingOrganizerView({Key? key}) : super(key: key);
+  final EventWeddingOrganizerController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +53,123 @@ class DetailEventClientView extends StatelessWidget {
               ),
               SizedBox(
                 height: 5.h,
+              ),
+              SizedBox(
+                width: 70.w,
+                height: 5.h,
+                child: Wrap(
+                  spacing: 5.0,
+                  runSpacing: 5.0,
+                  direction: Axis.horizontal,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 3, horizontal: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: colorPink2,
+                        ),
+                      ),
+                      child: Text(
+                        "Pre-wedding",
+                        style: fontNunito.copyWith(
+                          color: colorPink2,
+                          fontWeight: semiBold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 3,
+                        horizontal: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: colorPink2,
+                        ),
+                      ),
+                      child: Text(
+                        "Engagement",
+                        style: fontNunito.copyWith(
+                          color: colorPink2,
+                          fontWeight: semiBold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 3,
+                        horizontal: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: colorPink2,
+                        ),
+                      ),
+                      child: Text(
+                        "Akaad",
+                        style: fontNunito.copyWith(
+                          color: colorPink2,
+                          fontWeight: semiBold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 3,
+                        horizontal: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: colorPink2,
+                        ),
+                      ),
+                      child: Text(
+                        "Lainnya",
+                        style: fontNunito.copyWith(
+                          color: colorPink2,
+                          fontWeight: semiBold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 3,
+                        horizontal: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: colorPink2,
+                        ),
+                      ),
+                      child: Text(
+                        "Lainnya",
+                        style: fontNunito.copyWith(
+                          color: colorPink2,
+                          fontWeight: semiBold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 2.h,
               ),
               Container(
                 height: 23.h,
@@ -151,103 +268,117 @@ class DetailEventClientView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 2.h,
+                height: 1.5.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 12.h,
+                    width: 43.w,
+                    padding: const EdgeInsets.all(defaultPadding),
+                    decoration: BoxDecoration(
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 6,
+                          offset: const Offset(1, 1),
+                          color: colorGrey.withOpacity(0.25),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "3",
+                          style: fontNunito.copyWith(
+                            color: colorPink3,
+                            fontWeight: extraBold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          "Jumlah Agenda",
+                          style: fontNunito.copyWith(
+                            color: colorBlack,
+                            fontWeight: medium,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 12.h,
+                    width: 43.w,
+                    padding: const EdgeInsets.all(defaultPadding),
+                    decoration: BoxDecoration(
+                      color: colorWhite,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 6,
+                          offset: const Offset(1, 1),
+                          color: colorGrey.withOpacity(0.25),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "10",
+                          style: fontNunito.copyWith(
+                            color: colorPink3,
+                            fontWeight: extraBold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          "Agenda Selesai",
+                          style: fontNunito.copyWith(
+                            color: colorBlack,
+                            fontWeight: medium,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
               SizedBox(
-                width: 70.w,
-                height: 5.h,
-                child: Wrap(
-                  spacing: 5.0,
-                  runSpacing: 5.0,
-                  direction: Axis.horizontal,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 3, horizontal: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: colorPink2,
-                        ),
-                      ),
-                      child: Text(
-                        "Pre-wedding",
-                        style: fontNunito.copyWith(
-                          color: colorPink2,
-                          fontWeight: semiBold,
-                          fontSize: 11,
-                        ),
-                      ),
+                height: 1.5.h,
+              ),
+              Container(
+                width: 100.w,
+                height: 6.h,
+                decoration: BoxDecoration(
+                  color: colorPink1,
+                  borderRadius: BorderRadius.circular(defaultBorderRadius),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                  ),
+                  child: Text(
+                    "Lihat Agenda",
+                    style: fontNunito.copyWith(
+                      color: colorWhite,
+                      fontSize: 14,
+                      fontWeight: bold,
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 3,
-                        horizontal: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: colorPink2,
-                        ),
-                      ),
-                      child: Text(
-                        "Engagement",
-                        style: fontNunito.copyWith(
-                          color: colorPink2,
-                          fontWeight: semiBold,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 3,
-                        horizontal: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: colorPink2,
-                        ),
-                      ),
-                      child: Text(
-                        "Akaad",
-                        style: fontNunito.copyWith(
-                          color: colorPink2,
-                          fontWeight: semiBold,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 3,
-                        horizontal: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: colorPink2,
-                        ),
-                      ),
-                      child: Text(
-                        "Lainnya",
-                        style: fontNunito.copyWith(
-                          color: colorPink2,
-                          fontWeight: semiBold,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(
-                height: 3.h,
+                height: 5.h,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -357,6 +488,9 @@ class DetailEventClientView extends StatelessWidget {
                     ],
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 5.h ,
               )
             ],
           ),

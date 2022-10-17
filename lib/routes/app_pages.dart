@@ -16,6 +16,7 @@ class AppPages {
   static const initial = RouteName.splash;
 
   static final pages = [
+    //Welcome Page
     GetPage(
       name: RouteName.splash,
       page: () => SplashScreen(),
@@ -25,6 +26,11 @@ class AppPages {
       name: RouteName.navigationClient,
       page: () => NavigationClientView(),
       binding: NavigationClientBinding(),
+    ),
+    GetPage(
+      name: RouteName.navigationWo,
+      page: () => NavigationWeddingOrganizerView(),
+      binding: NavigationWeddingOrganizerBinding(),
     ),
     GetPage(
       name: RouteName.role,
@@ -51,6 +57,8 @@ class AppPages {
       page: () => OtherView(),
       binding: OtherBinding(),
     ),
+
+    //Client Page
     GetPage(
       name: RouteName.homeClient,
       page: () => HomeClientView(),
@@ -64,17 +72,21 @@ class AppPages {
     GetPage(
       name: RouteName.detailEventClient,
       page: () => DetailEventClientView(),
-      binding: DetailEventClientBinding(),
+      binding: EventClientBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailTaskClient,
+      page: () => DetailTaskClientView(),
+      binding: DetailTaskClientBinding(),
     ),
     GetPage(
       name: RouteName.paymentClient,
       page: () => PaymentClientView(),
       binding: PaymentClientBinding(),
     ),
+
+    // Wedding Organizer Page
     GetPage(
-      name: RouteName.detailTaskClient,
-      page: () => DetailTaskClientView(),
-      binding: DetailTaskClientBinding(),
       name: RouteName.homeWeddingOrganizer,
       page: () => HomeWeddingOrganizerView(),
       binding: HomeWeddingOrganizerBinding(),
@@ -83,6 +95,41 @@ class AppPages {
       name: RouteName.eventWeddingOrganizer,
       page: () => EventWeddingOrganizerView(),
       binding: EventWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailEventWeddingOrganizer,
+      page: () => DetailEventWeddingOrganizerView(),
+      binding: EventWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.addEventWeddingOrganizer1,
+      page: () => AddEvent1View(),
+      binding: EventWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.addEventWeddingOrganizer2,
+      page: () => AddEvent2View(),
+      binding: EventWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.addEventWeddingOrganizer3,
+      page: () => AddEvent3View(),
+      binding: EventWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.taskWeddingOrganizer,
+      page: () => TaskWeddingOrganizerView(),
+      binding: TaskWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.paymentWo,
+      page: () => PaymentWeddingOrganizerView(),
+      binding: PaymentWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailPaymentWo,
+      page: () => DetailPaymentWeddingOrganizerView(),
+      binding: PaymentWeddingOrganizerBinding(),
     ),
   ];
 }

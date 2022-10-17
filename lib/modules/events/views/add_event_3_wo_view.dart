@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
-import '../event.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../event.dart';
 
-class DetailEventClientView extends StatelessWidget {
-  DetailEventClientView({Key? key}) : super(key: key);
-  final EventClientController controller = Get.find();
+class AddEvent3View extends StatelessWidget {
+  AddEvent3View({Key? key}) : super(key: key);
+  final EventWeddingOrganizerController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class DetailEventClientView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Detail",
+                      "Tambah",
                       style: fontNunito.copyWith(
                         color: colorBlack,
                         fontWeight: bold,
@@ -277,57 +277,23 @@ class DetailEventClientView extends StatelessWidget {
                   SizedBox(
                     height: 3.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Total Pembayaran :",
-                            style: fontNunito.copyWith(
-                              color: colorGrey,
-                              fontWeight: medium,
-                              fontSize: 14,
-                            ),
-                          ),
-                          Text(
-                            "Rp 30.000.000",
-                            style: fontNunito.copyWith(
-                              color: colorBlack,
-                              fontWeight: extraBold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        width: 40.w,
-                        height: 5.h,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [colorPink2, colorPink3],
-                          ),
-                          borderRadius:
-                              BorderRadius.circular(defaultBorderRadius),
+                      Text(
+                        "Total Pembayaran :",
+                        style: fontNunito.copyWith(
+                          color: colorGrey,
+                          fontWeight: medium,
+                          fontSize: 14,
                         ),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                          ),
-                          child: Text(
-                            "Lihat Pembayaran",
-                            style: fontNunito.copyWith(
-                              color: colorWhite,
-                              fontSize: 14,
-                              fontWeight: bold,
-                            ),
-                          ),
+                      ),
+                      Text(
+                        "Rp 30.000.000",
+                        style: fontNunito.copyWith(
+                          color: colorBlack,
+                          fontWeight: extraBold,
+                          fontSize: 18,
                         ),
                       ),
                     ],
@@ -357,7 +323,42 @@ class DetailEventClientView extends StatelessWidget {
                     ],
                   ),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 47.w,
+                    height: 5.h,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [colorPink2, colorPink3],
+                      ),
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                      ),
+                      child: Text(
+                        "Selesai",
+                        style: fontNunito.copyWith(
+                          color: colorWhite,
+                          fontSize: 14,
+                          fontWeight: bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
