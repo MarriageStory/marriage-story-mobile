@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           // initialRoute: AppPages.initial,
           getPages: AppPages.pages,
-          initialRoute: '/detail-task-wo',
+          initialRoute: AppPages.initial,
         );
       },
     );

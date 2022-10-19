@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../routes/routes.dart';
 import '../payments.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
@@ -100,7 +101,7 @@ class PaymentClientView extends StatelessWidget {
                             BorderRadius.circular(defaultBorderRadius),
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: ()=> Get.toNamed(RouteName.addTransactionClient),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
                           shadowColor: Colors.transparent,
@@ -134,7 +135,7 @@ class PaymentClientView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10),
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () => Get.toNamed(RouteName.detailTransactionClient),
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 5),
                       decoration: BoxDecoration(

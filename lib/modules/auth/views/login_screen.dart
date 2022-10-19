@@ -4,6 +4,7 @@ import 'package:marriage_story_mobile/constants/theme.dart';
 import '../controllers/login_controller.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:marriage_story_mobile/widgets/background_auth.dart';
+import 'package:marriage_story_mobile/routes/routes.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -125,7 +126,8 @@ class LoginScreen extends StatelessWidget {
                             BorderRadius.circular(defaultBorderRadius),
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () =>
+                            Get.offAllNamed(RouteName.navigationWo),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
                           shadowColor: Colors.transparent,

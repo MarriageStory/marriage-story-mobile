@@ -77,10 +77,7 @@ class DetailTaskWeddingOrganizerView extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
-            Obx(() => Checkbox(
-                  value: isChecked.value,
-                  onChanged: (checked)[isChecked.value = checked ?? false],
-                )),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

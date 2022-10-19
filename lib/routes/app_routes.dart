@@ -26,4 +26,6 @@ abstract class RouteName {
   static const addTaskWo = '/add-task-wo';
   static const detailPaymentWo = '/detail-payment-wo';
   static const detailTransactionWo = '/detail-transaction-wo';
+  static const detailTransactionClient = '/detail-transaction-client';
+  static const addTransactionClient = '/add-transaction-client';
 }

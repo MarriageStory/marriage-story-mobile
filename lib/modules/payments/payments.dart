@@ -6,3 +6,5 @@ export './controllers/payment_wo_controller.dart';
 export './views/payment_wo_view.dart';
 export './views/detail_payment_wo_view.dart';
 export './views/detail_transaction_wo_view.dart';
+export 'views/detail_transaction_client_view.dart';
+export './views/add_transaction_client_view.dart';

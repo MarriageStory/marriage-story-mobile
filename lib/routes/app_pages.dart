@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../modules/navigation/navigation.dart';
 import '../modules/auth/auth.dart';
@@ -145,6 +146,16 @@ class AppPages {
       name: RouteName.detailTaskWo,
       page: () => DetailTaskWeddingOrganizerView(),
       binding: TaskWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailTransactionClient,
+      page: () => DetailTransactionClientView(),
+      binding: PaymentClientBinding(),
+    ),
+    GetPage(
+      name: RouteName.addTransactionClient,
+      page: () => AddTransactionClientView(),
+      binding: PaymentClientBinding(),
     ),
   ];
 }

@@ -4,6 +4,7 @@ import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/home/views/home_client_empty.dart';
 import '../controllers/home_client_controller.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:marriage_story_mobile/routes/routes.dart';
 
 class HomeClientView extends StatelessWidget {
   HomeClientView({Key? key}) : super(key: key);
@@ -115,7 +116,7 @@ class HomeClientView extends StatelessWidget {
                   height: 1.h,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () => Get.toNamed(RouteName.detailEventClient),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(defaultBorderRadius),
@@ -235,169 +236,7 @@ class HomeClientView extends StatelessWidget {
                   height: 1.h,
                 ),
                 GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      color: colorWhite,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3,
-                          color: colorGrey.withOpacity(0.25),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(defaultPadding),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kegiatan hari ini",
-                                style: fontNunito.copyWith(
-                                  color: colorBlack,
-                                  fontWeight: bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "23 Agustus 2022",
-                                style: fontNunito.copyWith(
-                                  color: colorGrey,
-                                  fontWeight: medium,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            "20:00",
-                            style: fontNunito.copyWith(
-                              color: colorPink2,
-                              fontWeight: extraBold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      color: colorWhite,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3,
-                          color: colorGrey.withOpacity(0.25),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(defaultPadding),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kegiatan hari ini",
-                                style: fontNunito.copyWith(
-                                  color: colorBlack,
-                                  fontWeight: bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "23 Agustus 2022",
-                                style: fontNunito.copyWith(
-                                  color: colorGrey,
-                                  fontWeight: medium,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            "20:00",
-                            style: fontNunito.copyWith(
-                              color: colorPink2,
-                              fontWeight: extraBold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                      color: colorWhite,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 3,
-                          color: colorGrey.withOpacity(0.25),
-                        ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(defaultPadding),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Kegiatan hari ini",
-                                style: fontNunito.copyWith(
-                                  color: colorBlack,
-                                  fontWeight: bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                "23 Agustus 2022",
-                                style: fontNunito.copyWith(
-                                  color: colorGrey,
-                                  fontWeight: medium,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            "20:00",
-                            style: fontNunito.copyWith(
-                              color: colorPink2,
-                              fontWeight: extraBold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {},
+                  onTap: () => Get.toNamed(RouteName.detailTaskClient),
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
