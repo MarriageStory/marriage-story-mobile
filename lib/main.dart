@@ -19,17 +19,19 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return ResponsiveSizer(builder: (context, orientation, screenType) {
-      return GetMaterialApp(
-        title: 'Marriage Story',
-        theme: ThemeData(
-          fontFamily: 'Nunito',
-        ),
-        debugShowCheckedModeBanner: false,
-        // initialRoute: AppPages.initial,
-        getPages: AppPages.pages,
-        initialRoute: '/detail-payment-wo',
-      );
-    });
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return GetMaterialApp(
+          title: 'Marriage Story',
+          theme: ThemeData(
+            fontFamily: 'Nunito',
+          ),
+          debugShowCheckedModeBanner: false,
+          // initialRoute: AppPages.initial,
+          getPages: AppPages.pages,
+          initialRoute: '/detail-task-wo',
+        );
+      },
+    );
   }
 }

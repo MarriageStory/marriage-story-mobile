@@ -117,7 +117,7 @@ class AppPages {
       binding: EventWeddingOrganizerBinding(),
     ),
     GetPage(
-      name: RouteName.taskWeddingOrganizer,
+      name: RouteName.taskWo,
       page: () => TaskWeddingOrganizerView(),
       binding: TaskWeddingOrganizerBinding(),
     ),
@@ -130,6 +130,21 @@ class AppPages {
       name: RouteName.detailPaymentWo,
       page: () => DetailPaymentWeddingOrganizerView(),
       binding: PaymentWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailTransactionWo,
+      page: () => DetailTransactionWeddingOrganizerView(),
+      binding: PaymentWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.addTaskWo,
+      page: () => AddTaskWeddingOrganizerView(),
+      binding: TaskWeddingOrganizerBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailTaskWo,
+      page: () => DetailTaskWeddingOrganizerView(),
+      binding: TaskWeddingOrganizerBinding(),
     ),
   ];
 }

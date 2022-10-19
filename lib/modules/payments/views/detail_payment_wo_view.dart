@@ -16,7 +16,7 @@ class DetailPaymentWeddingOrganizerView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 60.h,
+            height: 50.h,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.centerLeft,
@@ -64,7 +64,7 @@ class DetailPaymentWeddingOrganizerView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 3.h,
+                    height: 7.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -75,7 +75,7 @@ class DetailPaymentWeddingOrganizerView extends StatelessWidget {
                           Text(
                             "Pernikahan Aan dan Ainul",
                             style: fontNunito.copyWith(
-                              color: colorWhite.withOpacity(0.5),
+                              color: colorWhite.withOpacity(0.7),
                               fontWeight: bold,
                               fontSize: 14,
                             ),
@@ -83,7 +83,7 @@ class DetailPaymentWeddingOrganizerView extends StatelessWidget {
                           Text(
                             "23 Agustus 2022",
                             style: fontNunito.copyWith(
-                              color: colorWhite.withOpacity(0.5),
+                              color: colorWhite.withOpacity(0.7),
                               fontWeight: bold,
                               fontSize: 14,
                             ),
@@ -93,7 +93,7 @@ class DetailPaymentWeddingOrganizerView extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 3.h,
+                    height: 5.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -129,7 +129,7 @@ class DetailPaymentWeddingOrganizerView extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 30.h,
+            height: 42.h,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: ListView(
