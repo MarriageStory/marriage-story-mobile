@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 import '../event.dart';
@@ -109,7 +110,8 @@ class EventWeddingOrganizerView extends StatelessWidget {
                   width: 5.w,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Get.toNamed(RouteName.addEventWeddingOrganizer1),
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                     padding: const EdgeInsets.all(10),
@@ -140,7 +142,8 @@ class EventWeddingOrganizerView extends StatelessWidget {
                     height: 1.h,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () =>
+                        Get.toNamed(RouteName.detailEventWeddingOrganizer),
                     child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 5),
                       decoration: BoxDecoration(

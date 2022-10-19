@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 import '../home.dart';
@@ -202,7 +203,7 @@ class HomeWeddingOrganizerView extends StatelessWidget {
                 height: 1.h,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () => Get.toNamed(RouteName.detailEventWeddingOrganizer),
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(

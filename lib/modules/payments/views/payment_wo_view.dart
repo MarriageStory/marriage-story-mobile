@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import '../payments.dart';
@@ -221,7 +222,8 @@ class PaymentWeddingOrganizerView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () =>
+                                  Get.toNamed(RouteName.detailPaymentWo),
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.transparent,
                                 shadowColor: Colors.transparent,

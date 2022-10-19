@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:marriage_story_mobile/widgets/selected_card_vendor.dart';
@@ -144,7 +145,8 @@ class AddEvent1View extends StatelessWidget {
                       borderRadius: BorderRadius.circular(defaultBorderRadius),
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () =>
+                          Get.toNamed(RouteName.addEventWeddingOrganizer2),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
                         shadowColor: Colors.transparent,

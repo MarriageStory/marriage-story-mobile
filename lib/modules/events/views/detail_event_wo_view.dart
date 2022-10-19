@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import '../event.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -362,7 +363,7 @@ class DetailEventWeddingOrganizerView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(defaultBorderRadius),
                 ),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Get.toNamed(RouteName.taskWo),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.transparent,
                     shadowColor: Colors.transparent,
@@ -446,7 +447,8 @@ class DetailEventWeddingOrganizerView extends StatelessWidget {
                               BorderRadius.circular(defaultBorderRadius),
                         ),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Get.toNamed(RouteName.detailPaymentWo),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.transparent,
                             shadowColor: Colors.transparent,
@@ -490,7 +492,7 @@ class DetailEventWeddingOrganizerView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 5.h ,
+                height: 5.h,
               )
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/card_list_task.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -162,7 +163,7 @@ class TaskWeddingOrganizerView extends StatelessWidget {
                   Button(
                     height: 6.h,
                     width: 100.w,
-                    onTap: () {},
+                    onTap: () => Get.toNamed(RouteName.addTaskWo),
                     colorBg: colorPink1,
                     label: "Tambah Agenda",
                     textColor: colorWhite,
@@ -181,7 +182,7 @@ class TaskWeddingOrganizerView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10),
                 children: [
                   CardListTask(
-                    onTap: () {},
+                    onTap: () => Get.toNamed(RouteName.detailTaskWo),
                     label: "Kegiatan Hari",
                     date: "23 April 2022",
                     time: "20:00",

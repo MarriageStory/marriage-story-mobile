@@ -77,7 +77,6 @@ class DetailTaskWeddingOrganizerView extends StatelessWidget {
             SizedBox(
               height: 5.h,
             ),
-            
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
