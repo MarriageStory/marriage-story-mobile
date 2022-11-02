@@ -13,6 +13,6 @@ class SplashController extends GetxController {
       const Duration(seconds: 3),
       () {},
     );
-    Get.offAllNamed(RouteName.role);
+    Get.offAllNamed(RouteName.landing);
   }
 }
