@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../modules/navigation/navigation.dart';
 import '../modules/auth/auth.dart';

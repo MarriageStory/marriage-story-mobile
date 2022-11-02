@@ -11,6 +11,8 @@ class AddEvent1View extends StatelessWidget {
   AddEvent1View({Key? key}) : super(key: key);
   final EventWeddingOrganizerController controller = Get.find();
 
+  List selectedPackage = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +126,13 @@ class AddEvent1View extends StatelessWidget {
                       ),
                     ),
                   ],
-                  onChange: ((selectedItems, selectedItem) {}),
+                  onChange: ((selectedItems, selectedItem) {
+                    if (selectedPackage.contains(selectedItem)) {
+                      selectedPackage.remove(selectedItem);
+                    } else {
+                      selectedPackage.add(selectedItem);
+                    }
+                  }),
                 ),
               ),
               SizedBox(
@@ -145,8 +153,10 @@ class AddEvent1View extends StatelessWidget {
                       borderRadius: BorderRadius.circular(defaultBorderRadius),
                     ),
                     child: ElevatedButton(
-                      onPressed: () =>
-                          Get.toNamed(RouteName.addEventWeddingOrganizer2),
+                      onPressed: () => {
+                        print(selectedPackage),
+                        // Get.toNamed(RouteName.addEventWeddingOrganizer2),
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
                         shadowColor: Colors.transparent,
