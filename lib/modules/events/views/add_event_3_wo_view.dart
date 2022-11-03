@@ -343,7 +343,7 @@ class AddEvent3View extends StatelessWidget {
                       borderRadius: BorderRadius.circular(defaultBorderRadius),
                     ),
                     child: ElevatedButton(
-                      onPressed: () => Get.toNamed(RouteName.navigationWo),
+                      onPressed: () => Get.toNamed(RouteName.navigation),
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
                         shadowColor: Colors.transparent,

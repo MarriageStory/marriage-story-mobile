@@ -49,7 +49,7 @@ class RegisterController extends GetxController {
           color: Colors.white,
         ),
       );
-      Get.offAllNamed(RouteName.navigationClient);
+      Get.offAllNamed(RouteName.navigation);
     } else {
       Map<String, dynamic> error = jsonDecode(registerResponse.body);
       Get.snackbar(

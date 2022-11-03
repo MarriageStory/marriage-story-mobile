@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/modules/navigation/controllers/navigation_controller.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/events/event.dart';
@@ -8,14 +9,14 @@ import 'package:marriage_story_mobile/modules/navigation/navigation.dart';
 import 'package:marriage_story_mobile/modules/other/other.dart';
 import 'package:marriage_story_mobile/modules/payments/payments.dart';
 
-class NavigationWeddingOrganizerView extends StatelessWidget {
-  NavigationWeddingOrganizerView({Key? key}) : super(key: key);
-  final NavigationWeddingOrganizerController controller = Get.find();
+class NavigationView extends StatelessWidget {
+  NavigationView({Key? key}) : super(key: key);
+  final NavigationController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder<NavigationWeddingOrganizerController>(
+      body: GetBuilder<NavigationController>(
         builder: (c) {
           return IndexedStack(
             index: controller.tabIndex,
@@ -35,8 +36,8 @@ class NavigationWeddingOrganizerView extends StatelessWidget {
           width: 100.w,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-            child: GetBuilder<NavigationWeddingOrganizerController>(
-              init: NavigationWeddingOrganizerController(),
+            child: GetBuilder<NavigationController>(
+              init: NavigationController(),
               builder: (controller) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

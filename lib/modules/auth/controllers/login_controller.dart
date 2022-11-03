@@ -24,39 +24,24 @@ class LoginController extends GetxController {
         'email': emailTextController.text,
         'password': passwordTextController.text,
       };
-      isLoading = true;
 
       var loginResponse = await AuthService.authLogin(input);
 
-      Storage.saveValue('token', loginResponse?.accessToken);
+      await Storage.saveValue('token', loginResponse?.accessToken);
 
-      var user = await AuthService.userProfile();
+      final user = await AuthService.userProfile();
 
-      if (user!.roleName == "Client") {
-        Get.snackbar(
-          'Berhasil Masuk !',
-          'Selamat Datang ',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.check,
-            color: Colors.white,
-          ),
-        );
-        Get.offAllNamed(RouteName.navigationClient);
-      } else if (user!.roleName == "WeddingOrganize") {
-        Get.snackbar(
-          'Berhasil Masuk !',
-          'Selamat Datang ',
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-          icon: const Icon(
-            Icons.check,
-            color: Colors.white,
-          ),
-        );
-        Get.offAllNamed(RouteName.navigationWo);
-      }
+      Get.snackbar(
+        'Berhasil Masuk !',
+        'Selamat Datang ${user!.name}',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      );
+      Get.offAllNamed(RouteName.navigation);
     } catch (e) {
       Get.snackbar(
         'Gagal Masuk !',

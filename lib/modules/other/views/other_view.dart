@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/routes/routes.dart';
+import 'package:marriage_story_mobile/utils/storage.dart';
 import '../other.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -46,7 +48,7 @@ class OtherView extends StatelessWidget {
                         height: 1.h,
                       ),
                       Text(
-                        "Afnan",
+                        controller.homeController.user.value.name,
                         style: fontNunito.copyWith(
                           color: colorBlack,
                           fontWeight: bold,
@@ -54,7 +56,7 @@ class OtherView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "Pengantin",
+                        controller.homeController.user.value.roleName,
                         style: fontNunito.copyWith(
                           color: colorGrey.withOpacity(0.5),
                           fontWeight: semiBold,
@@ -77,7 +79,10 @@ class OtherView extends StatelessWidget {
                               BorderRadius.circular(defaultBorderRadius),
                         ),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await Storage.removeValue('token').then(
+                                (value) => Get.offAllNamed(RouteName.landing));
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.transparent,
                             shadowColor: Colors.transparent,

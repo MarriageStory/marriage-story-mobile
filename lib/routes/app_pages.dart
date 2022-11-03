@@ -23,14 +23,9 @@ class AppPages {
       binding: SplashBinding(),
     ),
     GetPage(
-      name: RouteName.navigationClient,
-      page: () => NavigationClientView(),
-      binding: NavigationClientBinding(),
-    ),
-    GetPage(
-      name: RouteName.navigationWo,
-      page: () => NavigationWeddingOrganizerView(),
-      binding: NavigationWeddingOrganizerBinding(),
+      name: RouteName.navigation,
+      page: () => NavigationView(),
+      binding: NavigationBinding(),
     ),
     GetPage(
       name: RouteName.role,
@@ -57,13 +52,6 @@ class AppPages {
       page: () => OtherView(),
       binding: OtherBinding(),
     ),
-
-    //Client Page
-    GetPage(
-      name: RouteName.homeClient,
-      page: () => HomeClientView(),
-      binding: HomeClientBinding(),
-    ),
     GetPage(
       name: RouteName.eventClient,
       page: () => EventClientView(),
@@ -87,9 +75,9 @@ class AppPages {
 
     // Wedding Organizer Page
     GetPage(
-      name: RouteName.homeWeddingOrganizer,
-      page: () => HomeWeddingOrganizerView(),
-      binding: HomeWeddingOrganizerBinding(),
+      name: RouteName.home,
+      page: () => HomeView(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: RouteName.eventWeddingOrganizer,
