@@ -4,23 +4,10 @@ import 'package:marriage_story_mobile/utils/storage.dart';
 import 'package:marriage_story_mobile/routes/routes.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
 
-import '../../../models/user_model.dart';
-
-
 class LoginController extends GetxController {
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   final isObsecured = true.obs;
-
-  var user = UserModel(
-        id: 0,
-        name: "",
-        email: "",
-        emailVerifiedAt: DateTime.now(),
-        roleName: "",
-        gencode: "",
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now()).obs;
 
   var isLoading = false;
 
@@ -38,9 +25,26 @@ class LoginController extends GetxController {
         'password': passwordTextController.text,
       };
       isLoading = true;
+
       var loginResponse = await AuthService.authLogin(input);
-      if (loginResponse != null) {
-        Storage.saveValue('token', loginResponse.accessToken);
+
+      Storage.saveValue('token', loginResponse?.accessToken);
+
+      var user = await AuthService.userProfile();
+
+      if (user!.roleName == "Client") {
+        Get.snackbar(
+          'Berhasil Masuk !',
+          'Selamat Datang ',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+        Get.offAllNamed(RouteName.navigationClient);
+      } else if (user!.roleName == "WeddingOrganize") {
         Get.snackbar(
           'Berhasil Masuk !',
           'Selamat Datang ',

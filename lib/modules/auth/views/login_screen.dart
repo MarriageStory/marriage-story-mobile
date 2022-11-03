@@ -52,6 +52,7 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextField(
+                      controller: controller.emailTextController,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide:
@@ -78,6 +79,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Obx(
                       () => TextField(
+                        controller: controller.passwordTextController,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
@@ -126,8 +128,9 @@ class LoginScreen extends StatelessWidget {
                             BorderRadius.circular(defaultBorderRadius),
                       ),
                       child: ElevatedButton(
-                        onPressed: () =>
-                            Get.offAllNamed(RouteName.navigationWo),
+                        onPressed: () {
+                          controller.login();
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.transparent,
                           shadowColor: Colors.transparent,

@@ -49,6 +49,7 @@ class RegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextField(
+                    controller: controller.nameTextController,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -74,6 +75,7 @@ class RegisterScreen extends StatelessWidget {
                     height: 2.h,
                   ),
                   TextField(
+                    controller: controller.emailTextController,
                     decoration: InputDecoration(
                       focusedBorder: OutlineInputBorder(
                         borderSide:
@@ -100,6 +102,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   Obx(
                     () => TextField(
+                      controller: controller.passwordTextController,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -144,11 +147,12 @@ class RegisterScreen extends StatelessWidget {
                         end: Alignment.centerRight,
                         colors: [colorPink2, colorPink3],
                       ),
-                      borderRadius:
-                          BorderRadius.circular(defaultBorderRadius),
+                      borderRadius: BorderRadius.circular(defaultBorderRadius),
                     ),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.register();
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.transparent,
                         shadowColor: Colors.transparent,

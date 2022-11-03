@@ -37,14 +37,14 @@ class HomeWeddingOrganizerView extends StatelessWidget {
                           fontSize: 14,
                         ),
                       ),
-                      Text(
-                        "Nama WO",
-                        style: fontNunito.copyWith(
-                          color: colorPink3,
-                          fontWeight: bold,
-                          fontSize: 20,
-                        ),
-                      ),
+                      Obx(() => Text(
+                            controller.user.value.name,
+                            style: fontNunito.copyWith(
+                              color: colorPink3,
+                              fontWeight: bold,
+                              fontSize: 20,
+                            ),
+                          )),
                     ],
                   ),
                   Image.asset(

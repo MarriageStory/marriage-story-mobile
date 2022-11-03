@@ -15,7 +15,6 @@ class AuthService {
         'email': data["email"],
         'password': data["password"],
         'role_name': data["role_name"],
-        'role_slug': data["role_slug"],
       };
 
       var response = await http.post(Uri.parse(baseURLAPI + "register"),
@@ -49,9 +48,9 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        return LoginModel.fromJson(jsonDecode(response.body)['data']);
+        return LoginModel.fromJson(jsonDecode(response.body));
       } else {
-        throw jsonDecode(response.body)['message'];
+        throw jsonDecode(response.body);
       }
     } catch (e) {
       rethrow;
@@ -78,26 +77,27 @@ class AuthService {
       if (response.statusCode == 200) {
         return true;
       } else {
-        throw Exception(jsonDecode(response.body)['message']);
+        throw Exception(jsonDecode(response.body));
       }
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<http.Response> userProfile() async {
+  static Future<UserModel?> userProfile() async {
     final token = Storage.getValue(storageToken);
 
     var response = await http.get(
       Uri.parse(baseURLAPI + "user"),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': "bearer $token",
+        'Accept': 'application/json',
+        'Authorization': "Bearer $token",
       },
     );
 
     if (response.statusCode == 200) {
-      return response;
+      return UserModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception(false);
     }
