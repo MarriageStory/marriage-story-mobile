@@ -65,8 +65,6 @@ class AppPages {
       page: () => PaymentClientView(),
       binding: PaymentClientBinding(),
     ),
-
-    // Wedding Organizer Page
     GetPage(
       name: RouteName.home,
       page: () => HomeView(),
@@ -75,6 +73,16 @@ class AppPages {
     GetPage(
       name: RouteName.event,
       page: () => EventView(),
+      binding: EventBinding(),
+    ),
+    GetPage(
+      name: RouteName.detailEvent,
+      page: () => DetailEventView(),
+      binding: EventBinding(),
+    ),
+    GetPage(
+      name: RouteName.addEvent,
+      page: () => AddEventView(),
       binding: EventBinding(),
     ),
     

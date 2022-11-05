@@ -15,13 +15,13 @@ class EventPack extends StatelessWidget {
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
-          color: colorSecondary,
+          color: colorPrimary,
         ),
       ),
       child: Text(
         label,
         style: fontNunito.copyWith(
-          color: colorSecondary,
+          color: colorPrimary,
           fontWeight: semiBold,
           fontSize: 11,
         ),

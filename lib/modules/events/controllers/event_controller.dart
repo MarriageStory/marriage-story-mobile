@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/event_service.dart';
 import '../../../models/event_model.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../routes/app_pages.dart';
 
 class EventController extends GetxController {
+
   var events = <EventDataModel>[].obs;
   final TextEditingController namaKlientTextController =
       TextEditingController();
@@ -20,11 +22,15 @@ class EventController extends GetxController {
   final TextEditingController catatanTextController = TextEditingController();
   final TextEditingController paketTextController = TextEditingController();
 
+  final testTextController = TextEditingController();
+
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
   }
+
 
   Future<void> getAllEvent() async {
     try {
@@ -150,4 +156,5 @@ class EventController extends GetxController {
       print(e);
     }
   }
+
 }

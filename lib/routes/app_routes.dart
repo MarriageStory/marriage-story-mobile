@@ -9,14 +9,10 @@ abstract class RouteName {
   static const register = '/register';
   static const other = '/other';
   static const home = '/home';
-  static const event = '/event';
-  
-  static const detailEventClient = '/detail-event-client';
-  static const eventWeddingOrganizer = '/event-wo';
-  static const detailEventWeddingOrganizer = '/detail-event-wo';
-  static const addEventWeddingOrganizer1 = '/add-event-1';
-  static const addEventWeddingOrganizer2 = '/add-event-2';
-  static const addEventWeddingOrganizer3 = '/add-event-3';
+  static const event = '/event'; 
+  static const detailEvent = '/detail-event';
+  static const addEvent = '/add-event';
+
   static const paymentClient = '/payment-client';
   static const paymentWo = '/payment-wo';
   static const detailTaskClient = '/detail-task-client';

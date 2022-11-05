@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../widgets/button.dart';
+import '../../../widgets/card_event.dart';
 import '../event.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +18,7 @@ class EventView extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            height: 55.h,
+            height: 50.h,
             decoration: BoxDecoration(gradient: colorGradient),
             child: Padding(
               padding: EdgeInsets.only(
@@ -69,7 +71,7 @@ class EventView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 2.h,
+                    height: 4.h,
                   ),
                   Center(
                     child: Button(
@@ -78,6 +80,7 @@ class EventView extends StatelessWidget {
                       onTap: () {
                         controller.createEvent();
                       },
+
                       colorBg: colorWhite.withOpacity(0.25),
                       label: "Tambah",
                       textColor: colorWhite,
@@ -88,7 +91,7 @@ class EventView extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 50.h),
+            margin: EdgeInsets.only(top: 45.h),
             decoration: const BoxDecoration(
               color: colorWhite,
               borderRadius: BorderRadius.only(
@@ -103,26 +106,9 @@ class EventView extends StatelessWidget {
                 top: 6.h,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Button(
-                          height: 7.h,
-                          width: 16.w,
-                          onTap: () {},
-                          colorBg: colorPrimary,
-                          label: "OK",
-                          textColor: colorWhite,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
                   Text(
                     "Acara Kosong",
                     style: fontNunito.copyWith(
@@ -131,6 +117,16 @@ class EventView extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  CardEvent(
+                    label: "Pernikahan",
+                    date: "23 April 2022",
+                    allTask: "3",
+                    eventPack: "akad",
+                    onTap: () => Get.toNamed(RouteName.detailEvent),
+                  )
                 ],
               ),
             ),
