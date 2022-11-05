@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/modules/auth/views/register_view.dart';
 import '../modules/navigation/navigation.dart';
 import '../modules/auth/auth.dart';
 import '../modules/role/role.dart';
@@ -39,12 +40,12 @@ class AppPages {
     ),
     GetPage(
       name: RouteName.login,
-      page: () => LoginScreen(),
+      page: () => LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
       name: RouteName.register,
-      page: () => RegisterScreen(),
+      page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
     GetPage(

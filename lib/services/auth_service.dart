@@ -57,7 +57,7 @@ class AuthService {
     }
   }
 
-  static Future<bool> updateUser(int id, Map<String, dynamic> data) async {
+  static Future<bool> updateUser(Map<String, dynamic> data, int id) async {
     try {
       final token = Storage.getValue(storageToken);
 
@@ -66,11 +66,11 @@ class AuthService {
       };
 
       var response = await http.put(
-        Uri.parse(baseURLAPI + "admin/" + id.toString() + "/update"),
+        Uri.parse(baseURLAPI + "admin/$id/update"),
         body: jsonEncode(event),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "Bearer $token",
+          'Authorization': "Bearer $token"
         },
       );
 

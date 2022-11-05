@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
+import 'package:marriage_story_mobile/widgets/button.dart';
+import 'package:marriage_story_mobile/widgets/card_event_home.dart';
+import 'package:marriage_story_mobile/widgets/card_list_task.dart';
+import 'package:marriage_story_mobile/widgets/event_pack.dart';
+import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
 import '../home.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -12,543 +18,650 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            right: defaultPadding,
-            left: defaultPadding,
-            top: marginTop,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hai,",
-                        style: fontNunito.copyWith(
-                          color: colorBlack,
-                          fontWeight: medium,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Obx(() => Text(
-                            controller.user.value.name ?? "-",
-                            style: fontNunito.copyWith(
-                              color: colorPink3,
-                              fontWeight: bold,
-                              fontSize: 20,
+      body: Obx(
+        () => controller.isLoading.value
+            ? Center(
+                child: LoadingAnimationWidget.fourRotatingDots(
+                  color: colorPrimary,
+                  size: 7.h,
+                ),
+              )
+            : controller.user.value.roleName == "WeddingOrganize"
+                ? SingleChildScrollView(
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          height: 20.h,
+                          decoration: BoxDecoration(gradient: colorGradient),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              right: defaultPadding,
+                              left: defaultPadding,
+                              top: 6.h,
                             ),
-                          )),
-                    ],
-                  ),
-                  Image.asset(
-                    "assets/images/user-profile.png",
-                    height: 50,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 7.h,
-              ),
-              Container(
-                height: 15.h,
-                width: 100.w,
-                padding: const EdgeInsets.all(defaultPadding2),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [colorPink2, colorPink3],
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 6,
-                      offset: const Offset(1, 1),
-                      color: colorGrey.withOpacity(0.25),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(defaultBorderRadius),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Kamu,",
-                      style: fontNunito.copyWith(
-                        color: colorWhite,
-                        fontWeight: semiBold,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Obx(() => Text(
-                          controller.user.value.roleName,
-                          style: fontNunito.copyWith(
-                            color: colorWhite,
-                            fontWeight: bold,
-                            fontSize: 18,
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Obx(
-                () => controller.isLoading.value
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : controller.user.value.roleName == "WeddingOrganize"
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: 12.h,
-                                width: 43.w,
-                                padding: const EdgeInsets.all(defaultPadding),
-                                decoration: BoxDecoration(
-                                  color: colorWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 6,
-                                      offset: const Offset(1, 1),
-                                      color: colorGrey.withOpacity(0.25),
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius),
-                                ),
-                                child: Column(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Acara",
+                                      "Hallo,",
                                       style: fontNunito.copyWith(
-                                        color: colorBlack,
-                                        fontWeight: medium,
-                                        fontSize: 14,
+                                        color: colorWhite,
+                                        fontWeight: semiBold,
+                                        fontSize: 16,
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
-                                    Text(
-                                      "3",
-                                      style: fontNunito.copyWith(
-                                        color: colorPink3,
-                                        fontWeight: extraBold,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height: 12.h,
-                                width: 43.w,
-                                padding: const EdgeInsets.all(defaultPadding),
-                                decoration: BoxDecoration(
-                                  color: colorWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 6,
-                                      offset: const Offset(1, 1),
-                                      color: colorGrey.withOpacity(0.25),
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Agenda",
-                                      style: fontNunito.copyWith(
-                                        color: colorBlack,
-                                        fontWeight: medium,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 1.h,
-                                    ),
-                                    Text(
-                                      "10",
-                                      style: fontNunito.copyWith(
-                                        color: colorPink3,
-                                        fontWeight: extraBold,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        : SizedBox(),
-              ),
-              SizedBox(
-                height: 3.h,
-              ),
-              Obx(
-                () {
-                  return controller.user.value.roleName == "WeddingOrganize"
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Semua Acara",
-                              style: fontNunito.copyWith(
-                                color: colorGrey,
-                                fontWeight: semiBold,
-                                fontSize: 14,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            GestureDetector(
-                              onTap: () => Get.toNamed(
-                                  RouteName.detailEventWeddingOrganizer),
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(vertical: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius),
-                                  color: colorWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4,
-                                      offset: const Offset(1, 1),
-                                      color: colorGrey.withOpacity(0.25),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/poster-1.png",
-                                        height: 12.h,
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Pernikahan ",
-                                            style: fontNunito.copyWith(
-                                              color: colorBlack,
-                                              fontWeight: bold,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          Text(
-                                            "23 Agustus 2022",
-                                            style: fontNunito.copyWith(
-                                              color: colorGrey,
-                                              fontWeight: medium,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 1.h,
-                                          ),
-                                          SizedBox(
-                                            width: 50.w,
-                                            child: Wrap(
-                                              spacing: 5.0,
-                                              runSpacing: 5.0,
-                                              direction: Axis.horizontal,
-                                              children: [
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 3,
-                                                      horizontal: 6),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                      color: colorPink2,
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "Pre-wedding",
-                                                    style: fontNunito.copyWith(
-                                                      color: colorPink2,
-                                                      fontWeight: semiBold,
-                                                      fontSize: 11,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                    vertical: 3,
-                                                    horizontal: 6,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                      color: colorPink2,
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "Engagement",
-                                                    style: fontNunito.copyWith(
-                                                      color: colorPink2,
-                                                      fontWeight: semiBold,
-                                                      fontSize: 11,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Acara",
-                              style: fontNunito.copyWith(
-                                color: colorGrey,
-                                fontWeight: semiBold,
-                                fontSize: 14,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            GestureDetector(
-                              onTap: () =>
-                                  Get.toNamed(RouteName.detailEventClient),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius),
-                                  color: colorWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 4,
-                                      offset: const Offset(1, 1),
-                                      color: colorGrey.withOpacity(0.25),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/poster-1.png",
-                                        height: 12.h,
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Pernikahan ",
-                                            style: fontNunito.copyWith(
-                                              color: colorBlack,
-                                              fontWeight: bold,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          Text(
-                                            "23 Agustus 2022",
-                                            style: fontNunito.copyWith(
-                                              color: colorGrey,
-                                              fontWeight: medium,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: 1.h,
-                                          ),
-                                          SizedBox(
-                                            width: 50.w,
-                                            child: Wrap(
-                                              spacing: 5.0,
-                                              runSpacing: 5.0,
-                                              direction: Axis.horizontal,
-                                              children: [
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      vertical: 3,
-                                                      horizontal: 6),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                      color: colorPink2,
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "Pre-wedding",
-                                                    style: fontNunito.copyWith(
-                                                      color: colorPink2,
-                                                      fontWeight: semiBold,
-                                                      fontSize: 11,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                    vertical: 3,
-                                                    horizontal: 6,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    border: Border.all(
-                                                      color: colorPink2,
-                                                    ),
-                                                  ),
-                                                  child: Text(
-                                                    "Engagement",
-                                                    style: fontNunito.copyWith(
-                                                      color: colorPink2,
-                                                      fontWeight: semiBold,
-                                                      fontSize: 11,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 3.h,
-                            ),
-                            Text(
-                              "Agenda Selanjutnya",
-                              style: fontNunito.copyWith(
-                                color: colorGrey,
-                                fontWeight: semiBold,
-                                fontSize: 14,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            GestureDetector(
-                              onTap: () =>
-                                  Get.toNamed(RouteName.detailTaskClient),
-                              child: Container(
-                                margin: const EdgeInsets.symmetric(vertical: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius),
-                                  color: colorWhite,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 3,
-                                      color: colorGrey.withOpacity(0.25),
-                                    ),
-                                  ],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(defaultPadding),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Kegiatan hari ini",
-                                            style: fontNunito.copyWith(
-                                              color: colorBlack,
-                                              fontWeight: bold,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          Text(
-                                            "23 Agustus 2022",
-                                            style: fontNunito.copyWith(
-                                              color: colorGrey,
-                                              fontWeight: medium,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        "20:00",
+                                    Obx(
+                                      () => Text(
+                                        controller.user.value.name ?? "-",
                                         style: fontNunito.copyWith(
-                                          color: colorPink2,
-                                          fontWeight: extraBold,
+                                          color: colorWhite,
+                                          fontWeight: bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Image.asset(
+                                  "assets/images/user-profile.png",
+                                  height: 13.w,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 17.h),
+                          decoration: const BoxDecoration(
+                            color: colorWhite,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(defaultBorderRadius2),
+                              topRight: Radius.circular(defaultBorderRadius2),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              right: defaultPadding,
+                              left: defaultPadding,
+                              top: 6.h,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: colorPrimary,
+                                          borderRadius: BorderRadius.circular(
+                                              defaultBorderRadius),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(25),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Pernikahan",
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: medium,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              Text(
+                                                controller.events.length
+                                                    .toString(),
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: semiBold,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/pernikahan.png",
+                                                    width: 16.w,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 2.w,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: colorSecondary,
+                                          borderRadius: BorderRadius.circular(
+                                              defaultBorderRadius),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(25),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Kegiatan",
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: medium,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                              Text(
+                                                "10",
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: semiBold,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/kegiatan.png",
+                                                    width: 16.w,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 3.h),
+                                Text(
+                                  "Semua Acara",
+                                  style: fontNunito.copyWith(
+                                    color: colorBlack,
+                                    fontWeight: semiBold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.all(0),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: CardEventHome(
+                                        onTap: () {},
+                                        label:
+                                            controller.events[index].nameClient,
+                                        date: controller.events[index].date
+                                            .toString(),
+                                        task: "2",
+                                      ),
+                                    );
+                                  },
+                                  itemCount: controller.events.length,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : controller.user.value.gencode == ""
+                    ? SingleChildScrollView(
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              height: 55.h,
+                              decoration:
+                                  BoxDecoration(gradient: colorGradient),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  right: defaultPadding,
+                                  left: defaultPadding,
+                                  top: 6.h,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Hallo,",
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: semiBold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Obx(
+                                              () => Text(
+                                                controller.user.value.name ??
+                                                    "-",
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: bold,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Image.asset(
+                                          "assets/images/user-profile.png",
+                                          height: 13.w,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    Image.asset(
+                                      "assets/images/empty.png",
+                                      height: 50.w,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        "Masukan Kode Terlebih Dahulu",
+                                        style: fontNunito.copyWith(
+                                          color: colorWhite,
+                                          fontWeight: semiBold,
                                           fontSize: 18,
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 50.h),
+                              decoration: const BoxDecoration(
+                                color: colorWhite,
+                                borderRadius: BorderRadius.only(
+                                  topLeft:
+                                      Radius.circular(defaultBorderRadius2),
+                                  topRight:
+                                      Radius.circular(defaultBorderRadius2),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  right: defaultPadding,
+                                  left: defaultPadding,
+                                  top: 6.h,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: InputForm(
+                                            label: "Masukan Kode",
+                                            inputController: controller
+                                                .genCodeTextController,
+                                          ),
+                                        ),
+                                        Flexible(
+                                          child: Button(
+                                            height: 7.h,
+                                            width: 16.w,
+                                            onTap: () {},
+                                            colorBg: colorPrimary,
+                                            label: "OK",
+                                            textColor: colorWhite,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Text(
+                                      "Acara Kosong",
+                                      style: fontNunito.copyWith(
+                                        color: colorBlack,
+                                        fontWeight: semiBold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ],
-                        );
-                },
-              )
-            ],
-          ),
-        ),
+                        ),
+                      )
+                    : SingleChildScrollView(
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              height: 55.h,
+                              decoration:
+                                  BoxDecoration(gradient: colorGradient),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  right: defaultPadding,
+                                  left: defaultPadding,
+                                  top: 6.h,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Hallo,",
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: semiBold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Obx(
+                                              () => Text(
+                                                controller.user.value.name ??
+                                                    "-",
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: bold,
+                                                  fontSize: 20,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Image.asset(
+                                          "assets/images/user-profile.png",
+                                          height: 13.w,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 4.h,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        image: const DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/event.png"),
+                                          fit: BoxFit.scaleDown,
+                                        ),
+                                        color: colorWhite.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: colorWhite,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          "Des",
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: fontNunito
+                                                              .copyWith(
+                                                            color: colorBlack,
+                                                            fontWeight:
+                                                                semiBold,
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "23",
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: fontNunito
+                                                              .copyWith(
+                                                            color: colorPink4,
+                                                            fontWeight:
+                                                                extraBold,
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "Hbgs",
+                                                  style: fontNunito.copyWith(
+                                                    color: colorBlack,
+                                                    fontWeight: bold,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 5.h,
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: colorWhite,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        defaultBorderRadius),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(20),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 5,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            "Pernikahan Ainul dan Aan ",
+                                                            softWrap: false,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            style: fontNunito
+                                                                .copyWith(
+                                                              color: colorBlack,
+                                                              fontWeight:
+                                                                  semiBold,
+                                                              fontSize: 14,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: 1.h,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 50.w,
+                                                            child: Wrap(
+                                                              spacing: 5.0,
+                                                              runSpacing: 5.0,
+                                                              direction: Axis
+                                                                  .horizontal,
+                                                              children: const [
+                                                                EventPack(
+                                                                    label:
+                                                                        "Pre Wedding"),
+                                                                EventPack(
+                                                                    label:
+                                                                        "Akad"),
+                                                                EventPack(
+                                                                    label:
+                                                                        "Akad"),
+                                                                EventPack(
+                                                                    label:
+                                                                        "Akad"),
+                                                                EventPack(
+                                                                    label:
+                                                                        "Akad"),
+                                                                EventPack(
+                                                                    label:
+                                                                        "Akad"),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: IconButton(
+                                                        onPressed: () {},
+                                                        icon: const Icon(Icons
+                                                            .more_horiz_rounded),
+                                                        alignment:
+                                                            Alignment.topRight,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 50.h),
+                              decoration: const BoxDecoration(
+                                color: colorWhite,
+                                borderRadius: BorderRadius.only(
+                                  topLeft:
+                                      Radius.circular(defaultBorderRadius2),
+                                  topRight:
+                                      Radius.circular(defaultBorderRadius2),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  right: defaultPadding,
+                                  left: defaultPadding,
+                                  top: 5.h,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Agenda Selanjutnya",
+                                      style: fontNunito.copyWith(
+                                        color: colorBlack,
+                                        fontWeight: semiBold,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        CardListTask(
+                                          onTap: () {},
+                                          label: "Meeting dengan Wo",
+                                          date: "23 April 2022",
+                                          time: "17:00",
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
       ),
     );
   }

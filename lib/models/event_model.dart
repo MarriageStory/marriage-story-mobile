@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final eventsModel = eventsModelFromJson(jsonString);
+
 import 'dart:convert';
 
 EventsModel eventsModelFromJson(String str) =>
@@ -10,11 +14,11 @@ class EventsModel {
     required this.data,
   });
 
-  List<EventModel> data;
+  List<EventDataModel> data;
 
   factory EventsModel.fromJson(Map<String, dynamic> json) => EventsModel(
-        data: List<EventModel>.from(
-            json["data"].map((x) => EventModel.fromJson(x))),
+        data: List<EventDataModel>.from(
+            json["data"].map((x) => EventDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -22,8 +26,8 @@ class EventsModel {
       };
 }
 
-class EventModel {
-  EventModel({
+class EventDataModel {
+  EventDataModel({
     required this.id,
     required this.nameClient,
     required this.date,
@@ -41,8 +45,6 @@ class EventModel {
     required this.gencode,
     required this.createdAt,
     required this.updatedAt,
-    // required this.schedule,
-    // required this.paymentDetail,
   });
 
   int id;
@@ -62,10 +64,8 @@ class EventModel {
   String gencode;
   DateTime createdAt;
   DateTime updatedAt;
-  // List<ScheduleModel> schedule;
-  // List<PaymentDetailModel>? paymentDetail;
 
-  factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
+  factory EventDataModel.fromJson(Map<String, dynamic> json) => EventDataModel(
         id: json["id"],
         nameClient: json["name_client"],
         date: DateTime.parse(json["date"]),
@@ -83,7 +83,6 @@ class EventModel {
         gencode: json["gencode"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-
       );
 
   Map<String, dynamic> toJson() => {
@@ -104,6 +103,5 @@ class EventModel {
         "gencode": gencode,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-
       };
 }

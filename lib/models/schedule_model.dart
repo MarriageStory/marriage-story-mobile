@@ -10,11 +10,11 @@ class SchedulesModel {
     required this.data,
   });
 
-  List<ScheduleModel> data;
+  List<ScheduleDataModel> data;
 
   factory SchedulesModel.fromJson(Map<String, dynamic> json) => SchedulesModel(
-        data: List<ScheduleModel>.from(
-            json["data"].map((x) => ScheduleModel.fromJson(x))),
+        data: List<ScheduleDataModel>.from(
+            json["data"].map((x) => ScheduleDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -22,8 +22,8 @@ class SchedulesModel {
       };
 }
 
-class ScheduleModel {
-  ScheduleModel({
+class ScheduleDataModel {
+  ScheduleDataModel({
     required this.id,
     required this.namaKegiatan,
     required this.detailKegiatan,
@@ -49,7 +49,7 @@ class ScheduleModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory ScheduleModel.fromJson(Map<String, dynamic> json) => ScheduleModel(
+  factory ScheduleDataModel.fromJson(Map<String, dynamic> json) => ScheduleDataModel(
         id: json["id"],
         namaKegiatan: json["nama_kegiatan"],
         detailKegiatan: json["detail_kegiatan"],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/modules/navigation/controllers/navigation_controller.dart';
+import 'package:marriage_story_mobile/widgets/Icon_navbar.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/events/event.dart';
@@ -42,22 +43,42 @@ class NavigationView extends StatelessWidget {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      onPressed: () => controller.changeTabIndex(0),
-                      icon: Icon(Icons.home),
+                    IconNavbar(
+                      text: "Home",
+                      iconEnable: "assets/images/home1.png",
+                      iconDisable: "assets/images/home2.png",
+                      selected: controller.tabIndex == 0 ? true : false,
+                      onPressed: () {
+                        controller.changeTabIndex(0);
+                      },
                     ),
-                    IconButton(
-                      onPressed: () => controller.changeTabIndex(1),
-                      icon: Icon(Icons.task),
+                    IconNavbar(
+                      text: "Acara",
+                      iconEnable: "assets/images/acara1.png",
+                      iconDisable: "assets/images/acara2.png",
+                      selected: controller.tabIndex == 1 ? true : false,
+                      onPressed: () {
+                        controller.changeTabIndex(1);
+                      },
                     ),
-                    IconButton(
-                      onPressed: () => controller.changeTabIndex(2),
-                      icon: Icon(Icons.payment),
+                    IconNavbar(
+                      text: "Pembayaran",
+                      iconEnable: "assets/images/bayar1.png",
+                      iconDisable: "assets/images/bayar2.png",
+                      selected: controller.tabIndex == 2 ? true : false,
+                      onPressed: () {
+                        controller.changeTabIndex(2);
+                      },
                     ),
-                    IconButton(
-                      onPressed: () => controller.changeTabIndex(3),
-                      icon: Icon(Icons.other_houses),
-                    )
+                    IconNavbar(
+                      text: "Lainnya",
+                      iconEnable: "assets/images/lainnya1.png",
+                      iconDisable: "assets/images/lainnya2.png",
+                      selected: controller.tabIndex == 3 ? true : false,
+                      onPressed: () {
+                        controller.changeTabIndex(3);
+                      },
+                    ),
                   ],
                 );
               },

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:marriage_story_mobile/constants/theme.dart';
 
-class CardListTask extends StatelessWidget {
-  const CardListTask({
-    Key? key,
-    required this.onTap,
-    required this.label,
-    required this.date,
-    required this.time,
-  }) : super(key: key);
+import '../constants/theme.dart';
+
+class CardEventHome extends StatelessWidget {
+  const CardEventHome(
+      {super.key,
+      required this.label,
+      required this.date,
+      required this.task,
+      this.onTap});
+
   final String label;
   final String date;
-  final String time;
+  final String task;
   final Function()? onTap;
 
   @override
@@ -20,14 +21,11 @@ class CardListTask extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: colorPrimary, //                   <--- border color
-            width: 1,
-          ),
+          color: colorPrimary.withOpacity(0.3),
           borderRadius: BorderRadius.circular(defaultBorderRadius),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+          padding: const EdgeInsets.all(35),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,36 +36,44 @@ class CardListTask extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      date,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                      style: fontNunito.copyWith(
-                        color: colorGrey,
-                        fontWeight: medium,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
                       label,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       style: fontNunito.copyWith(
-                        color: colorBlack,
-                        fontWeight: medium,
+                        color: colorPrimary,
+                        fontWeight: semiBold,
                         fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      date,
+                      overflow: TextOverflow.ellipsis,
+                      style: fontNunito.copyWith(
+                        color: colorPrimary,
+                        fontWeight: medium,
+                        fontSize: 14,
                       ),
                     ),
                   ],
                 ),
               ),
               Flexible(
-                child: Text(
-                  time,
-                  overflow: TextOverflow.ellipsis,
-                  style: fontNunito.copyWith(
+                child: Container(
+                  decoration: BoxDecoration(
                     color: colorPrimary,
-                    fontWeight: bold,
-                    fontSize: 18,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      task,
+                      overflow: TextOverflow.ellipsis,
+                      style: fontNunito.copyWith(
+                        color: colorWhite,
+                        fontWeight: bold,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
               )
