@@ -9,7 +9,8 @@ abstract class RouteName {
   static const register = '/register';
   static const other = '/other';
   static const home = '/home';
-  static const eventClient = '/event-client';
+  static const event = '/event';
+  
   static const detailEventClient = '/detail-event-client';
   static const eventWeddingOrganizer = '/event-wo';
   static const detailEventWeddingOrganizer = '/detail-event-wo';

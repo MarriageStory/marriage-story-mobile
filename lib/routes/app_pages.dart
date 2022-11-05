@@ -53,16 +53,8 @@ class AppPages {
       page: () => OtherView(),
       binding: OtherBinding(),
     ),
-    GetPage(
-      name: RouteName.eventClient,
-      page: () => EventClientView(),
-      binding: EventClientBinding(),
-    ),
-    GetPage(
-      name: RouteName.detailEventClient,
-      page: () => DetailEventClientView(),
-      binding: EventClientBinding(),
-    ),
+    
+
     GetPage(
       name: RouteName.detailTaskClient,
       page: () => DetailTaskClientView(),
@@ -81,30 +73,11 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: RouteName.eventWeddingOrganizer,
-      page: () => EventWeddingOrganizerView(),
-      binding: EventWeddingOrganizerBinding(),
+      name: RouteName.event,
+      page: () => EventView(),
+      binding: EventBinding(),
     ),
-    GetPage(
-      name: RouteName.detailEventWeddingOrganizer,
-      page: () => DetailEventWeddingOrganizerView(),
-      binding: EventWeddingOrganizerBinding(),
-    ),
-    GetPage(
-      name: RouteName.addEventWeddingOrganizer1,
-      page: () => AddEvent1View(),
-      binding: EventWeddingOrganizerBinding(),
-    ),
-    GetPage(
-      name: RouteName.addEventWeddingOrganizer2,
-      page: () => AddEvent2View(),
-      binding: EventWeddingOrganizerBinding(),
-    ),
-    GetPage(
-      name: RouteName.addEventWeddingOrganizer3,
-      page: () => AddEvent3View(),
-      binding: EventWeddingOrganizerBinding(),
-    ),
+    
     GetPage(
       name: RouteName.taskWo,
       page: () => TaskWeddingOrganizerView(),

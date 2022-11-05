@@ -6,7 +6,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/events/event.dart';
 import 'package:marriage_story_mobile/modules/home/home.dart';
-import 'package:marriage_story_mobile/modules/navigation/navigation.dart';
 import 'package:marriage_story_mobile/modules/other/other.dart';
 import 'package:marriage_story_mobile/modules/payments/payments.dart';
 
@@ -23,7 +22,7 @@ class NavigationView extends StatelessWidget {
             index: controller.tabIndex,
             children: [
               HomeView(),
-              EventWeddingOrganizerView(),
+              EventView(),
               PaymentWeddingOrganizerView(),
               OtherView(),
             ],

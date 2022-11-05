@@ -11,8 +11,8 @@ class NavigationBinding extends Bindings {
   void dependencies() {
     Get.put(NavigationController());
     Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
-    Get.lazyPut<EventWeddingOrganizerController>(
-        () => EventWeddingOrganizerController(),
+    Get.lazyPut<EventController>(
+        () => EventController(),
         fenix: true);
     Get.lazyPut<PaymentWeddingOrganizerController>(
         () => PaymentWeddingOrganizerController(),

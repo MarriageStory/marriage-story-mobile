@@ -31,8 +31,8 @@ class HomeController extends GetxController {
   void onInit() {
     getUserProfile();
     getAllEvent();
-    getAllSchedule();
-    updateGenCode();
+    // getAllSchedule();
+    
     super.onInit();
   }
 
@@ -66,23 +66,22 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> getAllSchedule() async {
-    try {
-      final dataSchedule = await ScheduleService.getSchedule();
-      if (dataSchedule != null) {
-        schedule.assignAll(dataSchedule);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  // Future<void> getAllSchedule() async {
+  //   try {
+  //     final dataSchedule = await ScheduleService.getSchedule();
+  //     if (dataSchedule != null) {
+  //       schedule.assignAll(dataSchedule);
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future<void> updateGenCode() async {
     var input = <String, dynamic>{
       'gencode': genCodeTextController.text,
     };
     try {
-      getUserProfile();
       var updateCode = await AuthService.updateUser(input, user.value.id);
 
       Get.snackbar(
@@ -98,7 +97,7 @@ class HomeController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Gagal Menemukan Event',
-        '$e',
+        '',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
-import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/card_event_home.dart';
 import 'package:marriage_story_mobile/widgets/card_list_task.dart';
@@ -348,7 +347,8 @@ class HomeView extends StatelessWidget {
                                           child: Button(
                                             height: 7.h,
                                             width: 16.w,
-                                            onTap: () {},
+                                            onTap: () =>
+                                                controller.updateGenCode(),
                                             colorBg: colorPrimary,
                                             label: "OK",
                                             textColor: colorWhite,
@@ -474,7 +474,7 @@ class HomeView extends StatelessWidget {
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          "Des",
+                                                          "dec",
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           style: fontNunito

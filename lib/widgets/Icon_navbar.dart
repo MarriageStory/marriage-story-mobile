@@ -18,40 +18,44 @@ class IconNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 70,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: onPressed,
-            child: selected
-                ? Image.asset(
-                    iconEnable,
-                    width: 20,
-                    height: 20,
+    return GestureDetector(
+      onTap: onPressed,
+      child: SizedBox(
+        width: 70,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: selected
+                  ? Image.asset(
+                      iconEnable,
+                      width: 20,
+                      height: 20,
+                    )
+                  : Image.asset(
+                      iconDisable,
+                      width: 20,
+                      height: 20,
+                    ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            selected
+                ? Text(
+                    text,
+                    style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: semiBold,
+                        color: colorPrimary),
                   )
-                : Image.asset(
-                    iconDisable,
-                    width: 20,
-                    height: 20,
-                  ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          selected
-              ? Text(
-                  text,
-                  style: TextStyle(
-                      fontSize: 10, fontWeight: semiBold, color: colorPrimary),
-                )
-              : Text(
-                  text,
-                  style: TextStyle(
-                      fontSize: 10, fontWeight: semiBold, color: colorGrey),
-                )
-        ],
+                : Text(
+                    text,
+                    style: TextStyle(
+                        fontSize: 10, fontWeight: semiBold, color: colorGrey),
+                  )
+          ],
+        ),
       ),
     );
   }
