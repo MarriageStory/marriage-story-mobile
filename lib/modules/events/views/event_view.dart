@@ -60,7 +60,7 @@ class EventView extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      "3",
+                      "8",
                       style: fontNunito.copyWith(
                         color: colorWhite,
                         fontWeight: bold,
@@ -75,7 +75,9 @@ class EventView extends StatelessWidget {
                     child: Button(
                       height: 6.h,
                       width: 75.w,
-                      onTap: () {},
+                      onTap: () {
+                        controller.createEvent();
+                      },
                       colorBg: colorWhite.withOpacity(0.25),
                       label: "Tambah",
                       textColor: colorWhite,

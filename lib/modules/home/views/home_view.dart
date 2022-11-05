@@ -48,7 +48,7 @@ class HomeView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Hallo,",
+                                      "Hallokk,",
                                       style: fontNunito.copyWith(
                                         color: colorWhite,
                                         fontWeight: semiBold,
