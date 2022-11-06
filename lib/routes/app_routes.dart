@@ -13,15 +13,12 @@ abstract class RouteName {
   static const detailEvent = '/detail-event';
   static const addEvent = '/add-event';
   static const task = '/task';
+  static const detailTask = '/detail-task';
+  static const addTask = '/add-task';
+  static const payment = '/payment';
+  static const detailPayment = '/detail-payment';
+  static const transaction = '/transaction';
 
-  static const paymentClient = '/payment-client';
-  static const paymentWo = '/payment-wo';
-  static const detailTaskClient = '/detail-task-client';
-  
-  static const detailTaskWo = '/detail-task-wo';
-  static const addTaskWo = '/add-task-wo';
-  static const detailPaymentWo = '/detail-payment-wo';
-  static const detailTransactionWo = '/detail-transaction-wo';
   static const detailTransactionClient = '/detail-transaction-client';
   static const addTransactionClient = '/add-transaction-client';
 }

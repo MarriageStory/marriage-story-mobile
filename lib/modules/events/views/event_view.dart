@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
-import 'package:marriage_story_mobile/widgets/card_list_task.dart';
+import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../widgets/button.dart';
@@ -110,7 +110,7 @@ class EventView extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            CardListTask(
+                            CardTask(
                               onTap: () {},
                               label: "Meeting dengan Wo",
                               date: "23 April 2022",

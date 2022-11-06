@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class IconNavbar extends StatelessWidget {
   const IconNavbar(
@@ -21,7 +22,7 @@ class IconNavbar extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: SizedBox(
-        width: 70,
+        width: 20.w,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

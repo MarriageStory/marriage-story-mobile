@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class PaymentWeddingOrganizerController extends GetxController {
+class PaymentController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit

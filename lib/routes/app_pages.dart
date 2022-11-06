@@ -7,7 +7,7 @@ import '../modules/splash/splash.dart';
 import '../modules/landing/landing.dart';
 import '../modules/home/home.dart';
 import '../modules/events/event.dart';
-import '../modules/payments/payments.dart';
+import '../modules/payments/payment.dart';
 import '../modules/other/other.dart';
 import '../modules/task/task.dart';
 
@@ -48,26 +48,7 @@ class AppPages {
       page: () => RegisterView(),
       binding: RegisterBinding(),
     ),
-    GetPage(
-      name: RouteName.other,
-      page: () => OtherView(),
-      binding: OtherBinding(),
-    ),
-    GetPage(
-      name: RouteName.paymentClient,
-      page: () => PaymentClientView(),
-      binding: PaymentClientBinding(),
-    ),
-    GetPage(
-      name: RouteName.home,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-    ),
-    GetPage(
-      name: RouteName.event,
-      page: () => EventView(),
-      binding: EventBinding(),
-    ),
+
     GetPage(
       name: RouteName.detailEvent,
       page: () => DetailEventView(),
@@ -78,37 +59,31 @@ class AppPages {
       page: () => AddEventView(),
       binding: EventBinding(),
     ),
-    
     GetPage(
       name: RouteName.task,
       page: () => TaskView(),
       binding: TaskBinding(),
     ),
     GetPage(
-      name: RouteName.paymentWo,
-      page: () => PaymentWeddingOrganizerView(),
-      binding: PaymentWeddingOrganizerBinding(),
+      name: RouteName.detailTask,
+      page: () => DetailTaskView(),
+      binding: TaskBinding(),
     ),
     GetPage(
-      name: RouteName.detailPaymentWo,
-      page: () => DetailPaymentWeddingOrganizerView(),
-      binding: PaymentWeddingOrganizerBinding(),
+      name: RouteName.addTask,
+      page: () => AddTaskView(),
+      binding: TaskBinding(),
     ),
     GetPage(
-      name: RouteName.detailTransactionWo,
-      page: () => DetailTransactionWeddingOrganizerView(),
-      binding: PaymentWeddingOrganizerBinding(),
+      name: RouteName.detailPayment,
+      page: () => DetailPaymentView(),
+      binding: PaymentBinding(),
+    ),
+    GetPage(
+      name: RouteName.transaction,
+      page: () => TransactionView(),
+      binding: PaymentBinding(),
     ),
 
-    GetPage(
-      name: RouteName.detailTransactionClient,
-      page: () => DetailTransactionClientView(),
-      binding: PaymentClientBinding(),
-    ),
-    GetPage(
-      name: RouteName.addTransactionClient,
-      page: () => AddTransactionClientView(),
-      binding: PaymentClientBinding(),
-    ),
   ];
 }

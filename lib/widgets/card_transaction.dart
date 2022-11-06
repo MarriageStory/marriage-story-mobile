@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 
-class CardListTask extends StatelessWidget {
-  const CardListTask({
+class CardTransaction extends StatelessWidget {
+  const CardTransaction({
     Key? key,
     required this.onTap,
-    required this.label,
     required this.date,
-    required this.time,
+    required this.amount,
   }) : super(key: key);
-  final String label;
+
   final String date;
-  final String time;
+  final String amount;
   final Function()? onTap;
 
   @override
@@ -31,12 +30,21 @@ class CardListTask extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                flex: 5,
+              Flexible(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "Terima Uang",
+                      overflow: TextOverflow.ellipsis,
+                      softWrap: false,
+                      style: fontNunito.copyWith(
+                        color: colorBlack,
+                        fontWeight: medium,
+                        fontSize: 16,
+                      ),
+                    ),
                     Text(
                       date,
                       overflow: TextOverflow.ellipsis,
@@ -47,27 +55,18 @@ class CardListTask extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
-                    Text(
-                      label,
-                      overflow: TextOverflow.ellipsis,
-                      softWrap: false,
-                      style: fontNunito.copyWith(
-                        color: colorBlack,
-                        fontWeight: medium,
-                        fontSize: 16,
-                      ),
-                    ),
                   ],
                 ),
               ),
-              Flexible(
+              Expanded(
+                flex: 1,
                 child: Text(
-                  time,
+                  amount,
                   overflow: TextOverflow.ellipsis,
                   style: fontNunito.copyWith(
                     color: colorPrimary,
                     fontWeight: bold,
-                    fontSize: 18,
+                    fontSize: 14,
                   ),
                 ),
               )

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/card_event_home.dart';
-import 'package:marriage_story_mobile/widgets/card_list_task.dart';
+import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/event_pack.dart';
 import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -651,7 +651,7 @@ class HomeView extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        CardListTask(
+                                        CardTask(
                                           onTap: () {},
                                           label: "Meeting dengan Wo",
                                           date: "23 April 2022",

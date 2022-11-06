@@ -7,7 +7,7 @@ import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/events/event.dart';
 import 'package:marriage_story_mobile/modules/home/home.dart';
 import 'package:marriage_story_mobile/modules/other/other.dart';
-import 'package:marriage_story_mobile/modules/payments/payments.dart';
+import 'package:marriage_story_mobile/modules/payments/payment.dart';
 
 class NavigationView extends StatelessWidget {
   NavigationView({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class NavigationView extends StatelessWidget {
             children: [
               HomeView(),
               EventView(),
-              PaymentWeddingOrganizerView(),
+              PaymentView(),
               OtherView(),
             ],
           );

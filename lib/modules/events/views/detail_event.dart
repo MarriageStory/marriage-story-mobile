@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/widgets/vendor_pack.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
+import '../../../routes/routes.dart';
 import '../../../widgets/event_pack.dart';
 import '../../home/home.dart';
 import '../event.dart';
@@ -178,7 +179,7 @@ class DetailEventView extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () => Get.toNamed(RouteName.task),
                           child: Text(
                             "Lihat Agenda",
                             overflow: TextOverflow.ellipsis,

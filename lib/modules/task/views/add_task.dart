@@ -6,12 +6,12 @@ import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
-import '../event.dart';
+import '../task.dart';
 import 'package:get/get.dart';
 
-class AddEventView extends StatelessWidget {
-  AddEventView({super.key});
-  final controller = Get.find<EventController>();
+class AddTaskView extends StatelessWidget {
+  AddTaskView({super.key});
+  final controller = Get.find<TaskController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class AddEventView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Tambah Acara",
+                    "Tambah Agenda",
                     style: fontNunito.copyWith(
                       color: colorBlack,
                       fontWeight: semiBold,
@@ -52,52 +52,10 @@ class AddEventView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 4.h,
+                height: 10.h,
               ),
               Text(
-                "Paket Acara",
-                style: fontNunito.copyWith(
-                  color: colorBlack,
-                  fontWeight: semiBold,
-                  fontSize: 14,
-                ),
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              MultiSelectContainer(
-                textStyles: const MultiSelectTextStyles(
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: colorPrimary,
-                    fontSize: 14,
-                  ),
-                ),
-                itemsDecoration: MultiSelectDecorations(
-                  decoration: BoxDecoration(
-                      color: colorWhite,
-                      border: Border.all(color: colorPrimary),
-                      borderRadius: BorderRadius.circular(20)),
-                  selectedDecoration: BoxDecoration(
-                      color: colorPrimary,
-                      border: Border.all(color: colorPrimary),
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-                items: [
-                  MultiSelectCard(
-                      value: 'Pre - Wedding', label: 'Pre - Wedding'),
-                  MultiSelectCard(value: 'Engagement', label: 'Engagement'),
-                  MultiSelectCard(value: 'Akad', label: 'Akad'),
-                  MultiSelectCard(value: 'Panggih', label: 'Panggih'),
-                  MultiSelectCard(value: 'Resepsi', label: 'Resepsi'),
-                ],
-                onChange: (allSelectedItems, selectedItem) {},
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              Text(
-                "Kelengkapan Acara",
+                "Kelengkapan Agenda",
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: semiBold,
@@ -108,28 +66,35 @@ class AddEventView extends StatelessWidget {
                 height: 3.h,
               ),
               InputForm(
-                label: "Nama Pengantin",
+                label: "Nama Kegiatan",
                 inputController: controller.testTextController,
               ),
               SizedBox(
                 height: 1.5.h,
               ),
               InputForm(
-                label: "Tanggal Acara",
+                label: "Tanggal Kegiatan",
                 inputController: controller.testTextController,
               ),
               SizedBox(
                 height: 1.5.h,
               ),
               InputForm(
-                label: "Waktu Acara",
+                label: "Waktu Kegiatan",
                 inputController: controller.testTextController,
               ),
               SizedBox(
                 height: 1.5.h,
               ),
               InputForm(
-                label: "Total Pembayaran",
+                label: "Tempat Kegiatan",
+                inputController: controller.testTextController,
+              ),
+              SizedBox(
+                height: 1.5.h,
+              ),
+              InputForm(
+                label: "Detail Kegiatan",
                 inputController: controller.testTextController,
               ),
               SizedBox(
