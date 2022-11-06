@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import '../task.dart';
 
-class TaskWeddingOrganizerBinding extends Bindings {
+class TaskBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(TaskWeddingOrganizerController());
+    Get.put(TaskController());
   }
 }

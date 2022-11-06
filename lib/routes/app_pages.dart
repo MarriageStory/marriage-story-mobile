@@ -53,13 +53,6 @@ class AppPages {
       page: () => OtherView(),
       binding: OtherBinding(),
     ),
-    
-
-    GetPage(
-      name: RouteName.detailTaskClient,
-      page: () => DetailTaskClientView(),
-      binding: DetailTaskClientBinding(),
-    ),
     GetPage(
       name: RouteName.paymentClient,
       page: () => PaymentClientView(),
@@ -87,9 +80,9 @@ class AppPages {
     ),
     
     GetPage(
-      name: RouteName.taskWo,
-      page: () => TaskWeddingOrganizerView(),
-      binding: TaskWeddingOrganizerBinding(),
+      name: RouteName.task,
+      page: () => TaskView(),
+      binding: TaskBinding(),
     ),
     GetPage(
       name: RouteName.paymentWo,
@@ -106,16 +99,7 @@ class AppPages {
       page: () => DetailTransactionWeddingOrganizerView(),
       binding: PaymentWeddingOrganizerBinding(),
     ),
-    GetPage(
-      name: RouteName.addTaskWo,
-      page: () => AddTaskWeddingOrganizerView(),
-      binding: TaskWeddingOrganizerBinding(),
-    ),
-    GetPage(
-      name: RouteName.detailTaskWo,
-      page: () => DetailTaskWeddingOrganizerView(),
-      binding: TaskWeddingOrganizerBinding(),
-    ),
+
     GetPage(
       name: RouteName.detailTransactionClient,
       page: () => DetailTransactionClientView(),

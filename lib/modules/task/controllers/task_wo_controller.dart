@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class TaskWeddingOrganizerController extends GetxController {
+class TaskController extends GetxController {
   final isChecked = false.obs;
   
   @override

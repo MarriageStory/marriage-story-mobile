@@ -48,7 +48,7 @@ class HomeView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Hallokk,",
+                                      "Hallo,",
                                       style: fontNunito.copyWith(
                                         color: colorWhite,
                                         fontWeight: semiBold,
@@ -526,13 +526,13 @@ class HomeView extends StatelessWidget {
                                                     const EdgeInsets.all(20),
                                                 child: Row(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.center,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                   children: [
                                                     Expanded(
-                                                      flex: 5,
+                                                      flex: 6,
                                                       child: Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -593,10 +593,14 @@ class HomeView extends StatelessWidget {
                                                     Flexible(
                                                       child: IconButton(
                                                         onPressed: () {},
-                                                        icon: const Icon(Icons
-                                                            .more_horiz_rounded),
-                                                        alignment:
-                                                            Alignment.topRight,
+                                                        icon: const Icon(
+                                                          Icons
+                                                              .arrow_forward_rounded,
+                                                          color:
+                                                              Colors.blueAccent,
+                                                        ),
+                                                        alignment: Alignment
+                                                            .centerRight,
                                                       ),
                                                     )
                                                   ],

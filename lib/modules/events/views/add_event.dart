@@ -91,7 +91,9 @@ class AddEventView extends StatelessWidget {
                   MultiSelectCard(value: 'Panggih', label: 'Panggih'),
                   MultiSelectCard(value: 'Resepsi', label: 'Resepsi'),
                 ],
-                onChange: (allSelectedItems, selectedItem) {},
+                onChange: (allSelectedItems, selectedItem) {
+                  
+                },
               ),
               SizedBox(
                 height: 4.h,

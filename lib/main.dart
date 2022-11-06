@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           title: 'Marriage Story',
           theme: ThemeData(
             fontFamily: 'Nunito',
+            primarySwatch: Colors.purple,
           ),
           debugShowCheckedModeBanner: false,
           // initialRoute: AppPages.initial,
