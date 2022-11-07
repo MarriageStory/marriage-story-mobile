@@ -9,6 +9,7 @@ import '../../../widgets/event_pack.dart';
 import '../../home/home.dart';
 import '../event.dart';
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/models/event_model.dart';
 
 class DetailEventView extends StatelessWidget {
   DetailEventView({super.key});
@@ -16,6 +17,8 @@ class DetailEventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final event = ModalRoute.of(context)!.settings.arguments as EventDataModel;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(

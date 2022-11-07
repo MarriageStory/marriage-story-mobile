@@ -37,7 +37,7 @@ class EventDataModel {
     required this.statusPembayaran,
     required this.jumlahTerbayar,
     required this.note,
-    required this.paket,
+    // required this.paket,
     required this.gencode,
     required this.createdAt,
     required this.updatedAt,
@@ -52,7 +52,7 @@ class EventDataModel {
   String statusPembayaran;
   String jumlahTerbayar;
   String note;
-  String paket;
+  // String paket;
   String gencode;
   DateTime createdAt;
   DateTime updatedAt;
@@ -67,7 +67,7 @@ class EventDataModel {
         statusPembayaran: json["status_pembayaran"],
         jumlahTerbayar: json["jumlah_terbayar"],
         note: json["note"],
-        paket: json["paket"],
+        // paket: json["paket"],
         gencode: json["gencode"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -83,7 +83,7 @@ class EventDataModel {
         "status_pembayaran": statusPembayaran,
         "jumlah_terbayar": jumlahTerbayar,
         "note": note,
-        "paket": paket,
+        // "paket": paket,
         "gencode": gencode,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),

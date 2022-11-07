@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../../../routes/app_pages.dart';
 
 class EventController extends GetxController {
-
   var events = <EventDataModel>[].obs;
   final TextEditingController namaKlientTextController =
       TextEditingController();
@@ -20,17 +19,15 @@ class EventController extends GetxController {
   final TextEditingController jumlahTerbayarTextController =
       TextEditingController();
   final TextEditingController catatanTextController = TextEditingController();
-  final TextEditingController paketTextController = TextEditingController();
 
-  final testTextController = TextEditingController();
-
+  var selectedPackage1 = [];
 
   @override
   void onInit() {
     // TODO: implement onInit
+    getAllEvent();
     super.onInit();
   }
-
 
   Future<void> getAllEvent() async {
     try {
@@ -49,12 +46,12 @@ class EventController extends GetxController {
         'name_client': namaKlientTextController.text,
         'date': tanggalTextController.text,
         'time': jamTextController.text,
-        'tempat': tempatTextController.text,
+        'tempat': "-",
         'total_pembayaran': totalBayarTextController.text,
-        'status_pembayaran': statusBayarTextController.text,
-        'jumlah_terbayar': jumlahTerbayarTextController.text,
-        'note': catatanTextController.text,
-        'paket': paketTextController.text,
+        'status_pembayaran': "pending",
+        'jumlah_terbayar': "0",
+        'note': "-",
+        'paket': selectedPackage1.toList(),
       };
 
       var loginResponse = await EventService.createNewEvent(input);
@@ -96,7 +93,7 @@ class EventController extends GetxController {
         'status_pembayaran': statusBayarTextController.text,
         'jumlah_terbayar': jumlahTerbayarTextController.text,
         'note': catatanTextController.text,
-        'paket': paketTextController.text,
+        'paket': selectedPackage1.toList(),
       };
 
       var loginResponse = await EventService.updateEvent(idEvent, input);
@@ -156,5 +153,4 @@ class EventController extends GetxController {
       print(e);
     }
   }
-
 }

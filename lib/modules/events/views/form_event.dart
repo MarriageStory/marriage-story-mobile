@@ -6,12 +6,54 @@ import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
+import '../../../utils/dateTime.dart';
 import '../event.dart';
 import 'package:get/get.dart';
 
-class AddEventView extends StatelessWidget {
-  AddEventView({super.key});
+class FormEventView extends StatefulWidget {
+  FormEventView({super.key});
+
+  @override
+  State<FormEventView> createState() => _BodyState();
+}
+
+class _BodyState extends State<FormEventView> {
   final controller = Get.find<EventController>();
+  final selectedPackage = [];
+
+  bool cekJam = false;
+  bool cekTgl = false;
+  DateTime tanggal = DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
+
+  final TextStyle valueStyle = TextStyle(
+      color: Color(0xff828282), fontWeight: FontWeight.w500, fontSize: 14);
+
+  void showTime() {
+    showTimePicker(context: context, initialTime: TimeOfDay.now())
+        .then((value) {
+      setState(() {
+        cekJam = true;
+        controller.jamTextController.text = value!.format(context).toString();
+      });
+    });
+  }
+
+  Future<Null> _selectDate(BuildContext context) async {
+    // Initial DateTime FIinal Picked
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: tanggal,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+
+    if (picked != null && picked != tanggal)
+      setState(() {
+        cekTgl = true;
+        controller.tanggalTextController.text = picked.toString();
+        tanggal = picked;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +133,16 @@ class AddEventView extends StatelessWidget {
                   MultiSelectCard(value: 'Panggih', label: 'Panggih'),
                   MultiSelectCard(value: 'Resepsi', label: 'Resepsi'),
                 ],
-                onChange: (allSelectedItems, selectedItem) {},
+                onChange: (allSelectedItems, selectedItem) {
+                  if (selectedPackage.contains(selectedItem)) {
+                    selectedPackage.remove(selectedItem);
+                  } else {
+                    selectedPackage.add(selectedItem);
+                  }
+                  // controller.paketTextController.text =
+                  //     selectedPackage.toString();
+                  controller.selectedPackage1 = selectedPackage;
+                },
               ),
               SizedBox(
                 height: 4.h,
@@ -109,36 +160,49 @@ class AddEventView extends StatelessWidget {
               ),
               InputForm(
                 label: "Nama Pengantin",
-                inputController: controller.testTextController,
+                inputController: controller.namaKlientTextController,
               ),
               SizedBox(
                 height: 1.5.h,
               ),
-              InputForm(
-                label: "Tanggal Acara",
-                inputController: controller.testTextController,
+              dateTime(
+                // labelText: "Date",
+                valueText:
+                    cekTgl != false ? tanggal.toString() : "Tanggal Acara",
+                valueStyle: valueStyle,
+                onPressed: () {
+                  _selectDate(context);
+                },
               ),
               SizedBox(
                 height: 1.5.h,
               ),
-              InputForm(
-                label: "Waktu Acara",
-                inputController: controller.testTextController,
+              dateTime(
+                // labelText: "Date",
+                valueText: cekJam != false
+                    ? controller.jamTextController.text
+                    : "Waktu Acara",
+                valueStyle: valueStyle,
+                onPressed: () {
+                  showTime();
+                },
               ),
               SizedBox(
                 height: 1.5.h,
               ),
               InputForm(
                 label: "Total Pembayaran",
-                inputController: controller.testTextController,
+                inputController: controller.totalBayarTextController,
               ),
               SizedBox(
-                height: 20.h,
+                height: 5.h,
               ),
               Button(
                 height: 6.h,
                 width: 100.w,
-                onTap: () {},
+                onTap: () {
+                  controller.createEvent();
+                },
                 colorBg: colorPrimary,
                 label: "Tambah",
                 textColor: colorWhite,
