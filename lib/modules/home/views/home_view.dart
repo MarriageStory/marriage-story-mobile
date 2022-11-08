@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/modules/events/controllers/event_controller.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/card_event_home.dart';
 import 'package:marriage_story_mobile/widgets/card_task.dart';
@@ -7,12 +8,14 @@ import 'package:marriage_story_mobile/widgets/event_pack.dart';
 import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:get/get.dart';
+import '../../../routes/routes.dart';
 import '../home.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
   final HomeController controller = Get.find();
+  final EventController eventController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -119,13 +122,15 @@ class HomeView extends StatelessWidget {
                                                   fontSize: 14,
                                                 ),
                                               ),
-                                              Text(
-                                                controller.events.length
-                                                    .toString(),
-                                                style: fontNunito.copyWith(
-                                                  color: colorWhite,
-                                                  fontWeight: semiBold,
-                                                  fontSize: 16,
+                                              Obx(
+                                                () => Text(
+                                                  eventController.events.length
+                                                      .toString(),
+                                                  style: fontNunito.copyWith(
+                                                    color: colorWhite,
+                                                    fontWeight: semiBold,
+                                                    fontSize: 16,
+                                                  ),
                                                 ),
                                               ),
                                               Row(
@@ -204,28 +209,44 @@ class HomeView extends StatelessWidget {
                                 SizedBox(
                                   height: 2.h,
                                 ),
-                                ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.all(0),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 5),
-                                      child: CardEventHome(
-                                        onTap: () {},
-                                        label:
-                                            controller.events[index].nameClient,
-                                        date: controller.events[index].date
-                                            .toString(),
-                                        task: "2",
-                                      ),
-                                    );
-                                  },
-                                  itemCount: controller.events.length,
-                                ),
+                                Obx(() => eventController.events.isNotEmpty
+                                    ? ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        padding: const EdgeInsets.all(0),
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: CardEventHome(
+                                              onTap: () => Get.toNamed(
+                                                  RouteName.detailEvent,
+                                                  arguments:
+                                                      eventController.events[index]),
+                                              label: eventController
+                                                  .events[index].nameClient,
+                                              date: eventController
+                                                  .events[index].date
+                                                  .toString(),
+                                              task: "2",
+                                            ),
+                                          );
+                                        },
+                                        itemCount: eventController.events.length,
+                                      )
+                                    : Center(
+                                        child: Text(
+                                          "Acara Kosong",
+                                          style: fontNunito.copyWith(
+                                            color: colorWhite,
+                                            fontWeight: semiBold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      )),
                               ],
                             ),
                           ),
@@ -273,8 +294,7 @@ class HomeView extends StatelessWidget {
                                             ),
                                             Obx(
                                               () => Text(
-                                                controller.user.value.name ??
-                                                    "-",
+                                                controller.user.value.name,
                                                 style: fontNunito.copyWith(
                                                   color: colorWhite,
                                                   fontWeight: bold,

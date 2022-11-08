@@ -1,19 +1,21 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:marriage_story_mobile/widgets/button.dart';
+import 'package:marriage_story_mobile/widgets/button_outlined.dart';
 import 'package:marriage_story_mobile/widgets/vendor_pack.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
+import '../../../models/event_model.dart';
 import '../../../routes/routes.dart';
 import '../../../widgets/event_pack.dart';
-import '../../home/home.dart';
 import '../event.dart';
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/models/event_model.dart';
 
 class DetailEventView extends StatelessWidget {
   DetailEventView({super.key});
   final controller = Get.find<EventController>();
+  final EventDataModel event = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class DetailEventView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "23 April 2022",
+                        event.date.toString(),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,
@@ -82,7 +84,7 @@ class DetailEventView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "Pernikahan Aan dan Ainul",
+                        event.nameClient,
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,
@@ -102,7 +104,7 @@ class DetailEventView extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(
-                            "Kode : Hsda",
+                            "Kode : ${event.gencode}",
                             overflow: TextOverflow.ellipsis,
                             style: fontNunito.copyWith(
                               color: colorWhite,
@@ -181,15 +183,17 @@ class DetailEventView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => Get.toNamed(RouteName.task),
-                          child: Text(
-                            "Lihat Agenda",
-                            overflow: TextOverflow.ellipsis,
-                            style: fontNunito.copyWith(
-                              color: colorPrimary,
-                              fontWeight: bold,
-                              fontSize: 16,
+                        Flexible(
+                          child: GestureDetector(
+                            onTap: () => Get.toNamed(RouteName.task),
+                            child: Text(
+                              "Lihat Agenda",
+                              overflow: TextOverflow.ellipsis,
+                              style: fontNunito.copyWith(
+                                color: colorPrimary,
+                                fontWeight: bold,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ),
@@ -208,19 +212,33 @@ class DetailEventView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
+                      height: 4.h,
+                      width: 70.w,
+                      child: ListView(
+                        semanticChildCount: 2,
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(5),
+                        children: [
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                          EventPack(label: "label"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
                       width: 70.w,
                       child: Wrap(
                         spacing: 5.0,
                         runSpacing: 5.0,
                         direction: Axis.horizontal,
-                        children: const [
-                          EventPack(label: "Pre Wedding"),
-                          EventPack(label: "Engagment"),
-                          EventPack(label: "Resepsi"),
-                          EventPack(label: "Panggih"),
-                          EventPack(label: "Akad"),
-                          EventPack(label: "Akad"),
-                        ],
+                        children: [],
                       ),
                     ),
                     SizedBox(
@@ -287,6 +305,29 @@ class DetailEventView extends StatelessWidget {
                             ],
                           ),
                         ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 3.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ButtonOutlined(
+                          height: 6.h,
+                          width: 40.w,
+                          onTap: () {},
+                          label: "Edit",
+                          textColor: colorPrimary,
+                        ),
+                        Button(
+                          height: 6.h,
+                          width: 40.w,
+                          onTap: () => controller.deleteEvent(event.id),
+                          colorBg: colorPrimary,
+                          label: "Hapus",
+                          textColor: colorWhite,
+                        )
                       ],
                     )
                   ],

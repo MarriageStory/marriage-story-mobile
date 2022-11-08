@@ -7,6 +7,7 @@ import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../utils/dateTime.dart';
+import '../../../widgets/number_form.dart';
 import '../event.dart';
 import 'package:get/get.dart';
 
@@ -126,8 +127,7 @@ class _BodyState extends State<FormEventView> {
                       borderRadius: BorderRadius.circular(5)),
                 ),
                 items: [
-                  MultiSelectCard(
-                      value: 'Pre - Wedding', label: 'Pre - Wedding'),
+                  MultiSelectCard(value: 'Pre-Wedding', label: 'Pre-Wedding'),
                   MultiSelectCard(value: 'Engagement', label: 'Engagement'),
                   MultiSelectCard(value: 'Akad', label: 'Akad'),
                   MultiSelectCard(value: 'Panggih', label: 'Panggih'),
@@ -139,8 +139,6 @@ class _BodyState extends State<FormEventView> {
                   } else {
                     selectedPackage.add(selectedItem);
                   }
-                  // controller.paketTextController.text =
-                  //     selectedPackage.toString();
                   controller.selectedPackage1 = selectedPackage;
                 },
               ),
@@ -190,7 +188,7 @@ class _BodyState extends State<FormEventView> {
               SizedBox(
                 height: 1.5.h,
               ),
-              InputForm(
+              NumberForm(
                 label: "Total Pembayaran",
                 inputController: controller.totalBayarTextController,
               ),

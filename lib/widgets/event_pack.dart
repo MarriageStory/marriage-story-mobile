@@ -9,21 +9,24 @@ class EventPack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: colorPrimary,
+    return FittedBox(
+      fit: BoxFit.fitHeight,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: colorPrimary,
+          ),
         ),
-      ),
-      child: Text(
-        label,
-        style: fontNunito.copyWith(
-          color: colorPrimary,
-          fontWeight: semiBold,
-          fontSize: 11,
+        child: Text(
+          label,
+          style: fontNunito.copyWith(
+            color: colorPrimary,
+            fontWeight: semiBold,
+            fontSize: 11,
+          ),
         ),
       ),
     );

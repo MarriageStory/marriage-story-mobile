@@ -1,22 +1,22 @@
 import 'dart:convert';
 
-PaymentDetailsModel paymentsModelFromJson(String str) =>
-    PaymentDetailsModel.fromJson(json.decode(str));
+TransactionModel paymentsModelFromJson(String str) =>
+    TransactionModel.fromJson(json.decode(str));
 
-String paymentsModelToJson(PaymentDetailsModel data) =>
+String paymentsModelToJson(TransactionModel data) =>
     json.encode(data.toJson());
 
-class PaymentDetailsModel {
-  PaymentDetailsModel({
+class TransactionModel {
+  TransactionModel({
     required this.data,
   });
 
-  List<PaymentDetailModel> data;
+  List<TransactionDataModel> data;
 
-  factory PaymentDetailsModel.fromJson(Map<String, dynamic> json) =>
-      PaymentDetailsModel(
-        data: List<PaymentDetailModel>.from(
-            json["data"].map((x) => PaymentDetailModel.fromJson(x))),
+  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
+      TransactionModel(
+        data: List<TransactionDataModel>.from(
+            json["data"].map((x) => TransactionDataModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -24,8 +24,8 @@ class PaymentDetailsModel {
       };
 }
 
-class PaymentDetailModel {
-  PaymentDetailModel({
+class TransactionDataModel {
+  TransactionDataModel({
     required this.id,
     required this.namaPayment,
     required this.bayar,
@@ -45,8 +45,8 @@ class PaymentDetailModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory PaymentDetailModel.fromJson(Map<String, dynamic> json) =>
-      PaymentDetailModel(
+  factory TransactionDataModel.fromJson(Map<String, dynamic> json) =>
+      TransactionDataModel(
         id: json["id"],
         namaPayment: json["nama_payment"],
         bayar: json["bayar"],

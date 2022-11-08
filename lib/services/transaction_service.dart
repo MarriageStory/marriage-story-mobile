@@ -3,10 +3,31 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../constants/string.dart';
-import '../models/payment_model.dart';
+import '../models/transaction_model.dart';
+import '../utils/storage.dart';
 
-class PaymentDetailService {
-  static Future<bool> createNewPaymentDetail(
+class TransactionService {
+  static Future<List<TransactionDataModel>?> getTransactions(
+      int idPayment) async {
+    final token = Storage.getValue(storageToken);
+
+    var response = await http.get(
+        Uri.parse(
+            baseURLAPI + "events/" + idPayment.toString() + "/details-payment"),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $token",
+        });
+
+    if (response.statusCode == 200) {
+      List jsonResponse = jsonDecode(response.body)['data'];
+      return jsonResponse.map((e) => TransactionDataModel.fromJson(e)).toList();
+    } else {
+      throw Exception("Gagal Terhubung ke Server");
+    }
+  }
+
+  static Future<bool> createTransaction(
       int idPayment, Map<String, dynamic> data) async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");
@@ -30,25 +51,6 @@ class PaymentDetailService {
 
     if (response.statusCode == 200) {
       return true;
-    } else {
-      throw Exception("Gagal Terhubung ke Server");
-    }
-  }
-
-  static Future<PaymentDetailsModel> getAllPaymentDetails(int idPayment) async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString("token");
-
-    var response = await http.get(
-        Uri.parse(
-            baseURLAPI + "events/" + idPayment.toString() + "/details-payment"),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "Bearer $token",
-        });
-
-    if (response.statusCode == 200) {
-      return PaymentDetailsModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception("Gagal Terhubung ke Server");
     }

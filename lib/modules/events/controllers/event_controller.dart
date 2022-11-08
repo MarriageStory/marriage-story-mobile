@@ -2,29 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/event_service.dart';
 import '../../../models/event_model.dart';
-import 'package:flutter/material.dart';
 import '../../../routes/app_pages.dart';
 
 class EventController extends GetxController {
   var events = <EventDataModel>[].obs;
-  final TextEditingController namaKlientTextController =
-      TextEditingController();
-  final TextEditingController tanggalTextController = TextEditingController();
-  final TextEditingController jamTextController = TextEditingController();
-  final TextEditingController tempatTextController = TextEditingController();
-  final TextEditingController totalBayarTextController =
-      TextEditingController();
-  final TextEditingController statusBayarTextController =
-      TextEditingController();
-  final TextEditingController jumlahTerbayarTextController =
-      TextEditingController();
-  final TextEditingController catatanTextController = TextEditingController();
+  final namaKlientTextController = TextEditingController();
+  final tanggalTextController = TextEditingController();
+  final jamTextController = TextEditingController();
+  final tempatTextController = TextEditingController();
+  final totalBayarTextController = TextEditingController();
+  final statusBayarTextController = TextEditingController();
+  final jumlahTerbayarTextController = TextEditingController();
+  final catatanTextController = TextEditingController();
 
   var selectedPackage1 = [];
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getAllEvent();
     super.onInit();
   }
@@ -54,7 +48,7 @@ class EventController extends GetxController {
         'paket': selectedPackage1.toList(),
       };
 
-      var loginResponse = await EventService.createNewEvent(input);
+      await EventService.createEvent(input);
 
       Get.snackbar(
         'Berhasil Menambahkan',
@@ -96,7 +90,7 @@ class EventController extends GetxController {
         'paket': selectedPackage1.toList(),
       };
 
-      var loginResponse = await EventService.updateEvent(idEvent, input);
+      await EventService.updateEvent(idEvent, input);
 
       Get.snackbar(
         'Berhasil Mengedit',
@@ -126,7 +120,7 @@ class EventController extends GetxController {
 
   Future<void> deleteEvent(int idEvent) async {
     try {
-      var loginResponse = await EventService.deleteEvent(idEvent);
+      await EventService.deleteEvent(idEvent);
 
       Get.snackbar(
         'Berhasil Mengahpus',

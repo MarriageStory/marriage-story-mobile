@@ -171,12 +171,14 @@ class EventView extends StatelessWidget {
                               height: 1.h,
                             ),
                             Center(
-                              child: Text(
-                                "8",
-                                style: fontNunito.copyWith(
-                                  color: colorWhite,
-                                  fontWeight: bold,
-                                  fontSize: 30,
+                              child: Obx(
+                                () => Text(
+                                  controller.events.length.toString(),
+                                  style: fontNunito.copyWith(
+                                    color: colorWhite,
+                                    fontWeight: bold,
+                                    fontSize: 30,
+                                  ),
                                 ),
                               ),
                             ),
@@ -236,27 +238,31 @@ class EventView extends StatelessWidget {
                             //   eventPack: "akad",
                             //   onTap: () => Get.toNamed(RouteName.detailEvent),
                             // )
-                            ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              padding: const EdgeInsets.all(0),
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: CardEvent(
-                                    label:
-                                        controllerHome.events[index].nameClient,
-                                    date: controllerHome.events[index].date
-                                        .toString(),
-                              allTask: "3",
-                              eventPack: "akad",
-                              onTap: () => Get.toNamed(RouteName.detailEvent),
-                                  ),
-                                );
-                              },
-                              itemCount: controller.events.length,
+                            Obx(
+                              () => ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.all(0),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    child: CardEvent(
+                                      label:
+                                          controller.events[index].nameClient,
+                                      date: controller.events[index].date
+                                          .toString(),
+                                      allTask: "3",
+                                      eventPack: "akad",
+                                      onTap: () => Get.toNamed(
+                                          RouteName.detailEvent,
+                                          arguments: controller.events[index]),
+                                    ),
+                                  );
+                                },
+                                itemCount: controller.events.length,
+                              ),
                             ),
                           ],
                         ),

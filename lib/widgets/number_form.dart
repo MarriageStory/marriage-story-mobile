@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 
-class InputForm extends StatelessWidget {
-  const InputForm({
+class NumberForm extends StatelessWidget {
+  const NumberForm({
     super.key,
     required this.label,
     required this.inputController,
@@ -14,9 +15,10 @@ class InputForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       controller: inputController,
       decoration: InputDecoration(
-        
         labelStyle: TextStyle(
           color: colorPrimary,
           fontSize: 14,

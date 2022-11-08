@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:marriage_story_mobile/constants/string.dart';
 import 'package:marriage_story_mobile/models/event_model.dart';
@@ -24,12 +25,9 @@ class EventService {
     }
   }
 
-  static Future<bool> createNewEvent(Map<String, dynamic> data) async {
-    final prefs = await SharedPreferences.getInstance();
+  static Future<bool> createEvent(Map<String, dynamic> data) async {
     // final token = prefs.getString("token");
     final token = Storage.getValue(storageToken);
-    print("masuk event servcice");
-
     var event = <String, dynamic>{
       "name_client": data["name_client"],
       "date": data["date"],
@@ -46,11 +44,11 @@ class EventService {
         body: jsonEncode(event),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
           'Authorization': "Bearer $token",
         });
 
     if (response.statusCode == 200) {
-      print("token ${token}");
       return true;
     } else {
       throw Exception("Gagal Terhubung ke Server");

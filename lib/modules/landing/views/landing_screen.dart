@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
-import 'package:marriage_story_mobile/widgets/background_welcome.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/button_outlined.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -16,12 +15,10 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(
-            right: defaultPadding,
-            left: defaultPadding,
-          ),
+          padding: EdgeInsets.only(
+              right: defaultPadding, left: defaultPadding, top: 10.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,12 +6,10 @@ import 'package:marriage_story_mobile/services/event_service.dart';
 import '../../../models/event_model.dart';
 import '../../../models/schedule_model.dart';
 import '../../../models/user_model.dart';
-import '../../../services/schedule_aan_service.dart';
+import '../../../services/schedule_service.dart';
 import '../../../utils/storage.dart';
 
 class HomeController extends GetxController {
-  var schedule = <SchedulesModel>[].obs;
-  var events = <EventDataModel>[].obs;
   final genCodeTextController = TextEditingController();
 
   final user = UserModel(
@@ -30,9 +28,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getUserProfile();
-    getAllEvent();
     // getAllSchedule();
-    
+
     super.onInit();
   }
 
@@ -55,20 +52,10 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> getAllEvent() async {
-    try {
-      final dataEvent = await EventService.getEvent();
-      if (dataEvent != null) {
-        events.assignAll(dataEvent);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
 
   Future<void> getAllSchedule() async {
     try {
-      final dataSchedule = await ScheduleService.getSchedule();
+      final dataSchedule = await ScheduleService.getSchedules();
       if (dataSchedule != null) {
         // schedule.assignAll(dataSchedule);
       }
