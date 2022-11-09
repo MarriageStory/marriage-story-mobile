@@ -37,6 +37,8 @@ class ScheduleService {
       "status": data["status"],
       "gencode": data["gencode"],
     };
+    print("data");
+    print(idEvent);
 
     var response = await http.post(
         Uri.parse(baseURLAPI + "events/" + idEvent.toString() + "/schedule"),

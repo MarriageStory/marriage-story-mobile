@@ -5,11 +5,14 @@ import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../models/event_model.dart';
 import '../task.dart';
 
 class TaskView extends StatelessWidget {
   TaskView({super.key});
   final controller = Get.find<TaskController>();
+  final EventDataModel event = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +57,8 @@ class TaskView extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              onPressed: () => Get.toNamed(RouteName.addTask),
+                              onPressed: () => Get.toNamed(RouteName.addTask,
+                                  arguments: event),
                               icon: const Icon(
                                 Icons.add_rounded,
                                 color: colorWhite,
@@ -124,12 +128,33 @@ class TaskView extends StatelessWidget {
                     SizedBox(
                       height: 2.h,
                     ),
-                    CardTask(
-                      onTap: () => Get.toNamed(RouteName.detailTask),
-                      label: "Meeting dengan Wo",
-                      date: "23 April 2022",
-                      time: "17:00",
-                    )
+                    // CardTask(
+                    //   onTap: () => Get.toNamed(RouteName.detailTask),
+                    //   label: "Meeting dengan Wo",
+                    //   date: "23 April 2022",
+                    //   time: "17:00",
+                    // ),
+                    Obx(
+                      () => ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(0),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            child: CardTask(
+                              onTap: () => Get.toNamed(RouteName.detailTask,
+                                  arguments: controller.task[index]),
+                              label: controller.task[index].namaKegiatan,
+                              date: controller.task[index].tanggal.toString(),
+                              time: controller.task[index].jam,
+                            ),
+                          );
+                        },
+                        itemCount: controller.task.length,
+                      ),
+                    ),
                   ],
                 ),
               ),

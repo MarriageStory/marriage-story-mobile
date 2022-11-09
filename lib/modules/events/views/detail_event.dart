@@ -185,7 +185,8 @@ class DetailEventView extends StatelessWidget {
                         ),
                         Flexible(
                           child: GestureDetector(
-                            onTap: () => Get.toNamed(RouteName.task),
+                            onTap: () =>
+                                Get.toNamed(RouteName.task, arguments: event),
                             child: Text(
                               "Lihat Agenda",
                               overflow: TextOverflow.ellipsis,

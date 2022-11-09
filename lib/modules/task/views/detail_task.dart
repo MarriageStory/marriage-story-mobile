@@ -8,11 +8,14 @@ import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/detail_format.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../models/schedule_model.dart';
 import '../task.dart';
 
 class DetailTaskView extends StatelessWidget {
   DetailTaskView({super.key});
   final controller = Get.find<TaskController>();
+  final ScheduleDataModel task = Get.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +71,7 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "20 : 00",
+                        task.jam,
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: bold,
@@ -78,7 +81,7 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "Senin, 24 April 2022",
+                        task.tanggal.toString(),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,
@@ -112,21 +115,21 @@ class DetailTaskView extends StatelessWidget {
                   children: [
                     DetailFormat(
                       keterangan: "Kegiatan :",
-                      label: "label",
+                      label: task.namaKegiatan,
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
                     DetailFormat(
                       keterangan: "Tempat :",
-                      label: "label",
+                      label: task.tempat,
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
                     DetailFormat(
                       keterangan: "Detail Kegiatan :",
-                      label: "label",
+                      label: task.detailKegiatan,
                     ),
                     SizedBox(
                       height: 20.h,
@@ -137,7 +140,9 @@ class DetailTaskView extends StatelessWidget {
                         Button(
                           height: 6.h,
                           width: 40.w,
-                          onTap: () {},
+                          onTap: () {
+                            // Get.toNamed(RouteName.addTask, arguments: task);
+                          },
                           colorBg: colorPrimary,
                           label: "Edit",
                           textColor: colorWhite,
@@ -153,7 +158,9 @@ class DetailTaskView extends StatelessWidget {
                             textConfirm: "Hapus",
                             confirmTextColor: colorWhite,
                             buttonColor: colorPrimary,
-                            onConfirm: () {},
+                            onConfirm: () {
+                              controller.deleteTask(task.id);
+                            },
                             textCancel: "Kembali",
                             cancelTextColor: colorPrimary,
                             radius: 15,

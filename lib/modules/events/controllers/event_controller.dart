@@ -14,7 +14,6 @@ class EventController extends GetxController {
   final statusBayarTextController = TextEditingController();
   final jumlahTerbayarTextController = TextEditingController();
   final catatanTextController = TextEditingController();
-
   var selectedPackage1 = [];
 
   @override
