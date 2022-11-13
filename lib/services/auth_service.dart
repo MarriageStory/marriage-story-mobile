@@ -1,107 +1,80 @@
-import 'dart:convert';
-import 'dart:async';
-
-import 'package:http/http.dart' as http;
-import 'package:marriage_story_mobile/constants/string.dart';
-import 'package:marriage_story_mobile/models/login_model.dart';
+import './base_service.dart';
+import 'package:marriage_story_mobile/models/user_auth_model.dart';
 import 'package:marriage_story_mobile/models/user_model.dart';
-import '../utils/storage.dart';
 
-class AuthService {
-  static Future<http.Response> authRegister(Map<String, dynamic> data) async {
+class AuthService extends BaseService {
+  Future<UserAuthDataModel?> authRegister(Map<String, dynamic> data) async {
     try {
       var dataRegister = <String, dynamic>{
-        'name': data["name"],
+        'fullname': data["fullname"],
         'email': data["email"],
         'password': data["password"],
-        'role_name': data["role_name"],
+        'role_id': data["role_id"],
       };
 
-      var response = await http.post(Uri.parse(baseURLAPI + "register"),
-          body: jsonEncode(dataRegister),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          });
+      final response = await post("/auth/register", dataRegister);
 
-      return response;
+      if (response.statusCode == 201) {
+        return UserAuthDataModel.fromJson(response.body['data']);
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
     } catch (e) {
-      throw Exception(e);
+      if (e.toString() == "Email telah terdaftar") {
+        throw ("Email Telah Terdaftar!");
+      } else {
+        rethrow;
+      }
     }
   }
 
-  static Future<LoginModel?> authLogin(Map<String, dynamic> data) async {
+  Future<UserAuthDataModel?> authLogin(Map<String, dynamic> data) async {
     try {
       var dataLogin = <String, dynamic>{
         'email': data['email'],
         'password': data['password'],
       };
-
-      // print(object)
-
-      var response = await http.post(Uri.parse(baseURLAPI + "login"),
-          body: jsonEncode(dataLogin),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }).timeout(
-        const Duration(seconds: 10),
-        onTimeout: () => throw TimeoutException("Connection Time Out"),
-      );
+      final response = await post("/auth/login", dataLogin);
 
       if (response.statusCode == 200) {
-        return LoginModel.fromJson(jsonDecode(response.body));
+        return UserAuthDataModel.fromJson(response.body['data']);
       } else {
-        throw jsonDecode(response.body);
+        throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<bool> updateUser(Map<String, dynamic> data, int id) async {
+  Future<UserDataModel?> userUpdateProfile(Map<String, dynamic> input) async {
     try {
-      final token = Storage.getValue(storageToken);
-
-      var event = <String, dynamic>{
-        'gencode': data['gencode'],
+      var dataProfile = <String, dynamic>{
+        'fullname': input['fullname'],
       };
 
-      var response = await http.put(
-        Uri.parse(baseURLAPI + "admin/$id/update"),
-        body: jsonEncode(event),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "Bearer $token"
-        },
-      );
+      final response = await post("/users/profile/update", dataProfile);
 
       if (response.statusCode == 200) {
-        return true;
+        return UserDataModel.fromJson(response.body['data']['user']);
       } else {
-        throw Exception(jsonDecode(response.body));
+        throw (response.body['data'] ?? response.body['message']);
       }
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<UserModel?> userProfile() async {
-    final token = Storage.getValue(storageToken);
+  Future<UserDataModel?> userProfile() async {
+    try {
+      final response = await get("/users/profile");
 
-    var response = await http.get(
-      Uri.parse(baseURLAPI + "user"),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json',
-        'Authorization': "Bearer $token",
-      },
-    );
-
-    if (response.statusCode == 200) {
-      return UserModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception(false);
+      if (response.statusCode == 200) {
+        return UserDataModel.fromJson(response.body['data']['user']);
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }

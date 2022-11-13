@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/utils/storage.dart';
 import 'package:marriage_story_mobile/routes/routes.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
+import 'package:marriage_story_mobile/constants/string.dart';
 
 class LoginController extends GetxController {
+  final authSerivice = Get.put(AuthService());
   final TextEditingController emailTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
   final isObsecured = true.obs;
@@ -25,15 +27,14 @@ class LoginController extends GetxController {
         'password': passwordTextController.text,
       };
 
-      var loginResponse = await AuthService.authLogin(input);
+      var loginResponse = await authSerivice.authLogin(input);
 
-      await Storage.saveValue('token', loginResponse?.accessToken);
+      await Storage.saveValue(storageToken, loginResponse!.payload.token);
 
-      final user = await AuthService.userProfile();
 
       Get.snackbar(
         'Berhasil Masuk !',
-        'Selamat Datang ${user!.name}',
+        'Selamat Datang ${loginResponse.user.fullname}',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(

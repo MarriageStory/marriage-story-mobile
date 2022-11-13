@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
@@ -7,16 +6,11 @@ import '../../../routes/routes.dart';
 import '../../../utils/storage.dart';
 
 class RegisterController extends GetxController {
+  final authSerivice = Get.put(AuthService());
   final nameTextController = TextEditingController();
   final emailTextController = TextEditingController();
   final passwordTextController = TextEditingController();
   final isObsecured = true.obs;
-
-  @override
-  void onInit() {
-    print(Storage.getValue(storageToken));
-    super.onInit();
-  }
 
   @override
   void onClose() {
@@ -28,20 +22,19 @@ class RegisterController extends GetxController {
 
   Future<void> register() async {
     final input = <String, dynamic>{
-      'name': nameTextController.text,
+      'fullname': nameTextController.text,
       'email': emailTextController.text,
       'password': passwordTextController.text,
-      'role_name': "Client",
+      'role_id': "1",
     };
 
-    var registerResponse = await AuthService.authRegister(input);
+    try {
+      var registerResponse = await authSerivice.authRegister(input);
+      await Storage.saveValue(storageToken, registerResponse?.payload.token);
 
-    if (registerResponse.statusCode == 200) {
-      Map<String, dynamic> token = jsonDecode(registerResponse.body);
-      Storage.saveValue('token', token['data']);
       Get.snackbar(
         'Berhasil Mendaftar !',
-        'Selamat Datang ${token['data']['name']}',
+        'Selamat Datang ${registerResponse?.user.fullname}',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -50,11 +43,10 @@ class RegisterController extends GetxController {
         ),
       );
       Get.offAllNamed(RouteName.navigation);
-    } else {
-      Map<String, dynamic> error = jsonDecode(registerResponse.body);
+    } catch (e) {
       Get.snackbar(
         'Gagal Mendaftar !',
-        '${error['data']}',
+        e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(

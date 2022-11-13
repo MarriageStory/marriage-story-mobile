@@ -1,15 +1,15 @@
 // To parse required this JSON data, do
 //
-//     final userModel = userModelFromJson(jsonString);
+//     final userAuthModel = userAuthModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
+UserAuthModel userAuthModelFromJson(String str) => UserAuthModel.fromJson(json.decode(str));
 
-String userModelToJson(UserModel data) => json.encode(data.toJson());
+String userAuthModelToJson(UserAuthModel data) => json.encode(data.toJson());
 
-class UserModel {
-    UserModel({
+class UserAuthModel {
+    UserAuthModel({
         required this.status,
         required this.message,
         required this.data,
@@ -17,12 +17,12 @@ class UserModel {
 
     bool status;
     String message;
-    UserDataModel data;
+    UserAuthDataModel data;
 
-    factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+    factory UserAuthModel.fromJson(Map<String, dynamic> json) => UserAuthModel(
         status: json["status"],
         message: json["message"],
-        data: UserDataModel.fromJson(json["data"]),
+        data: UserAuthDataModel.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -32,19 +32,43 @@ class UserModel {
     };
 }
 
-class UserDataModel {
-    UserDataModel({
+class UserAuthDataModel {
+    UserAuthDataModel({
         required this.user,
+        required this.payload,
     });
 
     User user;
+    Payload payload;
 
-    factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
+    factory UserAuthDataModel.fromJson(Map<String, dynamic> json) => UserAuthDataModel(
         user: User.fromJson(json["user"]),
+        payload: Payload.fromJson(json["payload"]),
     );
 
     Map<String, dynamic> toJson() => {
         "user": user.toJson(),
+        "payload": payload.toJson(),
+    };
+}
+
+class Payload {
+    Payload({
+        required this.type,
+        required this.token,
+    });
+
+    String type;
+    String token;
+
+    factory Payload.fromJson(Map<String, dynamic> json) => Payload(
+        type: json["type"],
+        token: json["token"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "type": type,
+        "token": token,
     };
 }
 

@@ -209,34 +209,34 @@ class HomeView extends StatelessWidget {
                                 SizedBox(
                                   height: 2.h,
                                 ),
-                                Obx(() => eventController.events.isNotEmpty
-                                    ? ListView.builder(
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        scrollDirection: Axis.vertical,
-                                        shrinkWrap: true,
-                                        padding: const EdgeInsets.all(0),
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: CardEventHome(
-                                              onTap: () => Get.toNamed(
-                                                  RouteName.detailEvent,
-                                                  arguments:
-                                                      eventController.events[index]),
-                                              label: eventController
-                                                  .events[index].nameClient,
-                                              date: eventController
-                                                  .events[index].date
-                                                  .toString(),
-                                              task: "2",
-                                            ),
-                                          );
-                                        },
-                                        itemCount: eventController.events.length,
-                                      )
+                                Obx(() => eventController.events.isNotEmpty? SizedBox()
+                                    // ? ListView.builder(
+                                    //     physics:
+                                    //         const NeverScrollableScrollPhysics(),
+                                    //     scrollDirection: Axis.vertical,
+                                    //     shrinkWrap: true,
+                                    //     padding: const EdgeInsets.all(0),
+                                    //     itemBuilder:
+                                    //         (BuildContext context, int index) {
+                                    //       return Container(
+                                    //         margin: const EdgeInsets.symmetric(
+                                    //             vertical: 5),
+                                    //         child: CardEventHome(
+                                    //           onTap: () => Get.toNamed(
+                                    //               RouteName.detailEvent,
+                                    //               arguments:
+                                    //                   eventController.events[index]),
+                                    //           label: eventController
+                                    //               .events[index].nameClient,
+                                    //           date: eventController
+                                    //               .events[index].date
+                                    //               .toString(),
+                                    //           task: "2",
+                                    //         ),
+                                    //       );
+                                    //     },
+                                    //     itemCount: eventController.events.length,
+                                    //   )
                                     : Center(
                                         child: Text(
                                           "Acara Kosong",
@@ -254,7 +254,7 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   )
-                : controller.user.value.gencode == ""
+                : controller == ""
                     ? SingleChildScrollView(
                         child: Stack(
                           clipBehavior: Clip.none,
@@ -294,7 +294,8 @@ class HomeView extends StatelessWidget {
                                             ),
                                             Obx(
                                               () => Text(
-                                                controller.user.value.name,
+                                                "",
+                                                // controller.user.value.name,
                                                 style: fontNunito.copyWith(
                                                   color: colorWhite,
                                                   fontWeight: bold,
@@ -433,7 +434,7 @@ class HomeView extends StatelessWidget {
                                             ),
                                             Obx(
                                               () => Text(
-                                                controller.user.value.name ??
+                                                // controller.user.value.name ??
                                                     "-",
                                                 style: fontNunito.copyWith(
                                                   color: colorWhite,

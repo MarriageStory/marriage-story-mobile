@@ -23,14 +23,14 @@ class EventController extends GetxController {
   }
 
   Future<void> getAllEvent() async {
-    try {
-      final dataEvent = await EventService.getEvent();
-      if (dataEvent != null) {
-        events.assignAll(dataEvent);
-      }
-    } catch (e) {
-      print(e);
-    }
+    // try {
+    //   final dataEvent = await EventService.getEvent();
+    //   if (dataEvent != null) {
+    //     events.assignAll(dataEvent);
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   Future<void> createEvent() async {
@@ -47,7 +47,7 @@ class EventController extends GetxController {
         'paket': selectedPackage1.toList(),
       };
 
-      await EventService.createEvent(input);
+      // await EventService.createEvent(input);
 
       Get.snackbar(
         'Berhasil Menambahkan',
@@ -89,7 +89,7 @@ class EventController extends GetxController {
         'paket': selectedPackage1.toList(),
       };
 
-      await EventService.updateEvent(idEvent, input);
+      // await EventService.updateEvent(idEvent, input);
 
       Get.snackbar(
         'Berhasil Mengedit',
@@ -119,7 +119,7 @@ class EventController extends GetxController {
 
   Future<void> deleteEvent(int idEvent) async {
     try {
-      await EventService.deleteEvent(idEvent);
+      // await EventService.deleteEvent(idEvent);
 
       Get.snackbar(
         'Berhasil Mengahpus',

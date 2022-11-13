@@ -12,16 +12,16 @@ import '../../../utils/storage.dart';
 class HomeController extends GetxController {
   final genCodeTextController = TextEditingController();
 
-  final user = UserModel(
-    id: 0,
-    name: "",
-    email: "",
-    emailVerifiedAt: DateTime.now(),
-    roleName: "",
-    gencode: "",
-    createdAt: DateTime.now(),
-    updatedAt: DateTime.now(),
-  ).obs;
+  // final user = UserModel(
+  //   id: 0,
+  //   name: "",
+  //   email: "",
+  //   emailVerifiedAt: DateTime.now(),
+  //   roleName: "",
+  //   gencode: "",
+  //   createdAt: DateTime.now(),
+  //   updatedAt: DateTime.now(),
+  // ).obs;
 
   final isLoading = false.obs;
 
@@ -36,15 +36,15 @@ class HomeController extends GetxController {
   Future<void> getUserProfile() async {
     isLoading.value = true;
     try {
-      final data = await AuthService.userProfile();
+      // final data = await AuthService.userProfile();
 
-      user.update((val) {
-        val!.id = data!.id;
-        val.name = data.name;
-        val.email = data.email;
-        val.roleName = data.roleName;
-        val.gencode = data.gencode;
-      });
+      // user.update((val) {
+      //   val!.id = data!.id;
+      //   val.name = data.name;
+      //   val.email = data.email;
+      //   val.roleName = data.roleName;
+      //   val.gencode = data.gencode;
+      // });
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -54,14 +54,14 @@ class HomeController extends GetxController {
 
 
   Future<void> getAllSchedule() async {
-    try {
-      final dataSchedule = await ScheduleService.getSchedules();
-      if (dataSchedule != null) {
-        // schedule.assignAll(dataSchedule);
-      }
-    } catch (e) {
-      print(e);
-    }
+    // try {
+    //   final dataSchedule = await ScheduleService.getSchedules();
+    //   if (dataSchedule != null) {
+    //     // schedule.assignAll(dataSchedule);
+    //   }
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 
   Future<void> updateGenCode() async {
@@ -69,11 +69,11 @@ class HomeController extends GetxController {
       'gencode': genCodeTextController.text,
     };
     try {
-      var updateCode = await AuthService.updateUser(input, user.value.id);
+      // var updateCode = await AuthService.updateUser(input, user.value.id);
 
       Get.snackbar(
         'Berhasil Menemukan Event !',
-        'Event dengan Code ${user.value.gencode}',
+        'Event dengan Code ',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(

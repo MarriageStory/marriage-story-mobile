@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../../../models/transaction_model.dart';
-import '../../../services/transaction_service.dart';
+import '../../../models/payment_model.dart';
+import '../../../services/payment_service.dart';
 
 class PaymentController extends GetxController {
   var task = <TransactionDataModel>[].obs;

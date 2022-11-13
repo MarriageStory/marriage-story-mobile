@@ -1,15 +1,15 @@
 // To parse required this JSON data, do
 //
-//     final scheduleModel = scheduleModelFromJson(jsonString);
+//     final paymentModel = paymentModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ScheduleModel scheduleModelFromJson(String str) => ScheduleModel.fromJson(json.decode(str));
+PaymentModel paymentModelFromJson(String str) => PaymentModel.fromJson(json.decode(str));
 
-String scheduleModelToJson(ScheduleModel data) => json.encode(data.toJson());
+String paymentModelToJson(PaymentModel data) => json.encode(data.toJson());
 
-class ScheduleModel {
-    ScheduleModel({
+class PaymentModel {
+    PaymentModel({
         required this.status,
         required this.message,
         required this.data,
@@ -17,12 +17,12 @@ class ScheduleModel {
 
     bool status;
     String message;
-    List<ScheduleDataModel> data;
+    List<PaymentDataModel> data;
 
-    factory ScheduleModel.fromJson(Map<String, dynamic> json) => ScheduleModel(
+    factory PaymentModel.fromJson(Map<String, dynamic> json) => PaymentModel(
         status: json["status"],
         message: json["message"],
-        data: List<ScheduleDataModel>.from(json["data"].map((x) => ScheduleDataModel.fromJson(x))),
+        data: List<PaymentDataModel>.from(json["data"].map((x) => PaymentDataModel.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -32,13 +32,14 @@ class ScheduleModel {
     };
 }
 
-class ScheduleDataModel {
-    ScheduleDataModel({
+class PaymentDataModel {
+    PaymentDataModel({
         required this.id,
-        required this.namaKegiatan,
-        required this.detailKegiatan,
+        required this.namaPayment,
+        required this.total,
         required this.datetime,
-        required this.tempat,
+        required this.detail,
+        required this.image,
         required this.eventId,
         required this.createdAt,
         required this.updatedAt,
@@ -46,21 +47,23 @@ class ScheduleDataModel {
     });
 
     int id;
-    String namaKegiatan;
-    String detailKegiatan;
+    String namaPayment;
+    int total;
     DateTime datetime;
-    String tempat;
+    String detail;
+    dynamic image;
     int eventId;
     DateTime createdAt;
     DateTime updatedAt;
     Event event;
 
-    factory ScheduleDataModel.fromJson(Map<String, dynamic> json) => ScheduleDataModel(
+    factory PaymentDataModel.fromJson(Map<String, dynamic> json) => PaymentDataModel(
         id: json["id"],
-        namaKegiatan: json["nama_kegiatan"],
-        detailKegiatan: json["detail_kegiatan"],
+        namaPayment: json["nama_payment"],
+        total: json["total"],
         datetime: DateTime.parse(json["datetime"]),
-        tempat: json["tempat"],
+        detail: json["detail"],
+        image: json["image"],
         eventId: json["event_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -69,10 +72,11 @@ class ScheduleDataModel {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "nama_kegiatan": namaKegiatan,
-        "detail_kegiatan": detailKegiatan,
+        "nama_payment": namaPayment,
+        "total": total,
         "datetime": datetime.toIso8601String(),
-        "tempat": tempat,
+        "detail": detail,
+        "image": image,
         "event_id": eventId,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),

@@ -1,101 +1,76 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import '../constants/string.dart';
+import 'dart:async';
 import '../models/schedule_model.dart';
-import '../utils/storage.dart';
+import 'base_service.dart';
 
-class ScheduleService {
-  static Future<List<ScheduleDataModel>?> getSchedules() async {
-    final token = Storage.getValue(storageToken);
+class ScheduleService extends BaseService {
+  Future<List<ScheduleDataModel>?> getSchedule(int eventId) async {
+    try {
+      final response = await get("/events/$eventId/schedules");
 
-    var response = await http.get(
-      Uri.parse(baseURLAPI + "schedules"),
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': "Bearer $token",
-      },
-    );
-    if (response.statusCode == 200) {
-      List jsonResponse = jsonDecode(response.body)['data'];
-      return jsonResponse.map((e) => ScheduleDataModel.fromJson(e)).toList();
-    } else {
-      throw jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        List jsonResponse = response.body['data'];
+        return jsonResponse
+            .map((e) => ScheduleDataModel.fromJson(e))
+            .toList();
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 
-  static Future<bool> createNewSchedule(
-      int idEvent, Map<String, dynamic> data) async {
-    final token = Storage.getValue(storageToken);
+  Future<bool> createSchedule(Map<String, dynamic> data, int eventId) async {
+    try {
+      var dataSchedule = <String, dynamic>{
+        'nama_kegiatan': data['nama_kegiatan'],
+        'detail_kegiatan': data['detail_kegiatan'],
+        'datetime': data['datetime'],
+        'tempat': data['tempat'],
+      };
 
-    var schedule = <String, dynamic>{
-      "nama_kegiatan": data["nama_kegiatan"],
-      "detail_kegiatan": data["detail_kegiatan"],
-      "tanggal": data["tanggal"],
-      "tempat": data["tempat"],
-      "jam": data["jam"],
-      "status": data["status"],
-      "gencode": data["gencode"],
-    };
-    print("data");
-    print(idEvent);
-
-    var response = await http.post(
-        Uri.parse(baseURLAPI + "events/" + idEvent.toString() + "/schedule"),
-        body: jsonEncode(schedule),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "Bearer $token",
-        });
-
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      throw Exception("Gagal Terhubung ke Server");
+      final response = await post("/events/$eventId/schedules/create", dataSchedule);
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 
-  static Future<bool> updateSchedule(int id, Map<String, dynamic> data) async {
-    final token = Storage.getValue(storageToken);
+  Future<bool> updateSchedule(Map<String, dynamic> data, int eventId, int scheduleId) async {
+    try {
+      var dataSchedule = <String, dynamic>{
+        'nama_kegiatan': data['nama_kegiatan'],
+        'detail_kegiatan': data['detail_kegiatan'],
+        'datetime': data['datetime'],
+        'tempat': data['tempat'],
+      };
 
-    var schedule = <String, dynamic>{
-      "nama_kegiatan": data["nama_kegiatan"],
-      "detail_kegiatan": data["detail_kegiatan"],
-      "tanggal": data["tanggal"],
-      "tempat": data["tempat"],
-      "jam": data["jam"],
-      "status": data["status"],
-    };
-
-    var response = await http.put(
-        Uri.parse(baseURLAPI + "schedules/" + id.toString()),
-        body: jsonEncode(schedule),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': "Bearer $token",
-        });
-
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      // throw Exception("Gagal Terhubung ke Server");
-      throw Exception(id.toString());
+      final response = await post("/events/$eventId/schedules/update/$scheduleId", dataSchedule);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 
-  static Future<bool> deleteSchedule(int id) async {
-    final token = Storage.getValue(storageToken);
+  Future<bool> deleteSchedule(int eventId,int scheduleId) async {
+    try {
+      final response = await delete("/events/$eventId/schedules/delete/$scheduleId");
 
-    var response = await http
-        .delete(Uri.parse(baseURLAPI + "schedules/" + id.toString()), headers: {
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': "Bearer $token",
-    });
-
-    if (response.statusCode == 200) {
-      return true;
-    } else {
-      throw Exception("Gagal Terhubung ke Server");
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }
