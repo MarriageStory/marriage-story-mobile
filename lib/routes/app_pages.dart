@@ -50,7 +50,7 @@ class AppPages {
     ),
     GetPage(
       name: RouteName.addEvent,
-      page: () => FormEventView(),
+      page: () => AddEventView(),
       binding: EventBinding(),
     ),
     GetPage(

@@ -8,7 +8,7 @@ import '../../../services/schedule_service.dart';
 
 class HomeController extends GetxController {
   final userService = Get.put(AuthService());
-  final eventService = Get.put(EventService());
+  
   final scheduleService = Get.put(ScheduleService());
   final paymentService = Get.put(PaymentService());
   final genCodeTextController = TextEditingController();

@@ -6,15 +6,21 @@ import '../../../routes/app_pages.dart';
 
 class EventController extends GetxController {
   var events = <EventDataModel>[].obs;
-  final namaKlientTextController = TextEditingController();
-  final tanggalTextController = TextEditingController();
-  final jamTextController = TextEditingController();
+  final eventService = Get.put(EventService());
+  final namaClientTextController = TextEditingController();
+  final dateTextController = TextEditingController();
   final tempatTextController = TextEditingController();
   final totalBayarTextController = TextEditingController();
-  final statusBayarTextController = TextEditingController();
   final jumlahTerbayarTextController = TextEditingController();
   final catatanTextController = TextEditingController();
-  var selectedPackage1 = [];
+  var selected = [].obs;
+  var selectedPackage = [].obs;
+  var selectedEvent = 0.obs;
+
+  bool cekJam = false;
+  bool cekTgl = false;
+  DateTime tanggal = DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
 
   @override
   void onInit() {
@@ -22,78 +28,46 @@ class EventController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    namaClientTextController.dispose();
+    dateTextController.dispose();
+    tempatTextController.dispose();
+    totalBayarTextController.dispose();
+    jumlahTerbayarTextController.dispose();
+    catatanTextController.dispose();
+    super.onClose();
+  }
+
   Future<void> getAllEvent() async {
-    // try {
-    //   final dataEvent = await EventService.getEvent();
-    //   if (dataEvent != null) {
-    //     events.assignAll(dataEvent);
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
+    try {
+      final dataEvent = await eventService.getEvent();
+      if (dataEvent != null) {
+        events.assignAll(dataEvent);
+      }
+    } catch (e) {
+      e.toString();
+    }
   }
 
   Future<void> createEvent() async {
     try {
       var input = <String, dynamic>{
-        'name_client': namaKlientTextController.text,
-        'date': tanggalTextController.text,
-        'time': jamTextController.text,
-        'tempat': "-",
-        'total_pembayaran': totalBayarTextController.text,
-        'status_pembayaran': "pending",
-        'jumlah_terbayar': "0",
-        'note': "-",
-        'paket': selectedPackage1.toList(),
-      };
-
-      // await EventService.createEvent(input);
-
-      Get.snackbar(
-        'Berhasil Menambahkan',
-        'Event Baru',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-      Get.offAllNamed(RouteName.navigation);
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Masuk !',
-        '$e',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.cancel,
-          color: Colors.white,
-        ),
-      );
-      print(e);
-    }
-  }
-
-  Future<void> updateEvent(int idEvent) async {
-    try {
-      var input = <String, dynamic>{
-        'name_client': namaKlientTextController.text,
-        'date': tanggalTextController.text,
-        'time': jamTextController.text,
+        'name_client': namaClientTextController.text,
+        'datetime': dateTextController.text,
         'tempat': tempatTextController.text,
         'total_pembayaran': totalBayarTextController.text,
-        'status_pembayaran': statusBayarTextController.text,
+        'status_pembayaran': "pending",
         'jumlah_terbayar': jumlahTerbayarTextController.text,
         'note': catatanTextController.text,
-        'paket': selectedPackage1.toList(),
+        'paket': selected.toList(),
       };
 
-      // await EventService.updateEvent(idEvent, input);
+      await eventService.createEvent(input);
 
       Get.snackbar(
-        'Berhasil Mengedit',
-        'Event',
+        'Sukses !',
+        'Berhasil Menambahkan Event Baru',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -104,7 +78,7 @@ class EventController extends GetxController {
       Get.offAllNamed(RouteName.navigation);
     } catch (e) {
       Get.snackbar(
-        'Gagal Masuk !',
+        'Gagal Menambahkan Event !',
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -117,13 +91,24 @@ class EventController extends GetxController {
     }
   }
 
-  Future<void> deleteEvent(int idEvent) async {
+  Future<void> updateEvent(int eventId) async {
     try {
-      // await EventService.deleteEvent(idEvent);
+      var input = <String, dynamic>{
+        'name_client': namaClientTextController.text,
+        'date': dateTextController.text,
+        'tempat': tempatTextController.text,
+        'total_pembayaran': totalBayarTextController.text,
+        'status_pembayaran': "pending",
+        'jumlah_terbayar': jumlahTerbayarTextController.text,
+        'note': catatanTextController.text,
+        'paket': selected.toList(),
+      };
+
+      await eventService.updateEvent(input, eventId);
 
       Get.snackbar(
-        'Berhasil Mengahpus',
-        'Event',
+        'Sukses !',
+        'Berhasil Mengedit Event ',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -134,7 +119,7 @@ class EventController extends GetxController {
       Get.offAllNamed(RouteName.navigation);
     } catch (e) {
       Get.snackbar(
-        'Gagal Masuk !',
+        'Gagal Mengupdate Event !',
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -145,5 +130,51 @@ class EventController extends GetxController {
       );
       print(e);
     }
+  }
+
+  Future<void> deleteEvent(int eventId) async {
+    try {
+      await eventService.deleteEvent(eventId);
+
+      Get.snackbar(
+        'Sukses !',
+        'Berhasil Menghapus Event',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      );
+      Get.offAllNamed(RouteName.navigation);
+    } catch (e) {
+      Get.snackbar(
+        'Gagal Menghapus Event !',
+        '$e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+      print(e);
+    }
+  }
+
+  Future<void> selectDate(BuildContext context) async {
+    // Initial DateTime FIinal Picked
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: tanggal,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+
+    if (picked != null && picked != tanggal) {
+      cekTgl = true;
+      dateTextController.text = picked.toString();
+      tanggal = picked;
+    }
+    ;
   }
 }

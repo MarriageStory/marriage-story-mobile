@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/schedule_service.dart';
 import '../../../models/event_model.dart';
@@ -9,39 +8,39 @@ import '../../../routes/app_pages.dart';
 
 class TaskController extends GetxController {
   // final EventDataModel event = Get.arguments;
-  final isChecked = false.obs;
   var task = <ScheduleDataModel>[].obs;
+  final taskService = Get.put(ScheduleService());
+  final isChecked = false.obs;
+  
 
   final namaAgendaController = TextEditingController();
   final detailAgendaController = TextEditingController();
-  final tanggalAgendaController = TextEditingController();
+  final dateAgendaController = TextEditingController();
   final tempatAgendaController = TextEditingController();
   final jamAgendaController = TextEditingController();
 
   @override
   void onInit() {
-    // getAllTask();
-    // TODO: implement onInit
     super.onInit();
   }
 
-  // Future<void> getAllTask() async {
-  //   try {
-  //     final dataEvent = await ScheduleService.getSchedules();
-  //     if (dataEvent != null) {
-  //       task.assignAll(dataEvent);
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  Future<void> getAllSchedule(int event) async {
+    try {
+      final dataTask = taskService.getSchedule(event);
+      if (dataTask != null) {
+        task.assignAll();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Future<void> createTask(EventDataModel event) async {
     try {
       var input = <String, dynamic>{
         'nama_kegiatan': namaAgendaController.text,
         'detail_kegiatan': detailAgendaController.text,
-        'tanggal': tanggalAgendaController.text,
+        'tanggal': dateAgendaController.text,
         'tempat': tempatAgendaController.text,
         'jam': jamAgendaController.text,
         'status': "pending",
@@ -81,7 +80,7 @@ class TaskController extends GetxController {
       var input = <String, dynamic>{
         'nama_kegiatan': namaAgendaController.text,
         'detail_kegiatan': detailAgendaController.text,
-        'tanggal': tanggalAgendaController.text,
+        'tanggal': dateAgendaController.text,
         'tempat': tempatAgendaController.text,
         'jam': jamAgendaController.text,
         'status': "pending",
