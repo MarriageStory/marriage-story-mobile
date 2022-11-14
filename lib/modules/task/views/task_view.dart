@@ -16,152 +16,153 @@ class TaskView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: 40.h,
-              decoration: BoxDecoration(gradient: colorGradient),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  right: defaultPadding,
-                  left: defaultPadding,
-                  top: 6.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () => Get.back(),
-                              icon: const Icon(
-                                Icons.arrow_back_ios_rounded,
-                                color: colorWhite,
-                              ),
-                            ),
-                            Text(
-                              "Agenda Acara",
-                              style: fontNunito.copyWith(
-                                color: colorWhite,
-                                fontWeight: bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () => Get.toNamed(RouteName.addTask,
-                                  arguments: event),
-                              icon: const Icon(
-                                Icons.add_rounded,
-                                color: colorWhite,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 7.h,
-                    ),
-                    Center(
-                      child: Text(
-                        "Jumlah Agenda :",
-                        style: fontNunito.copyWith(
-                          color: colorWhite,
-                          fontWeight: semiBold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 1.h,
-                    ),
-                    Center(
-                      child: Text(
-                        "8",
-                        style: fontNunito.copyWith(
-                          color: colorWhite,
-                          fontWeight: bold,
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 35.h),
-              decoration: const BoxDecoration(
-                color: colorWhite,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(defaultBorderRadius2),
-                  topRight: Radius.circular(defaultBorderRadius2),
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  right: defaultPadding,
-                  left: defaultPadding,
-                  top: 4.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Semua Agenda",
-                      style: fontNunito.copyWith(
-                        color: colorBlack,
-                        fontWeight: semiBold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    // CardTask(
-                    //   onTap: () => Get.toNamed(RouteName.detailTask),
-                    //   label: "Meeting dengan Wo",
-                    //   date: "23 April 2022",
-                    //   time: "17:00",
-                    // ),
-                    Obx(
-                      () => ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(0),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            child: CardTask(
-                              onTap: () => Get.toNamed(RouteName.detailTask,
-                                  arguments: controller.task[index]),
-                              label: controller.task[index].namaKegiatan,
-                              date: controller.task[index].tanggal.toString(),
-                              time: controller.task[index].jam,
-                            ),
-                          );
-                        },
-                        itemCount: controller.task.length,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // body: SingleChildScrollView(
+      //   child: Stack(
+      //     clipBehavior: Clip.none,
+      //     children: [
+      //       Container(
+      //         height: 40.h,
+      //         decoration: BoxDecoration(gradient: colorGradient),
+      //         child: Padding(
+      //           padding: EdgeInsets.only(
+      //             right: defaultPadding,
+      //             left: defaultPadding,
+      //             top: 6.h,
+      //           ),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             mainAxisAlignment: MainAxisAlignment.start,
+      //             children: [
+      //               Column(
+      //                 mainAxisAlignment: MainAxisAlignment.start,
+      //                 crossAxisAlignment: CrossAxisAlignment.start,
+      //                 children: [
+      //                   Row(
+      //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                     crossAxisAlignment: CrossAxisAlignment.center,
+      //                     children: [
+      //                       IconButton(
+      //                         onPressed: () => Get.back(),
+      //                         icon: const Icon(
+      //                           Icons.arrow_back_ios_rounded,
+      //                           color: colorWhite,
+      //                         ),
+      //                       ),
+      //                       Text(
+      //                         "Agenda Acara",
+      //                         style: fontNunito.copyWith(
+      //                           color: colorWhite,
+      //                           fontWeight: bold,
+      //                           fontSize: 20,
+      //                         ),
+      //                       ),
+      //                       IconButton(
+      //                         onPressed: () => Get.toNamed(RouteName.addTask,
+      //                             arguments: event),
+      //                         icon: const Icon(
+      //                           Icons.add_rounded,
+      //                           color: colorWhite,
+      //                         ),
+      //                       ),
+      //                     ],
+      //                   ),
+      //                 ],
+      //               ),
+      //               SizedBox(
+      //                 height: 7.h,
+      //               ),
+      //               Center(
+      //                 child: Text(
+      //                   "Jumlah Agenda :",
+      //                   style: fontNunito.copyWith(
+      //                     color: colorWhite,
+      //                     fontWeight: semiBold,
+      //                     fontSize: 16,
+      //                   ),
+      //                 ),
+      //               ),
+      //               SizedBox(
+      //                 height: 1.h,
+      //               ),
+      //               Center(
+      //                 child: Text(
+      //                   "8",
+      //                   style: fontNunito.copyWith(
+      //                     color: colorWhite,
+      //                     fontWeight: bold,
+      //                     fontSize: 30,
+      //                   ),
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //       Container(
+      //         margin: EdgeInsets.only(top: 35.h),
+      //         decoration: const BoxDecoration(
+      //           color: colorWhite,
+      //           borderRadius: BorderRadius.only(
+      //             topLeft: Radius.circular(defaultBorderRadius2),
+      //             topRight: Radius.circular(defaultBorderRadius2),
+      //           ),
+      //         ),
+      //         child: Padding(
+      //           padding: EdgeInsets.only(
+      //             right: defaultPadding,
+      //             left: defaultPadding,
+      //             top: 4.h,
+      //           ),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             mainAxisAlignment: MainAxisAlignment.start,
+      //             children: [
+      //               Text(
+      //                 "Semua Agenda",
+      //                 style: fontNunito.copyWith(
+      //                   color: colorBlack,
+      //                   fontWeight: semiBold,
+      //                   fontSize: 16,
+      //                 ),
+      //               ),
+      //               SizedBox(
+      //                 height: 2.h,
+      //               ),
+      //               // CardTask(
+      //               //   onTap: () => Get.toNamed(RouteName.detailTask),
+      //               //   label: "Meeting dengan Wo",
+      //               //   date: "23 April 2022",
+      //               //   time: "17:00",
+      //               // ),
+      //               Obx(
+      //                 () => ListView.builder(
+      //                   physics: const NeverScrollableScrollPhysics(),
+      //                   scrollDirection: Axis.vertical,
+      //                   shrinkWrap: true,
+      //                   padding: const EdgeInsets.all(0),
+      //                   itemBuilder: (BuildContext context, int index) {
+      //                     return Container(
+      //                       margin: const EdgeInsets.symmetric(vertical: 5),
+      //                       child: CardTask(
+      //                         onTap: () => Get.toNamed(RouteName.detailTask,
+      //                             arguments: controller.task[index]),
+      //                         label: controller.task[index].namaKegiatan,
+      //                         date: controller.task[index].tanggal.toString(),
+      //                         time: controller.task[index].jam,
+      //                       ),
+      //                     );
+      //                   },
+      //                   itemCount: controller.task.length,
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+    
     );
   }
 }

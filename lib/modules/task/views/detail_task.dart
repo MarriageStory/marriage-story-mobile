@@ -19,173 +19,174 @@ class DetailTaskView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              height: 45.h,
-              decoration: BoxDecoration(gradient: colorGradient),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  right: defaultPadding,
-                  left: defaultPadding,
-                  top: 6.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () => Get.back(),
-                              icon: const Icon(
-                                Icons.arrow_back_ios_rounded,
-                                color: colorWhite,
-                              ),
-                            ),
-                            Text(
-                              "Detail Agenda",
-                              style: fontNunito.copyWith(
-                                color: colorWhite,
-                                fontWeight: bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 4.h,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Center(
-                      child: Text(
-                        task.jam,
-                        style: fontNunito.copyWith(
-                          color: colorWhite,
-                          fontWeight: bold,
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        task.tanggal.toString(),
-                        style: fontNunito.copyWith(
-                          color: colorWhite,
-                          fontWeight: semiBold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: 100.w,
-              margin: EdgeInsets.only(top: 40.h),
-              decoration: const BoxDecoration(
-                color: colorWhite,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(defaultBorderRadius2),
-                  topRight: Radius.circular(defaultBorderRadius2),
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.only(
-                  right: defaultPadding,
-                  left: defaultPadding,
-                  top: 8.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    DetailFormat(
-                      keterangan: "Kegiatan :",
-                      label: task.namaKegiatan,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    DetailFormat(
-                      keterangan: "Tempat :",
-                      label: task.tempat,
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    DetailFormat(
-                      keterangan: "Detail Kegiatan :",
-                      label: task.detailKegiatan,
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Button(
-                          height: 6.h,
-                          width: 40.w,
-                          onTap: () {
-                            // Get.toNamed(RouteName.addTask, arguments: task);
-                          },
-                          colorBg: colorPrimary,
-                          label: "Edit",
-                          textColor: colorWhite,
-                        ),
-                        ButtonOutlined(
-                          height: 6.h,
-                          width: 40.w,
-                          label: "Hapus",
-                          textColor: colorPrimary,
-                          onTap: () => Get.defaultDialog(
-                            title: "Hapus Agenda",
-                            titlePadding: const EdgeInsets.only(top: 30.0),
-                            textConfirm: "Hapus",
-                            confirmTextColor: colorWhite,
-                            buttonColor: colorPrimary,
-                            onConfirm: () {
-                              controller.deleteTask(task.id);
-                            },
-                            textCancel: "Kembali",
-                            cancelTextColor: colorPrimary,
-                            radius: 15,
-                            contentPadding: const EdgeInsets.all(30),
-                            content: Center(
-                              child: Text(
-                                "Apakah Anda Ingin Menghapus Agenda Ini?",
-                                style: fontNunito.copyWith(
-                                  color: colorGrey,
-                                  fontWeight: semiBold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      // body: SingleChildScrollView(
+      //   child: Stack(
+      //     clipBehavior: Clip.none,
+      //     children: [
+      //       Container(
+      //         height: 45.h,
+      //         decoration: BoxDecoration(gradient: colorGradient),
+      //         child: Padding(
+      //           padding: EdgeInsets.only(
+      //             right: defaultPadding,
+      //             left: defaultPadding,
+      //             top: 6.h,
+      //           ),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             mainAxisAlignment: MainAxisAlignment.start,
+      //             children: [
+      //               Column(
+      //                 mainAxisAlignment: MainAxisAlignment.start,
+      //                 crossAxisAlignment: CrossAxisAlignment.start,
+      //                 children: [
+      //                   Row(
+      //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                     crossAxisAlignment: CrossAxisAlignment.center,
+      //                     children: [
+      //                       IconButton(
+      //                         onPressed: () => Get.back(),
+      //                         icon: const Icon(
+      //                           Icons.arrow_back_ios_rounded,
+      //                           color: colorWhite,
+      //                         ),
+      //                       ),
+      //                       Text(
+      //                         "Detail Agenda",
+      //                         style: fontNunito.copyWith(
+      //                           color: colorWhite,
+      //                           fontWeight: bold,
+      //                           fontSize: 20,
+      //                         ),
+      //                       ),
+      //                       SizedBox(
+      //                         width: 4.h,
+      //                       )
+      //                     ],
+      //                   ),
+      //                 ],
+      //               ),
+      //               SizedBox(
+      //                 height: 8.h,
+      //               ),
+      //               Center(
+      //                 child: Text(
+      //                   task.jam,
+      //                   style: fontNunito.copyWith(
+      //                     color: colorWhite,
+      //                     fontWeight: bold,
+      //                     fontSize: 30,
+      //                   ),
+      //                 ),
+      //               ),
+      //               Center(
+      //                 child: Text(
+      //                   task.tanggal.toString(),
+      //                   style: fontNunito.copyWith(
+      //                     color: colorWhite,
+      //                     fontWeight: semiBold,
+      //                     fontSize: 16,
+      //                   ),
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //       Container(
+      //         width: 100.w,
+      //         margin: EdgeInsets.only(top: 40.h),
+      //         decoration: const BoxDecoration(
+      //           color: colorWhite,
+      //           borderRadius: BorderRadius.only(
+      //             topLeft: Radius.circular(defaultBorderRadius2),
+      //             topRight: Radius.circular(defaultBorderRadius2),
+      //           ),
+      //         ),
+      //         child: Padding(
+      //           padding: EdgeInsets.only(
+      //             right: defaultPadding,
+      //             left: defaultPadding,
+      //             top: 8.h,
+      //           ),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             mainAxisAlignment: MainAxisAlignment.start,
+      //             children: [
+      //               DetailFormat(
+      //                 keterangan: "Kegiatan :",
+      //                 label: task.namaKegiatan,
+      //               ),
+      //               SizedBox(
+      //                 height: 2.h,
+      //               ),
+      //               DetailFormat(
+      //                 keterangan: "Tempat :",
+      //                 label: task.tempat,
+      //               ),
+      //               SizedBox(
+      //                 height: 2.h,
+      //               ),
+      //               DetailFormat(
+      //                 keterangan: "Detail Kegiatan :",
+      //                 label: task.detailKegiatan,
+      //               ),
+      //               SizedBox(
+      //                 height: 20.h,
+      //               ),
+      //               Row(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //                 children: [
+      //                   Button(
+      //                     height: 6.h,
+      //                     width: 40.w,
+      //                     onTap: () {
+      //                       // Get.toNamed(RouteName.addTask, arguments: task);
+      //                     },
+      //                     colorBg: colorPrimary,
+      //                     label: "Edit",
+      //                     textColor: colorWhite,
+      //                   ),
+      //                   ButtonOutlined(
+      //                     height: 6.h,
+      //                     width: 40.w,
+      //                     label: "Hapus",
+      //                     textColor: colorPrimary,
+      //                     onTap: () => Get.defaultDialog(
+      //                       title: "Hapus Agenda",
+      //                       titlePadding: const EdgeInsets.only(top: 30.0),
+      //                       textConfirm: "Hapus",
+      //                       confirmTextColor: colorWhite,
+      //                       buttonColor: colorPrimary,
+      //                       onConfirm: () {
+      //                         controller.deleteTask(task.id);
+      //                       },
+      //                       textCancel: "Kembali",
+      //                       cancelTextColor: colorPrimary,
+      //                       radius: 15,
+      //                       contentPadding: const EdgeInsets.all(30),
+      //                       content: Center(
+      //                         child: Text(
+      //                           "Apakah Anda Ingin Menghapus Agenda Ini?",
+      //                           style: fontNunito.copyWith(
+      //                             color: colorGrey,
+      //                             fontWeight: semiBold,
+      //                             fontSize: 16,
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ),
+      //                   )
+      //                 ],
+      //               )
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+    
     );
   }
 }

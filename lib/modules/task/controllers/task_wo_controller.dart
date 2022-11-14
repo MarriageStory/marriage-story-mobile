@@ -20,21 +20,21 @@ class TaskController extends GetxController {
 
   @override
   void onInit() {
-    getAllTask();
+    // getAllTask();
     // TODO: implement onInit
     super.onInit();
   }
 
-  Future<void> getAllTask() async {
-    try {
-      final dataEvent = await ScheduleService.getSchedules();
-      if (dataEvent != null) {
-        task.assignAll(dataEvent);
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
+  // Future<void> getAllTask() async {
+  //   try {
+  //     final dataEvent = await ScheduleService.getSchedules();
+  //     if (dataEvent != null) {
+  //       task.assignAll(dataEvent);
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   Future<void> createTask(EventDataModel event) async {
     try {
@@ -48,7 +48,7 @@ class TaskController extends GetxController {
         'gencode': event.gencode,
       };
 
-      await ScheduleService.createNewSchedule(event.id, input);
+      // await ScheduleService.createNewSchedule(event.id, input);
 
       Get.snackbar(
         'Berhasil Menambahkan',
@@ -85,10 +85,10 @@ class TaskController extends GetxController {
         'tempat': tempatAgendaController.text,
         'jam': jamAgendaController.text,
         'status': "pending",
-        'gencode': task.gencode,
+        // 'gencode': task.gencode,
       };
 
-      await ScheduleService.createNewSchedule(idTask, input);
+      // await ScheduleService.createNewSchedule(idTask, input);
 
       Get.snackbar(
         'Berhasil Mengedit',
@@ -118,7 +118,7 @@ class TaskController extends GetxController {
 
   Future<void> deleteTask(int idTask) async {
     try {
-      await ScheduleService.deleteSchedule(idTask);
+      // await ScheduleService.deleteSchedule(idTask);
 
       Get.snackbar(
         'Berhasil Mengahpus',

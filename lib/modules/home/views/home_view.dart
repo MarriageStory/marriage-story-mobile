@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
                   size: 7.h,
                 ),
               )
-            : controller.user.value.roleName == "WeddingOrganize"
+            : controller.user.value.roleId == 2
                 ? SingleChildScrollView(
                     child: Stack(
                       clipBehavior: Clip.none,
@@ -60,7 +60,7 @@ class HomeView extends StatelessWidget {
                                     ),
                                     Obx(
                                       () => Text(
-                                        controller.user.value.name ?? "-",
+                                          controller.user.value.fullname ?? "-",
                                         style: fontNunito.copyWith(
                                           color: colorWhite,
                                           fontWeight: bold,
@@ -368,8 +368,7 @@ class HomeView extends StatelessWidget {
                                           child: Button(
                                             height: 7.h,
                                             width: 16.w,
-                                            onTap: () =>
-                                                controller.updateGenCode(),
+                                            onTap: () {},
                                             colorBg: colorPrimary,
                                             label: "OK",
                                             textColor: colorWhite,
@@ -688,6 +687,7 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
       ),
+    
     );
   }
 }

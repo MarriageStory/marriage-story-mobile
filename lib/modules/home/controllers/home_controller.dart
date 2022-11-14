@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
-import 'package:marriage_story_mobile/services/event_service.dart';
-
-import '../../../models/event_model.dart';
-import '../../../models/schedule_model.dart';
 import '../../../models/user_model.dart';
+import '../../../services/event_service.dart';
+import '../../../services/payment_service.dart';
 import '../../../services/schedule_service.dart';
-import '../../../utils/storage.dart';
 
 class HomeController extends GetxController {
+  final userService = Get.put(AuthService());
+  final eventService = Get.put(EventService());
+  final scheduleService = Get.put(ScheduleService());
+  final paymentService = Get.put(PaymentService());
   final genCodeTextController = TextEditingController();
 
-  // final user = UserModel(
-  //   id: 0,
-  //   name: "",
-  //   email: "",
-  //   emailVerifiedAt: DateTime.now(),
-  //   roleName: "",
-  //   gencode: "",
-  //   createdAt: DateTime.now(),
-  //   updatedAt: DateTime.now(),
-  // ).obs;
+  final user = UserDataModel(
+    id: 0,
+    fullname: "",
+    email: "",
+    roleId: 0,
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+    role: Role(
+        id: 0,
+        roleName: "",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now()),
+  ).obs;
 
   final isLoading = false.obs;
 
@@ -36,15 +40,14 @@ class HomeController extends GetxController {
   Future<void> getUserProfile() async {
     isLoading.value = true;
     try {
-      // final data = await AuthService.userProfile();
+      final userResponse = await userService.userProfile();
 
-      // user.update((val) {
-      //   val!.id = data!.id;
-      //   val.name = data.name;
-      //   val.email = data.email;
-      //   val.roleName = data.roleName;
-      //   val.gencode = data.gencode;
-      // });
+      user.update((val) {
+        val!.id = userResponse!.id;
+        val.fullname = userResponse.fullname;
+        val.email = userResponse.email;
+        val.role.roleName = userResponse.role.roleName;
+      });
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
@@ -53,46 +56,4 @@ class HomeController extends GetxController {
   }
 
 
-  Future<void> getAllSchedule() async {
-    // try {
-    //   final dataSchedule = await ScheduleService.getSchedules();
-    //   if (dataSchedule != null) {
-    //     // schedule.assignAll(dataSchedule);
-    //   }
-    // } catch (e) {
-    //   print(e);
-    // }
-  }
-
-  Future<void> updateGenCode() async {
-    var input = <String, dynamic>{
-      'gencode': genCodeTextController.text,
-    };
-    try {
-      // var updateCode = await AuthService.updateUser(input, user.value.id);
-
-      Get.snackbar(
-        'Berhasil Menemukan Event !',
-        'Event dengan Code ',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Menemukan Event',
-        '',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.cancel,
-          color: Colors.white,
-        ),
-      );
-      print(e);
-    }
-  }
 }

@@ -46,7 +46,7 @@ class LoginController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Gagal Masuk !',
-        '$e',
+        e.toString(),
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -54,7 +54,6 @@ class LoginController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
 }

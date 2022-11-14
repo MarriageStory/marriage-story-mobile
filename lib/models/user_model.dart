@@ -17,12 +17,12 @@ class UserModel {
 
     bool status;
     String message;
-    UserDataModel data;
+    Data data;
 
     factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         status: json["status"],
         message: json["message"],
-        data: UserDataModel.fromJson(json["data"]),
+        data: Data.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -32,15 +32,15 @@ class UserModel {
     };
 }
 
-class UserDataModel {
-    UserDataModel({
+class Data {
+    Data({
         required this.user,
     });
 
-    User user;
+    UserDataModel user;
 
-    factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
-        user: User.fromJson(json["user"]),
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
+        user: UserDataModel.fromJson(json["user"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -48,8 +48,8 @@ class UserDataModel {
     };
 }
 
-class User {
-    User({
+class UserDataModel {
+    UserDataModel({
         required this.id,
         required this.fullname,
         required this.email,
@@ -67,7 +67,7 @@ class User {
     DateTime updatedAt;
     Role role;
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+    factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
         id: json["id"],
         fullname: json["fullname"],
         email: json["email"],

@@ -48,7 +48,8 @@ class OtherView extends StatelessWidget {
                         height: 1.h,
                       ),
                       Text(
-                        controller.homeController.user.value.name,
+                        "",
+                        // controller.homeController.user.value.name,
                         style: fontNunito.copyWith(
                           color: colorBlack,
                           fontWeight: bold,
@@ -56,7 +57,8 @@ class OtherView extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        controller.homeController.user.value.roleName,
+                        "",
+                        // controller.homeController.user.value.roleName,
                         style: fontNunito.copyWith(
                           color: colorGrey.withOpacity(0.5),
                           fontWeight: semiBold,

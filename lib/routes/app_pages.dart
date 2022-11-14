@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:marriage_story_mobile/modules/auth/views/register_view.dart';
 import '../modules/navigation/navigation.dart';
 import '../modules/auth/auth.dart';
-import '../modules/role/role.dart';
 import '../modules/splash/splash.dart';
 import '../modules/landing/landing.dart';
 import '../modules/home/home.dart';
@@ -27,11 +26,6 @@ class AppPages {
       name: RouteName.navigation,
       page: () => NavigationView(),
       binding: NavigationBinding(),
-    ),
-    GetPage(
-      name: RouteName.role,
-      page: () => RoleScreen(),
-      binding: RoleBinding(),
     ),
     GetPage(
       name: RouteName.landing,
