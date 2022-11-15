@@ -28,7 +28,7 @@ class _BodyState extends State<AddTaskView> {
       color: Color(0xff828282), fontWeight: FontWeight.w500, fontSize: 14);
   bool cekJam = false;
   bool cekTgl = false;
-  DateTime tanggal = DateTime.now();
+  // DateTime tanggal = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
 
   void showTime() {
@@ -43,18 +43,18 @@ class _BodyState extends State<AddTaskView> {
 
   Future<Null> _selectDate(BuildContext context) async {
     // Initial DateTime FIinal Picked
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: tanggal,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
+    // final DateTime? picked = await showDatePicker(
+    //     context: context,
+    //     initialDate: tanggal,
+    //     firstDate: DateTime(2015),
+    //     lastDate: DateTime(2101));
 
-    if (picked != null && picked != tanggal)
-      setState(() {
-        cekTgl = true;
-        controller.tanggalAgendaController.text = picked.toString();
-        tanggal = picked;
-      });
+    // if (picked != null && picked != tanggal)
+    //   setState(() {
+    //     cekTgl = true;
+    //     controller.tanggalAgendaController.text = picked.toString();
+    //     tanggal = picked;
+    //   });
   }
 
   @override
@@ -153,15 +153,15 @@ class _BodyState extends State<AddTaskView> {
               //   label: "Tanggal Kegiatan",
               //   inputController: controller.tanggalAgendaController,
               // ),
-              dateTime(
-                // labelText: "Date",
-                valueText:
-                    cekTgl != false ? tanggal.toString() : "Tanggal Acara",
-                valueStyle: valueStyle,
-                onPressed: () {
-                  _selectDate(context);
-                },
-              ),
+              // dateTime(
+              //   // labelText: "Date",
+              //   valueText:
+              //       cekTgl != false ? tanggal.toString() : "Tanggal Acara",
+              //   valueStyle: valueStyle,
+              //   onPressed: () {
+              //     _selectDate(context);
+              //   },
+              // ),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -169,16 +169,16 @@ class _BodyState extends State<AddTaskView> {
               //   label: "Waktu Kegiatan",
               //   inputController: controller.jamAgendaController,
               // ),
-              dateTime(
-                // labelText: "Date",
-                valueText: cekJam != false
-                    ? controller.jamAgendaController.text
-                    : "Waktu Acara",
-                valueStyle: valueStyle,
-                onPressed: () {
-                  showTime();
-                },
-              ),
+              // dateTime(
+              //   // labelText: "Date",
+              //   valueText: cekJam != false
+              //       ? controller.jamAgendaController.text
+              //       : "Waktu Acara",
+              //   valueStyle: valueStyle,
+              //   onPressed: () {
+              //     showTime();
+              //   },
+              // ),
               SizedBox(
                 height: 1.5.h,
               ),

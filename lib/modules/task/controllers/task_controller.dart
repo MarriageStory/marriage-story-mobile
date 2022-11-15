@@ -26,9 +26,9 @@ class TaskController extends GetxController {
 
   Future<void> getAllSchedule(int event) async {
     try {
-      final dataTask = taskService.getSchedule(event);
+      final dataTask = await taskService.getSchedule(event);
       if (dataTask != null) {
-        task.assignAll();
+        task.assignAll(dataTask);
       }
     } catch (e) {
       print(e);
