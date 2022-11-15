@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/modules/navigation/controllers/navigation_controller.dart';
+import '../../task/task.dart';
 import '../navigation.dart';
 import 'package:marriage_story_mobile/modules/events/event.dart';
 import 'package:marriage_story_mobile/modules/home/home.dart';
@@ -18,5 +19,6 @@ class NavigationBinding extends Bindings {
         () => PaymentController(),
         fenix: true);
     Get.lazyPut<OtherController>(() => OtherController(), fenix: true);
+    Get.lazyPut<TaskController>(() => TaskController(), fenix: true);
   }
 }

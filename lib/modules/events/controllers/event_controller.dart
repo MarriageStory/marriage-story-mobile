@@ -7,6 +7,7 @@ import '../../../routes/app_pages.dart';
 class EventController extends GetxController {
   var events = <EventDataModel>[].obs;
   final eventService = Get.put(EventService());
+  
   final namaClientTextController = TextEditingController();
   final dateTextController = TextEditingController();
   final tempatTextController = TextEditingController();

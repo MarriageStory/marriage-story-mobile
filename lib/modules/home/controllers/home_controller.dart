@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
 import '../../../models/user_model.dart';
-import '../../../services/event_service.dart';
-import '../../../services/payment_service.dart';
-import '../../../services/schedule_service.dart';
+import '../../task/task.dart';
 
 class HomeController extends GetxController {
   final userService = Get.put(AuthService());
   
-  final scheduleService = Get.put(ScheduleService());
-  final paymentService = Get.put(PaymentService());
   final genCodeTextController = TextEditingController();
 
   final user = UserDataModel(
@@ -46,6 +42,7 @@ class HomeController extends GetxController {
         val!.id = userResponse!.id;
         val.fullname = userResponse.fullname;
         val.email = userResponse.email;
+        val.roleId = userResponse.roleId;
         val.role.roleName = userResponse.role.roleName;
       });
       isLoading.value = false;

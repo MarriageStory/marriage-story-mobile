@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/schedule_service.dart';
 import '../../../models/event_model.dart';
@@ -5,13 +7,14 @@ import '../../../models/schedule_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../events/event.dart';
 
 class TaskController extends GetxController {
   // final EventDataModel event = Get.arguments;
   var task = <ScheduleDataModel>[].obs;
   final taskService = Get.put(ScheduleService());
+  final EventController eventController = Get.find();
   final isChecked = false.obs;
-  
 
   final namaAgendaController = TextEditingController();
   final detailAgendaController = TextEditingController();
@@ -21,14 +24,16 @@ class TaskController extends GetxController {
 
   @override
   void onInit() {
+    getAllSchedule(eventController.events.length);
+    log("");
     super.onInit();
   }
 
   Future<void> getAllSchedule(int event) async {
     try {
-      final dataTask = taskService.getSchedule(event);
+      final dataTask = await taskService.getSchedule(event);
       if (dataTask != null) {
-        task.assignAll();
+        task.assignAll(dataTask);
       }
     } catch (e) {
       print(e);

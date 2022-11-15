@@ -7,15 +7,19 @@ import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/event_pack.dart';
 import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:get/get.dart';
-import '../../../routes/routes.dart';
-import '../home.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:get/get.dart';
+
+import '../../../routes/routes.dart';
+import '../../task/task.dart';
+import '../home.dart';
+
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
   final HomeController controller = Get.find();
   final EventController eventController = Get.find();
+  final TaskController taskController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,7 @@ class HomeView extends StatelessWidget {
                                     ),
                                     Obx(
                                       () => Text(
-                                          controller.user.value.fullname ?? "-",
+                                        controller.user.value.fullname ?? "-",
                                         style: fontNunito.copyWith(
                                           color: colorWhite,
                                           fontWeight: bold,
@@ -173,7 +177,8 @@ class HomeView extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                "10",
+                                                taskController.task.length
+                                                    .toString(),
                                                 style: fontNunito.copyWith(
                                                   color: colorWhite,
                                                   fontWeight: semiBold,
@@ -209,34 +214,35 @@ class HomeView extends StatelessWidget {
                                 SizedBox(
                                   height: 2.h,
                                 ),
-                                Obx(() => eventController.events.isNotEmpty? SizedBox()
-                                    // ? ListView.builder(
-                                    //     physics:
-                                    //         const NeverScrollableScrollPhysics(),
-                                    //     scrollDirection: Axis.vertical,
-                                    //     shrinkWrap: true,
-                                    //     padding: const EdgeInsets.all(0),
-                                    //     itemBuilder:
-                                    //         (BuildContext context, int index) {
-                                    //       return Container(
-                                    //         margin: const EdgeInsets.symmetric(
-                                    //             vertical: 5),
-                                    //         child: CardEventHome(
-                                    //           onTap: () => Get.toNamed(
-                                    //               RouteName.detailEvent,
-                                    //               arguments:
-                                    //                   eventController.events[index]),
-                                    //           label: eventController
-                                    //               .events[index].nameClient,
-                                    //           date: eventController
-                                    //               .events[index].date
-                                    //               .toString(),
-                                    //           task: "2",
-                                    //         ),
-                                    //       );
-                                    //     },
-                                    //     itemCount: eventController.events.length,
-                                    //   )
+                                Obx(() => eventController.events.isNotEmpty
+                                    ? ListView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        padding: const EdgeInsets.all(0),
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: CardEventHome(
+                                              onTap: () => Get.toNamed(
+                                                  RouteName.detailEvent,
+                                                  arguments: eventController
+                                                      .events[index]),
+                                              label: eventController
+                                                  .events[index].namaClient,
+                                              date: eventController
+                                                  .events[index].datetime
+                                                  .toString(),
+                                              task: "2",
+                                            ),
+                                          );
+                                        },
+                                        itemCount:
+                                            eventController.events.length,
+                                      )
                                     : Center(
                                         child: Text(
                                           "Acara Kosong",
@@ -434,7 +440,7 @@ class HomeView extends StatelessWidget {
                                             Obx(
                                               () => Text(
                                                 // controller.user.value.name ??
-                                                    "-",
+                                                "-",
                                                 style: fontNunito.copyWith(
                                                   color: colorWhite,
                                                   fontWeight: bold,
@@ -687,7 +693,6 @@ class HomeView extends StatelessWidget {
                         ),
                       ),
       ),
-    
     );
   }
 }
