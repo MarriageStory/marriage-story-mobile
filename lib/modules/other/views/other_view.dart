@@ -3,112 +3,147 @@ import 'package:get/get.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/routes.dart';
 import 'package:marriage_story_mobile/utils/storage.dart';
+import 'package:marriage_story_mobile/widgets/button.dart';
+import 'package:marriage_story_mobile/widgets/button_outlined.dart';
+import '../../events/event.dart';
+import '../../home/controllers/home_controller.dart';
 import '../other.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class OtherView extends StatelessWidget {
   OtherView({Key? key}) : super(key: key);
   final OtherController controller = Get.find();
+  final HomeController homeController = Get.find();
+  final EventController eventController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          color: colorWhite,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              right: defaultPadding,
-              left: defaultPadding,
-              top: marginTop,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Lainnya",
-                  style: fontNunito.copyWith(
-                    color: colorBlack,
-                    fontWeight: bold,
-                    fontSize: 25,
-                  ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              height: 50.h,
+              decoration: BoxDecoration(gradient: colorGradient),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  right: defaultPadding,
+                  left: defaultPadding,
+                  top: 6.h,
                 ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Image.asset(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Lainnya",
+                              style: fontNunito.copyWith(
+                                color: colorWhite,
+                                fontWeight: bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 7.h,
+                    ),
+                    Center(
+                      child: Image.asset(
                         "assets/images/user-profile.png",
-                        width: 100,
+                        width: 30.w,
                       ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      Text(
-                        "",
-                        // controller.homeController.user.value.name,
+                    ),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Center(
+                      child: Text(
+                        homeController.user.value.fullname,
+                        overflow: TextOverflow.ellipsis,
                         style: fontNunito.copyWith(
-                          color: colorBlack,
+                          color: colorWhite,
                           fontWeight: bold,
                           fontSize: 20,
                         ),
                       ),
-                      Text(
-                        "",
-                        // controller.homeController.user.value.roleName,
+                    ),
+                    Center(
+                      child: Text(
+                        homeController.user.value.role.roleName,
                         style: fontNunito.copyWith(
-                          color: colorGrey.withOpacity(0.5),
-                          fontWeight: semiBold,
-                          fontSize: 18,
+                          color: colorWhite,
+                          fontWeight: bold,
+                          fontSize: 14,
                         ),
                       ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Container(
-                        width: 25.w,
-                        height: 5.h,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                            colors: [colorPink2, colorPink3],
-                          ),
-                          borderRadius:
-                              BorderRadius.circular(defaultBorderRadius),
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            await Storage.removeValue('token').then(
-                                (value) => Get.offAllNamed(RouteName.landing));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(defaultBorderRadius),
-                            ),
-                          ),
-                          child: Text(
-                            "Keluar",
-                            style: fontNunito.copyWith(
-                              color: colorWhite,
-                              fontSize: 14,
-                              fontWeight: bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+            Container(
+              margin: EdgeInsets.only(top: 45.h),
+              decoration: const BoxDecoration(
+                color: colorWhite,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(defaultBorderRadius2),
+                  topRight: Radius.circular(defaultBorderRadius2),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                  right: defaultPadding,
+                  left: defaultPadding,
+                  top: 7.h,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    homeController.user.value.roleId == 1
+                        ? eventController.events.isNotEmpty
+                            ? ButtonOutlined(
+                                height: 6.h,
+                                width: 35.w,
+                                onTap: () {
+                                  eventController.leaveEvent();
+                                },
+                                label: "Keluar Event",
+                                textColor: colorPrimary,
+                              )
+                            : const SizedBox()
+                        : const SizedBox(),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Button(
+                      height: 6.h,
+                      width: 35.w,
+                      onTap: () async {
+                        await Storage.removeValue('token').then(
+                            (value) => Get.offAllNamed(RouteName.landing));
+                      },
+                      colorBg: colorPrimary,
+                      label: "Keluar",
+                      textColor: colorWhite,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

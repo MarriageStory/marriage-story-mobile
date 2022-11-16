@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
 import '../../../models/user_model.dart';
-import '../../task/task.dart';
+import '../../../services/event_service.dart';
 
 class HomeController extends GetxController {
   final userService = Get.put(AuthService());
-  
-  final genCodeTextController = TextEditingController();
+  final eventService = Get.put(EventService());
+
 
   final user = UserDataModel(
     id: 0,
@@ -23,13 +25,13 @@ class HomeController extends GetxController {
         updatedAt: DateTime.now()),
   ).obs;
 
+
   final isLoading = false.obs;
 
   @override
   void onInit() {
     getUserProfile();
-    // getAllSchedule();
-
+    // getAllUserEvent();
     super.onInit();
   }
 
@@ -48,9 +50,7 @@ class HomeController extends GetxController {
       isLoading.value = false;
     } catch (e) {
       isLoading.value = false;
-      print(e);
+      e.toString();
     }
   }
-
-
 }

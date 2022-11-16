@@ -16,7 +16,6 @@ class InputForm extends StatelessWidget {
     return TextFormField(
       controller: inputController,
       decoration: InputDecoration(
-        
         labelStyle: TextStyle(
           color: colorPrimary,
           fontSize: 14,

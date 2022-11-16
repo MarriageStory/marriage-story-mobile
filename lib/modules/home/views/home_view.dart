@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/events/controllers/event_controller.dart';
@@ -13,7 +15,6 @@ import 'package:get/get.dart';
 import '../../../routes/routes.dart';
 import '../../task/task.dart';
 import '../home.dart';
-
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -62,14 +63,12 @@ class HomeView extends StatelessWidget {
                                         fontSize: 16,
                                       ),
                                     ),
-                                    Obx(
-                                      () => Text(
-                                        controller.user.value.fullname ?? "-",
-                                        style: fontNunito.copyWith(
-                                          color: colorWhite,
-                                          fontWeight: bold,
-                                          fontSize: 20,
-                                        ),
+                                    Text(
+                                      controller.user.value.fullname ?? "-",
+                                      style: fontNunito.copyWith(
+                                        color: colorWhite,
+                                        fontWeight: bold,
+                                        fontSize: 20,
                                       ),
                                     ),
                                   ],
@@ -126,15 +125,13 @@ class HomeView extends StatelessWidget {
                                                   fontSize: 14,
                                                 ),
                                               ),
-                                              Obx(
-                                                () => Text(
-                                                  eventController.events.length
-                                                      .toString(),
-                                                  style: fontNunito.copyWith(
-                                                    color: colorWhite,
-                                                    fontWeight: semiBold,
-                                                    fontSize: 16,
-                                                  ),
+                                              Text(
+                                                eventController.events.length
+                                                    .toString(),
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: semiBold,
+                                                  fontSize: 16,
                                                 ),
                                               ),
                                               Row(
@@ -214,7 +211,7 @@ class HomeView extends StatelessWidget {
                                 SizedBox(
                                   height: 2.h,
                                 ),
-                                Obx(() => eventController.events.isNotEmpty
+                                eventController.events.isNotEmpty
                                     ? ListView.builder(
                                         physics:
                                             const NeverScrollableScrollPhysics(),
@@ -244,15 +241,25 @@ class HomeView extends StatelessWidget {
                                             eventController.events.length,
                                       )
                                     : Center(
-                                        child: Text(
-                                          "Acara Kosong",
-                                          style: fontNunito.copyWith(
-                                            color: colorWhite,
-                                            fontWeight: semiBold,
-                                            fontSize: 16,
-                                          ),
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/empty.png",
+                                              height: 50.w,
+                                            ),
+                                            Center(
+                                              child: Text(
+                                                "Acara Kosong",
+                                                style: fontNunito.copyWith(
+                                                  color: colorWhite,
+                                                  fontWeight: semiBold,
+                                                  fontSize: 18,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      )),
+                                      ),
                               ],
                             ),
                           ),
@@ -260,7 +267,7 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   )
-                : controller == ""
+                : eventController.events.isEmpty
                     ? SingleChildScrollView(
                         child: Stack(
                           clipBehavior: Clip.none,
@@ -298,15 +305,12 @@ class HomeView extends StatelessWidget {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            Obx(
-                                              () => Text(
-                                                "",
-                                                // controller.user.value.name,
-                                                style: fontNunito.copyWith(
-                                                  color: colorWhite,
-                                                  fontWeight: bold,
-                                                  fontSize: 20,
-                                                ),
+                                            Text(
+                                              controller.user.value.fullname,
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: bold,
+                                                fontSize: 20,
                                               ),
                                             ),
                                           ],
@@ -366,7 +370,7 @@ class HomeView extends StatelessWidget {
                                           flex: 3,
                                           child: InputForm(
                                             label: "Masukan Kode",
-                                            inputController: controller
+                                            inputController: eventController
                                                 .genCodeTextController,
                                           ),
                                         ),
@@ -374,7 +378,9 @@ class HomeView extends StatelessWidget {
                                           child: Button(
                                             height: 7.h,
                                             width: 16.w,
-                                            onTap: () {},
+                                            onTap: () {
+                                              eventController.joinEvent();
+                                            },
                                             colorBg: colorPrimary,
                                             label: "OK",
                                             textColor: colorWhite,
@@ -437,15 +443,12 @@ class HomeView extends StatelessWidget {
                                                 fontSize: 16,
                                               ),
                                             ),
-                                            Obx(
-                                              () => Text(
-                                                // controller.user.value.name ??
-                                                "-",
-                                                style: fontNunito.copyWith(
-                                                  color: colorWhite,
-                                                  fontWeight: bold,
-                                                  fontSize: 20,
-                                                ),
+                                            Text(
+                                              controller.user.value.fullname,
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: bold,
+                                                fontSize: 20,
                                               ),
                                             ),
                                           ],
@@ -499,18 +502,23 @@ class HomeView extends StatelessWidget {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        Text(
-                                                          "dec",
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style: fontNunito
-                                                              .copyWith(
-                                                            color: colorBlack,
-                                                            fontWeight:
-                                                                semiBold,
-                                                            fontSize: 14,
-                                                          ),
-                                                        ),
+                                                        Obx(() => Text(
+                                                              eventController
+                                                                  .events[0]
+                                                                  .datetime
+                                                                  .toString(),
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              style: fontNunito
+                                                                  .copyWith(
+                                                                color:
+                                                                    colorBlack,
+                                                                fontWeight:
+                                                                    semiBold,
+                                                                fontSize: 14,
+                                                              ),
+                                                            )),
                                                         Text(
                                                           "23",
                                                           overflow: TextOverflow
@@ -527,12 +535,30 @@ class HomeView extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  "Hbgs",
-                                                  style: fontNunito.copyWith(
-                                                    color: colorBlack,
-                                                    fontWeight: bold,
-                                                    fontSize: 14,
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: colorWhite,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    child: Obx(() => Text(
+                                                          eventController
+                                                              .events[0]
+                                                              .gencode,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          style: fontNunito
+                                                              .copyWith(
+                                                            color: colorPrimary,
+                                                            fontWeight: bold,
+                                                            fontSize: 14,
+                                                          ),
+                                                        )),
                                                   ),
                                                 ),
                                               ],
@@ -567,20 +593,23 @@ class HomeView extends StatelessWidget {
                                                             MainAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Text(
-                                                            "Pernikahan Ainul dan Aan ",
-                                                            softWrap: false,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .ellipsis,
-                                                            style: fontNunito
-                                                                .copyWith(
-                                                              color: colorBlack,
-                                                              fontWeight:
-                                                                  semiBold,
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
+                                                          Obx(() => Text(
+                                                                eventController
+                                                                    .events[0]
+                                                                    .namaClient,
+                                                                softWrap: false,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style: fontNunito
+                                                                    .copyWith(
+                                                                  color:
+                                                                      colorBlack,
+                                                                  fontWeight:
+                                                                      semiBold,
+                                                                  fontSize: 14,
+                                                                ),
+                                                              )),
                                                           SizedBox(
                                                             height: 1.h,
                                                           ),

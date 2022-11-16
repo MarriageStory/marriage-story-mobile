@@ -18,6 +18,7 @@ class EventService extends BaseService {
     }
   }
 
+
   Future<bool> createEvent(Map<String, dynamic> data) async {
     try {
       var dataEvent = <String, dynamic>{
@@ -40,6 +41,39 @@ class EventService extends BaseService {
       rethrow;
     }
   }
+
+  Future<bool> joinEvent(Map<String, dynamic> data) async {
+    try {
+      var dataEvent = <String, dynamic>{
+        'gencode': data['gencode'],
+      };
+      final response = await post("/events/join", dataEvent);
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+Future<bool> leaveEvent(Map<String, dynamic> data) async {
+    try {
+      var dataEvent = <String, dynamic>{
+        'gencode': data['gencode'],
+      };
+      final response = await post("/events/leave", dataEvent);
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (response.body['data'] ?? response.body['message']);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 
     Future<bool> updateEvent(Map<String, dynamic> data,int eventId) async {
     try {

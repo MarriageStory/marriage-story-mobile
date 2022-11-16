@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/services/event_service.dart';
@@ -13,6 +15,7 @@ class EventController extends GetxController {
   final totalBayarTextController = TextEditingController();
   final jumlahTerbayarTextController = TextEditingController();
   final catatanTextController = TextEditingController();
+  final genCodeTextController = TextEditingController();
   var selected = [].obs;
   var selectedPackage = [].obs;
   var selectedEvent = 0.obs;
@@ -87,7 +90,6 @@ class EventController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
 
@@ -128,7 +130,6 @@ class EventController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
 
@@ -158,7 +159,6 @@ class EventController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
 
@@ -175,6 +175,70 @@ class EventController extends GetxController {
       dateTextController.text = picked.toString();
       tanggal = picked;
     }
-    ;
+  }
+
+  Future<void> joinEvent() async {
+    try {
+      var input = <String, dynamic>{
+        'gencode': genCodeTextController.text,
+      };
+
+      await eventService.joinEvent(input);
+
+      Get.snackbar(
+        'Sukses !',
+        'Berhasil Join Event',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      );
+      Get.offAllNamed(RouteName.navigation);
+    } catch (e) {
+      Get.snackbar(
+        'Gagal Menemukan Event !',
+        '$e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    }
+  }
+
+  Future<void> leaveEvent() async {
+    try {
+      var input = <String, dynamic>{
+        'gencode': null,
+      };
+      await eventService.leaveEvent(input);
+
+      Get.snackbar(
+        'Sukses !',
+        'Berhasil Keluar dari Event',
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      );
+      Get.offAllNamed(RouteName.navigation);
+    } catch (e) {
+      Get.snackbar(
+        'Gagal Keluar dari Event !',
+        '$e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import './base_service.dart';
 import 'package:marriage_story_mobile/models/user_auth_model.dart';
 import 'package:marriage_story_mobile/models/user_model.dart';
@@ -67,7 +69,7 @@ class AuthService extends BaseService {
   Future<UserDataModel?> userProfile() async {
     try {
       final response = await get("/users/profile");
-
+      
       if (response.statusCode == 200) {
         return UserDataModel.fromJson(response.body['data']['user']);
       } else {

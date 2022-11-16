@@ -30,7 +30,6 @@ class TaskController extends GetxController {
   @override
   void onInit() {
     getAllSchedule(eventController.events.length);
-    log("");
     super.onInit();
   }
 
