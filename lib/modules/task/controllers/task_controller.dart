@@ -22,6 +22,11 @@ class TaskController extends GetxController {
   final tempatAgendaController = TextEditingController();
   final jamAgendaController = TextEditingController();
 
+  bool cekJam = false;
+  bool cekTgl = false;
+  DateTime tanggal = DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
+
   @override
   void onInit() {
     getAllSchedule(eventController.events.length);
@@ -40,19 +45,16 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> createTask(EventDataModel event) async {
+  Future<void> createTask(int eventId) async {
     try {
       var input = <String, dynamic>{
         'nama_kegiatan': namaAgendaController.text,
         'detail_kegiatan': detailAgendaController.text,
-        'tanggal': dateAgendaController.text,
+        'datetime': dateAgendaController.text,
         'tempat': tempatAgendaController.text,
-        'jam': jamAgendaController.text,
-        'status': "pending",
-        'gencode': event.gencode,
       };
 
-      // await ScheduleService.createNewSchedule(event.id, input);
+      await taskService.createSchedule(input, eventId);
 
       Get.snackbar(
         'Berhasil Menambahkan',
@@ -148,5 +150,21 @@ class TaskController extends GetxController {
       );
       print(e);
     }
+  }
+
+  Future<void> selectDate(BuildContext context) async {
+    // Initial DateTime FIinal Picked
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: tanggal,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2101));
+
+    if (picked != null && picked != tanggal) {
+      cekTgl = true;
+      dateAgendaController.text = picked.toString();
+      tanggal = picked;
+    }
+    ;
   }
 }

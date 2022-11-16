@@ -7,7 +7,6 @@ import '../../../routes/app_pages.dart';
 class EventController extends GetxController {
   var events = <EventDataModel>[].obs;
   final eventService = Get.put(EventService());
-  
   final namaClientTextController = TextEditingController();
   final dateTextController = TextEditingController();
   final tempatTextController = TextEditingController();
@@ -54,12 +53,12 @@ class EventController extends GetxController {
   Future<void> createEvent() async {
     try {
       var input = <String, dynamic>{
-        'name_client': namaClientTextController.text,
+        'nama_client': namaClientTextController.text,
         'datetime': dateTextController.text,
         'tempat': tempatTextController.text,
         'total_pembayaran': totalBayarTextController.text,
         'status_pembayaran': "pending",
-        'jumlah_terbayar': jumlahTerbayarTextController.text,
+        'jumlah_terbayar': 0,
         'note': catatanTextController.text,
         'paket': selected.toList(),
       };
