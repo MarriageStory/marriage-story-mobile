@@ -11,6 +11,7 @@ import '../../../routes/routes.dart';
 import '../../../widgets/event_pack.dart';
 import '../event.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class DetailEventView extends StatelessWidget {
   DetailEventView({super.key});
@@ -74,7 +75,8 @@ class DetailEventView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        event.datetime.toString(),
+                        DateFormat('dd-MMM-yyyy - HH:mm')
+                            .format(event.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,

@@ -11,7 +11,7 @@ import 'package:marriage_story_mobile/widgets/input_form.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:get/get.dart';
-
+import 'package:intl/intl.dart';
 import '../../../routes/routes.dart';
 import '../../task/task.dart';
 import '../home.dart';
@@ -220,6 +220,10 @@ class HomeView extends StatelessWidget {
                                         padding: const EdgeInsets.all(0),
                                         itemBuilder:
                                             (BuildContext context, int index) {
+                                          String tanggal =
+                                              DateFormat('dd-MMM-yyyy - HH:mm')
+                                                  .format(eventController
+                                                      .events[index].datetime);
                                           return Container(
                                             margin: const EdgeInsets.symmetric(
                                                 vertical: 5),
@@ -230,9 +234,7 @@ class HomeView extends StatelessWidget {
                                                       .events[index]),
                                               label: eventController
                                                   .events[index].namaClient,
-                                              date: eventController
-                                                  .events[index].datetime
-                                                  .toString(),
+                                              date: tanggal,
                                               task: "2",
                                             ),
                                           );

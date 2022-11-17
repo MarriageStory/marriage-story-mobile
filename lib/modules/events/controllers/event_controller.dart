@@ -208,8 +208,8 @@ class EventController extends GetxController {
         cekTgl = true;
         dateTextController.text = dateTime.toString();
         tanggal = dateTime;
-        // final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
-        // print(selIOS);
+        final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
+        print(selIOS);
       },
     );
   }

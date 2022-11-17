@@ -8,6 +8,7 @@ import '../../../widgets/card_event.dart';
 import '../../home/home.dart';
 import '../event.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class EventView extends StatelessWidget {
   EventView({super.key});
@@ -247,19 +248,28 @@ class EventView extends StatelessWidget {
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(0),
                                 itemBuilder: (BuildContext context, int index) {
+                                  String tanggal =
+                                      DateFormat('dd-MMM-yyyy - HH:mm').format(
+                                          controller
+                                              .events[controller
+                                                  .selectedEvent.value = index]
+                                              .datetime);
                                   return Container(
                                     margin:
                                         const EdgeInsets.symmetric(vertical: 5),
                                     child: CardEvent(
-                                      label:
-                                          controller.events[controller.selectedEvent.value = index].namaClient,
-                                      date: controller.events[controller.selectedEvent.value = index].datetime
-                                          .toString(),
+                                      label: controller
+                                          .events[controller
+                                              .selectedEvent.value = index]
+                                          .namaClient,
+                                      date: tanggal,
                                       allTask: "3",
                                       eventPack: "akad",
                                       onTap: () => Get.toNamed(
                                           RouteName.detailEvent,
-                                          arguments: controller.events[controller.selectedEvent.value = index]),
+                                          arguments: controller.events[
+                                              controller.selectedEvent.value =
+                                                  index]),
                                     ),
                                   );
                                 },
@@ -274,7 +284,6 @@ class EventView extends StatelessWidget {
                 ),
               ),
       ),
-    
     );
   }
 }
