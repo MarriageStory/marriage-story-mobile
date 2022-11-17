@@ -190,7 +190,9 @@ class EventView extends StatelessWidget {
                                 height: 6.h,
                                 width: 75.w,
                                 onTap: () {
-                                  Get.toNamed(RouteName.addEvent);
+                                  // Get.toNamed(RouteName.addEvent);
+                                  Get.toNamed(RouteName.addEvent,
+                                      arguments: false);
                                 },
                                 colorBg: colorWhite.withOpacity(0.25),
                                 label: "Tambah",

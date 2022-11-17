@@ -317,7 +317,9 @@ class DetailEventView extends StatelessWidget {
                         ButtonOutlined(
                           height: 6.h,
                           width: 40.w,
-                          onTap: () {},
+                          onTap: () {
+                            controller.formEditTransaction(event);
+                          },
                           label: "Edit",
                           textColor: colorPrimary,
                         ),

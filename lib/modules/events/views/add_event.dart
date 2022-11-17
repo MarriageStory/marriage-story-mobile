@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../../constants/theme.dart';
 import '../../../utils/dateTime.dart';
 import '../../../widgets/button.dart';
@@ -13,7 +12,7 @@ import '../event.dart';
 class AddEventView extends StatelessWidget {
   AddEventView({super.key});
   final EventController controller = Get.find();
-
+  final args = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +39,7 @@ class AddEventView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Tambah Acara",
+                    args == false ? "Tambah Acara" : "Edit Acara",
                     style: fontNunito.copyWith(
                       color: colorBlack,
                       fontWeight: semiBold,
@@ -123,7 +122,7 @@ class AddEventView extends StatelessWidget {
               ),
               DateTime(
                 // labelText: "Date",
-                valueText: controller.cekTgl != false
+                valueText: controller.cekTgl != false || args == true
                     ? controller.tanggal.toString()
                     : "Tanggal Acara",
                 valueStyle: TextStyle(
@@ -132,7 +131,7 @@ class AddEventView extends StatelessWidget {
                   fontSize: 14,
                 ),
                 onPressed: () {
-                  controller.selectDate(context);
+                  controller.dateTimePickerWidget(context);
                 },
               ),
               SizedBox(
@@ -152,10 +151,14 @@ class AddEventView extends StatelessWidget {
                 height: 6.h,
                 width: 100.w,
                 onTap: () {
-                  controller.createEvent();
+                  if (args == false) {
+                    controller.createEvent();
+                  } else {
+                    controller.updateEvent();
+                  }
                 },
                 colorBg: colorPrimary,
-                label: "Tambah",
+                label: args == false ? "Tambah" : "Simpan",
                 textColor: colorWhite,
               )
             ],

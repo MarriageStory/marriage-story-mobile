@@ -87,7 +87,7 @@ Future<bool> leaveEvent(Map<String, dynamic> data) async {
         'note': data['note'],
         'paket': data['paket'],
       };
-      final response = await post("/events/update/$eventId", dataEvent);
+      final response = await put("/events/update/$eventId", dataEvent);
 
       if (response.statusCode == 200) {
         return true;

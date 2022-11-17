@@ -6,6 +6,11 @@ import 'package:marriage_story_mobile/services/event_service.dart';
 import '../../../models/event_model.dart';
 import '../../../routes/app_pages.dart';
 
+import 'package:date_time_picker/date_time_picker.dart';
+
+import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
+import 'package:intl/intl.dart';
+
 class EventController extends GetxController {
   var events = <EventDataModel>[].obs;
   final eventService = Get.put(EventService());
@@ -24,6 +29,7 @@ class EventController extends GetxController {
   bool cekTgl = false;
   DateTime tanggal = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
+  int? idEvent;
 
   @override
   void onInit() {
@@ -93,11 +99,11 @@ class EventController extends GetxController {
     }
   }
 
-  Future<void> updateEvent(int eventId) async {
+  Future<void> updateEvent() async {
     try {
       var input = <String, dynamic>{
-        'name_client': namaClientTextController.text,
-        'date': dateTextController.text,
+        'nama_client': namaClientTextController.text,
+        'datetime': tanggal.toString(),
         'tempat': tempatTextController.text,
         'total_pembayaran': totalBayarTextController.text,
         'status_pembayaran': "pending",
@@ -106,7 +112,7 @@ class EventController extends GetxController {
         'paket': selected.toList(),
       };
 
-      await eventService.updateEvent(input, eventId);
+      await eventService.updateEvent(input, idEvent!);
 
       Get.snackbar(
         'Sukses !',
@@ -131,6 +137,18 @@ class EventController extends GetxController {
         ),
       );
     }
+  }
+
+  Future<void> formEditTransaction(EventDataModel data) async {
+    namaClientTextController.text = data.namaClient;
+    tanggal = data.datetime;
+    tempatTextController.text = data.tempat;
+    totalBayarTextController.text = data.totalPembayaran.toString();
+    jumlahTerbayarTextController.text = data.jumlahTerbayar.toString();
+    catatanTextController.text = data.note;
+    //  selected.toList(),
+    idEvent = data.id;
+    Get.toNamed(RouteName.addEvent, arguments: true);
   }
 
   Future<void> deleteEvent(int eventId) async {
@@ -162,19 +180,38 @@ class EventController extends GetxController {
     }
   }
 
-  Future<void> selectDate(BuildContext context) async {
-    // Initial DateTime FIinal Picked
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: tanggal,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
+  // Future<void> selectDate(BuildContext context) async {
+  //   // Initial DateTime FIinal Picked
+  //   final DateTime? picked = await showDatePicker(
+  //       context: context,
+  //       initialDate: tanggal,
+  //       firstDate: DateTime(2015),
+  //       lastDate: DateTime(2101));
 
-    if (picked != null && picked != tanggal) {
-      cekTgl = true;
-      dateTextController.text = picked.toString();
-      tanggal = picked;
-    }
+  //   if (picked != null && picked != tanggal) {
+  //     cekTgl = true;
+  //     dateTextController.text = picked.toString();
+  //     tanggal = picked;
+  //   }
+  // }
+
+  dateTimePickerWidget(BuildContext context) {
+    return DatePicker.showDatePicker(
+      context,
+      dateFormat: 'dd MMMM yyyy HH:mm',
+      initialDateTime: tanggal,
+      minDateTime: DateTime(2000),
+      maxDateTime: DateTime(3000),
+      onMonthChangeStartWithFirstDate: true,
+      onConfirm: (dateTime, List<int> index) {
+        // DateTime selectdate = dateTime;
+        cekTgl = true;
+        dateTextController.text = dateTime.toString();
+        tanggal = dateTime;
+        // final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
+        // print(selIOS);
+      },
+    );
   }
 
   Future<void> joinEvent() async {
