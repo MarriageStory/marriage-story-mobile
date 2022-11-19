@@ -235,7 +235,7 @@ class HomeView extends StatelessWidget {
                                               label: eventController
                                                   .events[index].namaClient,
                                               date: tanggal,
-                                              task: "2",
+                                              task: "3",
                                             ),
                                           );
                                         },

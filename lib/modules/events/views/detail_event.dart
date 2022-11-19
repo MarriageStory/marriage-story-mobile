@@ -56,7 +56,7 @@ class DetailEventView extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "Acara",
+                              "Detail Acara",
                               style: fontNunito.copyWith(
                                 color: colorWhite,
                                 fontWeight: bold,
@@ -217,22 +217,42 @@ class DetailEventView extends StatelessWidget {
                     SizedBox(
                       height: 4.h,
                       width: 70.w,
-                      child: ListView(
-                        semanticChildCount: 2,
+                      child:
+                          // ListView(
+                          //   semanticChildCount: 2,
+                          //   physics: const NeverScrollableScrollPhysics(),
+                          //   scrollDirection: Axis.horizontal,
+                          //   shrinkWrap: true,
+                          //   padding: const EdgeInsets.all(5),
+                          //   children: [
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //     EventPack(label: "label"),
+                          //   ],
+                          // ),
+
+                          ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
+                        // scrollDirection: Axis.vertical,
                         shrinkWrap: true,
-                        padding: const EdgeInsets.all(5),
-                        children: [
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                          EventPack(label: "label"),
-                        ],
+                        padding: const EdgeInsets.all(0),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Wrap(
+                              spacing: 5.0,
+                              runSpacing: 5.0,
+                              direction: Axis.horizontal,
+                              children: [
+                                EventPack(
+                                  label: event.paket[index].deskripsi,
+                                )
+                              ]);
+                        },
+                        itemCount: event.paket.length,
                       ),
                     ),
                     SizedBox(
@@ -334,7 +354,7 @@ class DetailEventView extends StatelessWidget {
                           textColor: colorWhite,
                         )
                       ],
-                    )
+                    ) 
                   ],
                 ),
               ),
@@ -342,7 +362,6 @@ class DetailEventView extends StatelessWidget {
           ],
         ),
       ),
-    
     );
   }
 }

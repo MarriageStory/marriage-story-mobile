@@ -29,6 +29,7 @@ class TaskController extends GetxController {
 
   @override
   void onInit() {
+    print("masuk ga si");
     getAllSchedule(eventController.events.length);
     super.onInit();
   }

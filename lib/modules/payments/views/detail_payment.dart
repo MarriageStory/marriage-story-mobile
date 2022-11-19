@@ -4,13 +4,17 @@ import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/card_transaction.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
+import '../../../models/event_model.dart';
 import '../../../widgets/event_pack.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/utils/formatAngka.dart';
 
 class DetailPaymentView extends StatelessWidget {
   DetailPaymentView({super.key});
   final controller = Get.find<PaymentController>();
+  final EventDataModel event = Get.arguments;
+  // final tes = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +91,9 @@ class DetailPaymentView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Rp 30.000.000.000 ",
+                                formatAngka.convertToIdr(
+                                    int.parse(event.totalPembayaran.toString()),
+                                    2),
                                 overflow: TextOverflow.ellipsis,
                                 style: fontNunito.copyWith(
                                   color: colorWhite,
@@ -128,7 +134,7 @@ class DetailPaymentView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Pernikahan Ainul dan Aan ",
+                          event.namaClient,
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
                           style: fontNunito.copyWith(
@@ -142,19 +148,36 @@ class DetailPaymentView extends StatelessWidget {
                         ),
                         SizedBox(
                           width: 70.w,
-                          child: Wrap(
-                            spacing: 5.0,
-                            runSpacing: 5.0,
-                            direction: Axis.horizontal,
-                            children: const [
-                              EventPack(label: "Pre Wedding"),
-                              EventPack(label: "Akad"),
-                              EventPack(label: "Akad"),
-                              EventPack(label: "Akad"),
-                              EventPack(label: "Akad"),
-                              EventPack(label: "Akad"),
-                            ],
+                          child:
+                              // Wrap(
+                              //   spacing: 5.0,
+                              //   runSpacing: 5.0,
+                              //   direction: Axis.horizontal,
+                              //   children: [
+                              // EventPack(label: "Pre Wedding"),
+                              // EventPack(label: "Akad"),
+                              // EventPack(label: "Akad"),
+                              // EventPack(label: "Akad"),
+                              // EventPack(label: "Akad"),
+                              // EventPack(label: "Akad"),
+                              ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            // scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(0),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Wrap(spacing: 5.0, runSpacing: 5.0,
+                                  // direction: Axis.horizontal,
+                                  children: [
+                                    EventPack(
+                                      label: event.paket[index].deskripsi,
+                                    )
+                                  ]);
+                            },
+                            itemCount: event.paket.length,
                           ),
+                          //   ],
+                          // ),
                         ),
                       ],
                     ),
@@ -230,7 +253,10 @@ class DetailPaymentView extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    "Rp 30.000.000",
+                                    formatAngka.convertToIdr(
+                                        int.parse(
+                                            event.totalPembayaran.toString()),
+                                        2),
                                     overflow: TextOverflow.ellipsis,
                                     style: fontNunito.copyWith(
                                       color: colorPrimary,
