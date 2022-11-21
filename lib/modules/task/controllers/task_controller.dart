@@ -15,6 +15,10 @@ class TaskController extends GetxController {
   final taskService = Get.put(ScheduleService());
   final EventController eventController = Get.find();
   final isChecked = false.obs;
+  final isLoading = false.obs;
+
+  int? eventId;
+  int? taskId;
 
   final namaAgendaController = TextEditingController();
   final detailAgendaController = TextEditingController();
@@ -29,19 +33,20 @@ class TaskController extends GetxController {
 
   @override
   void onInit() {
-    print("masuk ga si");
-    getAllSchedule(eventController.events.length);
     super.onInit();
   }
 
   Future<void> getAllSchedule(int event) async {
+    isLoading.value = true;
     try {
       final dataTask = await taskService.getSchedule(event);
       if (dataTask != null) {
         task.assignAll(dataTask);
       }
+      isLoading.value = false;
     } catch (e) {
       print(e);
+      isLoading.value = false;
     }
   }
 
@@ -82,19 +87,26 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> updateTask(int idTask, ScheduleDataModel task) async {
+  Future<void> formAddTask(int eventId) async {
+    namaAgendaController.text = "";
+    detailAgendaController.text = "";
+    dateAgendaController.text = "";
+    tempatAgendaController.text = "";
+    jamAgendaController.text = "";
+    Get.toNamed(RouteName.addTask, arguments: eventId);
+  }
+
+  Future<void> updateTask() async {
     try {
       var input = <String, dynamic>{
         'nama_kegiatan': namaAgendaController.text,
         'detail_kegiatan': detailAgendaController.text,
-        'tanggal': dateAgendaController.text,
+        'datetime': tanggal.toString(),
         'tempat': tempatAgendaController.text,
-        'jam': jamAgendaController.text,
-        'status': "pending",
-        // 'gencode': task.gencode,
       };
 
       // await ScheduleService.createNewSchedule(idTask, input);
+      await taskService.updateSchedule(input, eventId!, taskId!);
 
       Get.snackbar(
         'Berhasil Mengedit',
@@ -122,9 +134,21 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> deleteTask(int idTask) async {
+  Future<void> formEditTask(ScheduleDataModel data) async {
+    namaAgendaController.text = data.namaKegiatan;
+    detailAgendaController.text = data.detailKegiatan;
+    dateAgendaController.text = data.datetime.toString();
+    tanggal = data.datetime;
+    tempatAgendaController.text = data.tempat;
+    jamAgendaController.text = data.datetime.toString();
+    eventId = data.eventId;
+    taskId = data.id;
+    Get.toNamed(RouteName.addTask, arguments: false);
+  }
+
+  Future<void> deleteTask(ScheduleDataModel data) async {
     try {
-      // await ScheduleService.deleteSchedule(idTask);
+      await taskService.deleteSchedule(data.eventId, data.id);
 
       Get.snackbar(
         'Berhasil Mengahpus',

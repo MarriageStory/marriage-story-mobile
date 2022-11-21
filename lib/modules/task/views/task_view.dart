@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/card_task.dart';
@@ -13,8 +14,14 @@ class TaskView extends StatelessWidget {
   final controller = Get.find<TaskController>();
   final EventDataModel event = Get.arguments;
 
+  // @override
+  // onInit() {
+  //   controller.getAllSchedule(event.id);
+  // }
+
   @override
   Widget build(BuildContext context) {
+    controller.getAllSchedule(event.id);
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -57,8 +64,7 @@ class TaskView extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                              onPressed: () => Get.toNamed(RouteName.addTask,
-                                  arguments: event),
+                              onPressed: () => controller.formAddTask(event.id),
                               icon: const Icon(
                                 Icons.add_rounded,
                                 color: colorWhite,
@@ -135,7 +141,14 @@ class TaskView extends StatelessWidget {
                     //   time: "17:00",
                     // ),
                     Obx(
-                      () => ListView.builder(
+                      () => controller.isLoading.value
+                          ? Center(
+                              child: LoadingAnimationWidget.fourRotatingDots(
+                                color: colorPrimary,
+                                size: 7.h,
+                              ),
+                            )
+                          : ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
@@ -146,7 +159,7 @@ class TaskView extends StatelessWidget {
                             child: CardTask(
                               onTap: () => Get.toNamed(RouteName.detailTask,
                                   arguments: controller.task[index]),
-                              label: controller.task[index].namaKegiatan,
+                                    label: controller.task[index].namaKegiatan,
                               date: controller.task[index].datetime.toString(),
                               time: controller.task[index].datetime.toString(),
                             ),
@@ -162,7 +175,6 @@ class TaskView extends StatelessWidget {
           ],
         ),
       ),
-    
     );
   }
 }

@@ -10,9 +10,7 @@ class ScheduleService extends BaseService {
 
       if (response.statusCode == 200) {
         List jsonResponse = response.body['data'];
-        return jsonResponse
-            .map((e) => ScheduleDataModel.fromJson(e))
-            .toList();
+        return jsonResponse.map((e) => ScheduleDataModel.fromJson(e)).toList();
       } else {
         throw (response.body['data'] ?? response.body['message']);
       }
@@ -30,7 +28,8 @@ class ScheduleService extends BaseService {
         'tempat': data['tempat'],
       };
 
-      final response = await post("/events/$eventId/schedules/create", dataSchedule);
+      final response =
+          await post("/events/$eventId/schedules/create", dataSchedule);
       if (response.statusCode == 201) {
         return true;
       } else {
@@ -41,7 +40,8 @@ class ScheduleService extends BaseService {
     }
   }
 
-  Future<bool> updateSchedule(Map<String, dynamic> data, int eventId, int scheduleId) async {
+  Future<bool> updateSchedule(
+      Map<String, dynamic> data, int eventId, int scheduleId) async {
     try {
       var dataSchedule = <String, dynamic>{
         'nama_kegiatan': data['nama_kegiatan'],
@@ -50,7 +50,8 @@ class ScheduleService extends BaseService {
         'tempat': data['tempat'],
       };
 
-      final response = await post("/events/$eventId/schedules/update/$scheduleId", dataSchedule);
+      final response = await put(
+          "events/$eventId/schedules/update/$scheduleId", dataSchedule);
       if (response.statusCode == 200) {
         return true;
       } else {
@@ -61,9 +62,11 @@ class ScheduleService extends BaseService {
     }
   }
 
-  Future<bool> deleteSchedule(int eventId,int scheduleId) async {
+  Future<bool> deleteSchedule(int eventId, int scheduleId) async {
     try {
-      final response = await delete("/events/$eventId/schedules/delete/$scheduleId");
+      print("masuk siniii");
+      final response =
+          await delete("events/$eventId/schedules/delete/$scheduleId");
 
       if (response.statusCode == 200) {
         return true;

@@ -192,8 +192,7 @@ class EventView extends StatelessWidget {
                                 width: 75.w,
                                 onTap: () {
                                   // Get.toNamed(RouteName.addEvent);
-                                  Get.toNamed(RouteName.addEvent,
-                                      arguments: false);
+                                  controller.formAddEvent();
                                 },
                                 colorBg: colorWhite.withOpacity(0.25),
                                 label: "Tambah",
@@ -263,8 +262,11 @@ class EventView extends StatelessWidget {
                                               .selectedEvent.value = index]
                                           .namaClient,
                                       date: tanggal,
-                                      allTask: "3",
-                                      eventPack: "akad",
+                                      allTask: controller
+                                          .events[index].schedules.length
+                                          .toString(),
+                                      eventPack: controller
+                                          .events[index].paket.first.deskripsi,
                                       onTap: () => Get.toNamed(
                                           RouteName.detailEvent,
                                           arguments: controller.events[

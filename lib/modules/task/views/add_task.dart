@@ -11,7 +11,8 @@ import '../../../utils/dateTime.dart';
 
 class AddTaskView extends StatelessWidget {
   AddTaskView({super.key});
-  final EventDataModel event = Get.arguments;
+  // final EventDataModel event = Get.arguments;
+  final args = Get.arguments;
   final controller = Get.find<TaskController>();
 
   @override
@@ -40,7 +41,7 @@ class AddTaskView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Tambah Agenda",
+                    args == false ? "Edit Agenda" : "Tambah Agenda",
                     style: fontNunito.copyWith(
                       color: colorBlack,
                       fontWeight: semiBold,
@@ -81,7 +82,7 @@ class AddTaskView extends StatelessWidget {
               ),
               DateTime(
                 // labelText: "Date",
-                valueText: controller.cekTgl != false
+                valueText: controller.cekTgl != false || args == false
                     ? controller.tanggal.toString()
                     : "Tanggal Kegiatan",
                 valueStyle: TextStyle(
@@ -114,10 +115,14 @@ class AddTaskView extends StatelessWidget {
                 height: 6.h,
                 width: 100.w,
                 onTap: () {
-                  controller.createTask(event.id);
+                  if (args == false) {
+                    controller.updateTask();
+                  } else {
+                    controller.createTask(args);
+                  }
                 },
                 colorBg: colorPrimary,
-                label: "Tambah",
+                label: args == false ? "Simpan" : "Tambah",
                 textColor: colorWhite,
               )
             ],
@@ -125,6 +130,5 @@ class AddTaskView extends StatelessWidget {
         ),
       ),
     );
-
   }
 }

@@ -99,6 +99,15 @@ class EventController extends GetxController {
     }
   }
 
+  Future<void> formAddEvent() async {
+    namaClientTextController.text = "";
+    tempatTextController.text = "";
+    totalBayarTextController.text = "";
+    jumlahTerbayarTextController.text = "";
+    catatanTextController.text = "";
+    Get.toNamed(RouteName.addEvent, arguments: false);
+  }
+
   Future<void> updateEvent() async {
     try {
       var input = <String, dynamic>{
@@ -139,7 +148,7 @@ class EventController extends GetxController {
     }
   }
 
-  Future<void> formEditTransaction(EventDataModel data) async {
+  Future<void> formEditEvent(EventDataModel data) async {
     namaClientTextController.text = data.namaClient;
     tanggal = data.datetime;
     tempatTextController.text = data.tempat;

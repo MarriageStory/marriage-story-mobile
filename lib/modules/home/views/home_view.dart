@@ -21,6 +21,7 @@ class HomeView extends StatelessWidget {
   final HomeController controller = Get.find();
   final EventController eventController = Get.find();
   final TaskController taskController = Get.find();
+  int allTask = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -173,15 +174,58 @@ class HomeView extends StatelessWidget {
                                                   fontSize: 14,
                                                 ),
                                               ),
-                                              Text(
-                                                taskController.task.length
-                                                    .toString(),
-                                                style: fontNunito.copyWith(
-                                                  color: colorWhite,
-                                                  fontWeight: semiBold,
-                                                  fontSize: 16,
-                                                ),
+                                              // Text(
+                                              //   taskController.task.length
+                                              //       .toString(),
+                                              //   style: fontNunito.copyWith(
+                                              //     color: colorWhite,
+                                              //     fontWeight: semiBold,
+                                              //     fontSize: 16,
+                                              //   ),
+                                              // ),
+                                              // Text(
+                                              //   allTask.toString(),
+                                              //   style: fontNunito.copyWith(
+                                              //     color: colorWhite,
+                                              //     fontWeight: semiBold,
+                                              //     fontSize: 16,
+                                              //   ),
+                                              // ),
+
+                                              ListView.builder(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                scrollDirection: Axis.vertical,
+                                                shrinkWrap: true,
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  if (index + 1 ==
+                                                      eventController
+                                                          .events.length) {
+                                                    return Text(
+                                                      allTask.toString(),
+                                                      style:
+                                                          fontNunito.copyWith(
+                                                        color: colorWhite,
+                                                        fontWeight: semiBold,
+                                                        fontSize: 16,
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    allTask += eventController
+                                                        .events[index]
+                                                        .schedules
+                                                        .length;
+                                                    return SizedBox();
+                                                  }
+                                                },
+                                                itemCount: eventController
+                                                    .events.length,
                                               ),
+
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.end,
@@ -235,7 +279,11 @@ class HomeView extends StatelessWidget {
                                               label: eventController
                                                   .events[index].namaClient,
                                               date: tanggal,
-                                              task: "3",
+                                              task: eventController
+                                                  .events[index]
+                                                  .schedules
+                                                  .length
+                                                  .toString(),
                                             ),
                                           );
                                         },

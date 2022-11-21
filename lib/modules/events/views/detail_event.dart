@@ -161,7 +161,7 @@ class DetailEventView extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "10",
+                                  event.schedules.length.toString(),
                                   overflow: TextOverflow.ellipsis,
                                   style: fontNunito.copyWith(
                                     color: colorBlack,
@@ -340,21 +340,51 @@ class DetailEventView extends StatelessWidget {
                           height: 6.h,
                           width: 40.w,
                           onTap: () {
-                            controller.formEditTransaction(event);
+                            controller.formEditEvent(event);
                           },
                           label: "Edit",
                           textColor: colorPrimary,
                         ),
-                        Button(
+                        // Button(
+                        //   height: 6.h,
+                        //   width: 40.w,
+                        //   onTap: () => controller.deleteEvent(event.id),
+                        //   colorBg: colorPrimary,
+                        //   label: "Hapus",
+                        //   textColor: colorWhite,
+                        // ),
+                        ButtonOutlined(
                           height: 6.h,
                           width: 40.w,
-                          onTap: () => controller.deleteEvent(event.id),
-                          colorBg: colorPrimary,
                           label: "Hapus",
-                          textColor: colorWhite,
+                          textColor: colorPrimary,
+                          onTap: () => Get.defaultDialog(
+                            title: "Hapus Event",
+                            titlePadding: const EdgeInsets.only(top: 30.0),
+                            textConfirm: "Hapus",
+                            confirmTextColor: colorWhite,
+                            buttonColor: colorPrimary,
+                            onConfirm: () {
+                              controller.deleteEvent(event.id);
+                            },
+                            textCancel: "Kembali",
+                            cancelTextColor: colorPrimary,
+                            radius: 15,
+                            contentPadding: const EdgeInsets.all(30),
+                            content: Center(
+                              child: Text(
+                                "Apakah Anda Ingin Menghapus Event Ini?",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: semiBold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
                         )
                       ],
-                    ) 
+                    )
                   ],
                 ),
               ),
