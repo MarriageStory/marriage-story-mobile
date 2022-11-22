@@ -8,13 +8,16 @@ import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/detail_format.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../models/event_model.dart';
 import '../../../models/schedule_model.dart';
+import '../../home/home.dart';
 import '../task.dart';
 
 class DetailTaskView extends StatelessWidget {
   DetailTaskView({super.key});
   final controller = Get.find<TaskController>();
-  final ScheduleDataModel task = Get.arguments;
+  final controllerHome = Get.find<HomeController>();
+  final EventScheduleDataModel task = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -134,52 +137,55 @@ class DetailTaskView extends StatelessWidget {
                     SizedBox(
                       height: 20.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Button(
-                          height: 6.h,
-                          width: 40.w,
-                          onTap: () {
-                            // Get.toNamed(RouteName.addTask, arguments: task);
-                            controller.formEditTask(task);
-                          },
-                          colorBg: colorPrimary,
-                          label: "Edit",
-                          textColor: colorWhite,
-                        ),
-                        ButtonOutlined(
-                          height: 6.h,
-                          width: 40.w,
-                          label: "Hapus",
-                          textColor: colorPrimary,
-                          onTap: () => Get.defaultDialog(
-                            title: "Hapus Agenda",
-                            titlePadding: const EdgeInsets.only(top: 30.0),
-                            textConfirm: "Hapus",
-                            confirmTextColor: colorWhite,
-                            buttonColor: colorPrimary,
-                            onConfirm: () {
-                              controller.deleteTask(task);
-                            },
-                            textCancel: "Kembali",
-                            cancelTextColor: colorPrimary,
-                            radius: 15,
-                            contentPadding: const EdgeInsets.all(30),
-                            content: Center(
-                              child: Text(
-                                "Apakah Anda Ingin Menghapus Agenda Ini?",
-                                style: fontNunito.copyWith(
-                                  color: colorGrey,
-                                  fontWeight: semiBold,
-                                  fontSize: 16,
-                                ),
+                    controllerHome.user.value.roleId == 2
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Button(
+                                height: 6.h,
+                                width: 40.w,
+                                onTap: () {
+                                  // Get.toNamed(RouteName.addTask, arguments: task);
+                                  controller.formEditTask(task);
+                                },
+                                colorBg: colorPrimary,
+                                label: "Edit",
+                                textColor: colorWhite,
                               ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
+                              ButtonOutlined(
+                                height: 6.h,
+                                width: 40.w,
+                                label: "Hapus",
+                                textColor: colorPrimary,
+                                onTap: () => Get.defaultDialog(
+                                  title: "Hapus Agenda",
+                                  titlePadding:
+                                      const EdgeInsets.only(top: 30.0),
+                                  textConfirm: "Hapus",
+                                  confirmTextColor: colorWhite,
+                                  buttonColor: colorPrimary,
+                                  onConfirm: () {
+                                    controller.deleteTask(task);
+                                  },
+                                  textCancel: "Kembali",
+                                  cancelTextColor: colorPrimary,
+                                  radius: 15,
+                                  contentPadding: const EdgeInsets.all(30),
+                                  content: Center(
+                                    child: Text(
+                                      "Apakah Anda Ingin Menghapus Agenda Ini?",
+                                      style: fontNunito.copyWith(
+                                        color: colorGrey,
+                                        fontWeight: semiBold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        : SizedBox()
                   ],
                 ),
               ),

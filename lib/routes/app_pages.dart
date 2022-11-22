@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/modules/auth/views/register_view.dart';
+import 'package:marriage_story_mobile/modules/payments/views/add_transaction.dart';
 import '../modules/navigation/navigation.dart';
 import '../modules/auth/auth.dart';
 import '../modules/splash/splash.dart';
@@ -78,6 +79,10 @@ class AppPages {
       page: () => TransactionView(),
       binding: PaymentBinding(),
     ),
-
+    GetPage(
+      name: RouteName.addTransactionClient,
+      page: () => AddTransactionView(),
+      binding: PaymentBinding(),
+    )
   ];
 }

@@ -286,11 +286,11 @@ class DetailPaymentView extends StatelessWidget {
                     SizedBox(
                       height: 1.h,
                     ),
-                    CardTransaction(
-                      onTap: () => Get.toNamed(RouteName.transaction),
-                      date: "23 April 2022",
-                      amount: "Rp 30. 000 000 000 000",
-                    ),
+                    // CardTransaction(
+                    //   onTap: () => Get.toNamed(RouteName.transaction),
+                    //   date: "23 April 2022",
+                    //   amount: "Rp 30. 000 000 000 000",
+                    // ),
                   ],
                 ),
               ),

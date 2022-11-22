@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -6,6 +7,7 @@ import '../../../constants/theme.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/card_event.dart';
 import '../../home/home.dart';
+import '../../task/task.dart';
 import '../event.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +16,7 @@ class EventView extends StatelessWidget {
   EventView({super.key});
   final controller = Get.find<EventController>();
   final controllerHome = Get.find<HomeController>();
+  final controllerEvent = Get.find<EventController>();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,11 @@ class EventView extends StatelessWidget {
                             ),
                             Center(
                               child: Text(
-                                "8",
+                                controllerEvent.events.isNotEmpty
+                                    ? controllerEvent
+                                        .events.first.schedules.length
+                                        .toString()
+                                    : "0",
                                 style: fontNunito.copyWith(
                                   color: colorWhite,
                                   fontWeight: bold,
@@ -111,12 +118,32 @@ class EventView extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            CardTask(
-                              onTap: () {},
-                              label: "Meeting dengan Wo",
-                              date: "23 April 2022",
-                              time: "17:00",
-                            )
+                            ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.all(0),
+                              itemBuilder: (BuildContext context, int index) {
+                                var events = controllerEvent
+                                    .events.first.schedules[index];
+                                return Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: CardTask(
+                                    onTap: () => Get.toNamed(
+                                        RouteName.detailTask,
+                                        arguments: events),
+                                    label: events.namaKegiatan,
+                                    date: events.datetime.toString(),
+                                    time: events.datetime.toString(),
+                                  ),
+                                );
+                              },
+                              itemCount: controllerEvent.events.isNotEmpty
+                                  ? controllerEvent
+                                      .events.first.schedules.length
+                                  : 0,
+                            ),
                           ],
                         ),
                       ),

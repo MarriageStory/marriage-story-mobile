@@ -134,7 +134,7 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> formEditTask(ScheduleDataModel data) async {
+  Future<void> formEditTask(EventScheduleDataModel data) async {
     namaAgendaController.text = data.namaKegiatan;
     detailAgendaController.text = data.detailKegiatan;
     dateAgendaController.text = data.datetime.toString();
@@ -146,12 +146,12 @@ class TaskController extends GetxController {
     Get.toNamed(RouteName.addTask, arguments: false);
   }
 
-  Future<void> deleteTask(ScheduleDataModel data) async {
+  Future<void> deleteTask(EventScheduleDataModel data) async {
     try {
       await taskService.deleteSchedule(data.eventId, data.id);
 
       Get.snackbar(
-        'Berhasil Mengahpus',
+        'Berhasil Menghapus',
         'Agenda',
         backgroundColor: Colors.green,
         colorText: Colors.white,

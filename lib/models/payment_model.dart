@@ -32,7 +32,7 @@ class PaymentModel {
     };
 }
 
-class PaymentDataModel {
+class  PaymentDataModel {
     PaymentDataModel({
         required this.id,
         required this.namaPayment,

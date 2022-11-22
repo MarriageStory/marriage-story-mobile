@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/models/payment_model.dart';
 
 class CardTransaction extends StatelessWidget {
   const CardTransaction({
     Key? key,
     required this.onTap,
-    required this.date,
-    required this.amount,
+    required this.data,
   }) : super(key: key);
 
-  final String date;
-  final String amount;
+  final PaymentDataModel data;
   final Function()? onTap;
 
   @override
@@ -36,7 +35,7 @@ class CardTransaction extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Terima Uang",
+                      data.namaPayment,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       style: fontNunito.copyWith(
@@ -46,7 +45,7 @@ class CardTransaction extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      date,
+                      data.datetime.toString(),
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       style: fontNunito.copyWith(
@@ -61,7 +60,7 @@ class CardTransaction extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(
-                  amount,
+                  data.total.toString(),
                   overflow: TextOverflow.ellipsis,
                   style: fontNunito.copyWith(
                     color: colorPrimary,

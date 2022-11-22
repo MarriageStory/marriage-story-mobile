@@ -21,6 +21,7 @@ class HomeView extends StatelessWidget {
   final HomeController controller = Get.find();
   final EventController eventController = Get.find();
   final TaskController taskController = Get.find();
+  final controllerEvent = Get.find<EventController>();
   int allTask = 0;
 
   @override
@@ -663,34 +664,45 @@ class HomeView extends StatelessWidget {
                                                           SizedBox(
                                                             height: 1.h,
                                                           ),
-                                                          SizedBox(
-                                                            width: 50.w,
-                                                            child: Wrap(
-                                                              spacing: 5.0,
-                                                              runSpacing: 5.0,
-                                                              direction: Axis
-                                                                  .horizontal,
-                                                              children: const [
-                                                                EventPack(
-                                                                    label:
-                                                                        "Pre Wedding"),
-                                                                EventPack(
-                                                                    label:
-                                                                        "Akad"),
-                                                                EventPack(
-                                                                    label:
-                                                                        "Akad"),
-                                                                EventPack(
-                                                                    label:
-                                                                        "Akad"),
-                                                                EventPack(
-                                                                    label:
-                                                                        "Akad"),
-                                                                EventPack(
-                                                                    label:
-                                                                        "Akad"),
-                                                              ],
-                                                            ),
+                                                          ListView.builder(
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            // scrollDirection: Axis.vertical,
+                                                            shrinkWrap: true,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(0),
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    int index) {
+                                                              var paket =
+                                                                  eventController
+                                                                          .events
+                                                                          .first
+                                                                          .paket[
+                                                                      index];
+                                                              return Wrap(
+                                                                  spacing: 5.0,
+                                                                  runSpacing:
+                                                                      5.0,
+                                                                  // direction: Axis.horizontal,
+                                                                  children: [
+                                                                    EventPack(
+                                                                        label: paket
+                                                                            .deskripsi)
+                                                                  ]);
+                                                            },
+                                                            itemCount:
+                                                                eventController
+                                                                        .events
+                                                                        .isEmpty
+                                                                    ? 0
+                                                                    : eventController
+                                                                        .events
+                                                                        .first
+                                                                        .paket
+                                                                        .length,
                                                           ),
                                                         ],
                                                       ),
@@ -752,17 +764,34 @@ class HomeView extends StatelessWidget {
                                     SizedBox(
                                       height: 2.h,
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        CardTask(
-                                          onTap: () {},
-                                          label: "Meeting dengan Wo",
-                                          date: "23 April 2022",
-                                          time: "17:00",
-                                        ),
-                                      ],
+                                    ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(0),
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        var events = controllerEvent
+                                            .events.first.schedules[index];
+                                        return Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: CardTask(
+                                            onTap: () => Get.toNamed(
+                                                RouteName.detailTask,
+                                                arguments: events),
+                                            label: events.namaKegiatan,
+                                            date: events.datetime.toString(),
+                                            time: events.datetime.toString(),
+                                          ),
+                                        );
+                                      },
+                                      itemCount:
+                                          controllerEvent.events.isNotEmpty
+                                              ? controllerEvent
+                                                  .events.first.schedules.length
+                                              : 0,
                                     ),
                                   ],
                                 ),
