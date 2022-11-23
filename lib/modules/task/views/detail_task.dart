@@ -75,7 +75,7 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        DateFormat('dd-MMM-yyyy').format(task.datetime),
+                        DateFormat('dd MMM yyyy').format(task.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: bold,

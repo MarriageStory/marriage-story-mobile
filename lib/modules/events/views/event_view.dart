@@ -134,7 +134,7 @@ class EventView extends StatelessWidget {
                                         RouteName.detailTask,
                                         arguments: events),
                                     label: events.namaKegiatan,
-                                    date: DateFormat('dd-MMM-yyyy')
+                                    date: DateFormat('dd MMM yyyy')
                                         .format(events.datetime),
                                     time: DateFormat('HH:mm')
                                         .format(events.datetime),
@@ -277,7 +277,8 @@ class EventView extends StatelessWidget {
                                 padding: const EdgeInsets.all(0),
                                 itemBuilder: (BuildContext context, int index) {
                                   String tanggal =
-                                      DateFormat('dd-MMM-yyyy - HH:mm').format(
+                                      DateFormat('dd MMM yyyy')
+                                      .format(
                                           controller
                                               .events[controller
                                                   .selectedEvent.value = index]

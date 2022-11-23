@@ -163,7 +163,7 @@ class TaskView extends StatelessWidget {
                               onTap: () => Get.toNamed(RouteName.detailTask,
                                   arguments: controller.task[index]),
                                     label: controller.task[index].namaKegiatan,
-                                    date: DateFormat('dd-MMM-yyyy').format(
+                                    date: DateFormat('dd MMM yyyy').format(
                                         controller.task[index].datetime),
                                     time: DateFormat('HH:mm').format(
                                         controller.task[index].datetime),

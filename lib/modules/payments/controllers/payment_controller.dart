@@ -184,7 +184,7 @@ class PaymentController extends GetxController {
         cekTgl.value = true;
         dateTextController.text = dateTime.toString();
         tanggal = dateTime;
-        final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
+        final selIOS = DateFormat('dd MMM yyyy - HH:mm').format(tanggal);
         print(selIOS);
       },
     );

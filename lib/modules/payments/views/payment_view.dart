@@ -320,6 +320,8 @@ class PaymentView extends StatelessWidget {
                             SizedBox(
                               height: 1.h,
                             ),
+                            controller.payments.length > 0
+                                ?
                             ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               // scrollDirection: Axis.vertical,
@@ -337,11 +339,13 @@ class PaymentView extends StatelessWidget {
                                         RouteName.transaction,
                                         arguments: payment),
                                     data: payment,
+                                          cek: true,
                                   ),
                                 );
                               },
                               itemCount: controller.payments.length,
-                            ),
+                                  )
+                                : Text("Belum Ada Transaksi")
                           ],
                         ),
                       ),
@@ -457,10 +461,6 @@ class PaymentView extends StatelessWidget {
                                     padding: const EdgeInsets.all(0),
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      String tanggal =
-                                          DateFormat('dd-MMM-yyyy - HH:mm')
-                                              .format(eventController
-                                                  .events[index].datetime);
                                       return Container(
                                         margin: const EdgeInsets.symmetric(
                                             vertical: 5),
@@ -471,7 +471,9 @@ class PaymentView extends StatelessWidget {
                                                   .events[index]),
                                           label: eventController
                                               .events[index].namaClient,
-                                          date: tanggal,
+                                          date: DateFormat('dd MMM yyyy')
+                                              .format(eventController
+                                                  .events[index].datetime),
                                           eventPack: eventController
                                                   .events[index].paket.isEmpty
                                               ? "-"
