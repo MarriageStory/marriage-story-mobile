@@ -31,7 +31,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getUserProfile();
-    // getAllUserEvent();
     super.onInit();
   }
 

@@ -215,53 +215,25 @@ class DetailEventView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 4.h,
                       width: 70.w,
-                      child:
-                          // ListView(
-                          //   semanticChildCount: 2,
-                          //   physics: const NeverScrollableScrollPhysics(),
-                          //   scrollDirection: Axis.horizontal,
-                          //   shrinkWrap: true,
-                          //   padding: const EdgeInsets.all(5),
-                          //   children: [
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //     EventPack(label: "label"),
-                          //   ],
-                          // ),
-
-                          ListView.builder(
+                      height: 10.h,
+                      child: GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        // scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(0),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Wrap(
-                              spacing: 5.0,
-                              runSpacing: 5.0,
-                              direction: Axis.horizontal,
-                              children: [
-                                EventPack(
-                                  label: event.paket[index].deskripsi,
-                                )
-                              ]);
-                        },
                         itemCount: event.paket.length,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 70.w,
-                      child: Wrap(
-                        spacing: 5.0,
-                        runSpacing: 5.0,
-                        direction: Axis.horizontal,
-                        children: [],
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 5.0,
+                          mainAxisSpacing: 5.0,
+                          childAspectRatio: 3.2,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          return EventPack(
+                            label: event.paket[index].deskripsi,
+                          );
+                        },
                       ),
                     ),
                     SizedBox(
@@ -345,19 +317,12 @@ class DetailEventView extends StatelessWidget {
                           label: "Edit",
                           textColor: colorPrimary,
                         ),
-                        // Button(
-                        //   height: 6.h,
-                        //   width: 40.w,
-                        //   onTap: () => controller.deleteEvent(event.id),
-                        //   colorBg: colorPrimary,
-                        //   label: "Hapus",
-                        //   textColor: colorWhite,
-                        // ),
-                        ButtonOutlined(
+                        Button(
+                          colorBg: colorPrimary,
                           height: 6.h,
                           width: 40.w,
                           label: "Hapus",
-                          textColor: colorPrimary,
+                          textColor: colorWhite,
                           onTap: () => Get.defaultDialog(
                             title: "Hapus Event",
                             titlePadding: const EdgeInsets.only(top: 30.0),

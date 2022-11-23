@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/modules/home/controllers/home_controller.dart';
@@ -171,22 +170,22 @@ class PaymentController extends GetxController {
     }
   }
 
-  dateTimePickerWidget(BuildContext context) {
-    return DatePicker.showDatePicker(
-      context,
-      dateFormat: 'dd MMMM yyyy HH:mm',
-      initialDateTime: tanggal,
-      minDateTime: DateTime(2000),
-      maxDateTime: DateTime(3000),
-      onMonthChangeStartWithFirstDate: true,
-      onConfirm: (dateTime, List<int> index) {
-        // DateTime selectdate = dateTime;
-        cekTgl.value = true;
-        dateTextController.text = dateTime.toString();
-        tanggal = dateTime;
-        final selIOS = DateFormat('dd MMM yyyy - HH:mm').format(tanggal);
-        print(selIOS);
-      },
-    );
-  }
+  // dateTimePickerWidget(BuildContext context) {
+  //   return DatePicker.showDatePicker(
+  //     context,
+  //     dateFormat: 'dd MMMM yyyy HH:mm',
+  //     initialDateTime: tanggal,
+  //     minDateTime: DateTime(2000),
+  //     maxDateTime: DateTime(3000),
+  //     onMonthChangeStartWithFirstDate: true,
+  //     onConfirm: (dateTime, List<int> index) {
+  //       // DateTime selectdate = dateTime;
+  //       cekTgl.value = true;
+  //       dateTextController.text = dateTime.toString();
+  //       tanggal = dateTime;
+  //       final selIOS = DateFormat('dd MMM yyyy - HH:mm').format(tanggal);
+  //       print(selIOS);
+  //     },
+  //   );
+  // }
 }

@@ -9,7 +9,7 @@ import '../../../constants/theme.dart';
 import '../../../widgets/button_outlined.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/utils/formatAngka.dart';
+import 'package:marriage_story_mobile/utils/format_angka.dart';
 
 class TransactionView extends StatelessWidget {
   TransactionView({super.key});
@@ -77,7 +77,7 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                formatAngka.convertToIdr(
+                FormatAngka.convertToIdr(
                     int.parse(payments.total.toString()), 2),
                 style: fontNunito.copyWith(
                   color: colorBlack,

@@ -8,7 +8,7 @@ import '../../../models/event_model.dart';
 import '../../../widgets/event_pack.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/utils/formatAngka.dart';
+import 'package:marriage_story_mobile/utils/format_angka.dart';
 
 class DetailPaymentView extends StatelessWidget {
   DetailPaymentView({super.key});
@@ -92,7 +92,7 @@ class DetailPaymentView extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                formatAngka.convertToIdr(
+                                FormatAngka.convertToIdr(
                                     int.parse(event.totalPembayaran.toString()),
                                     2),
                                 overflow: TextOverflow.ellipsis,
@@ -254,7 +254,7 @@ class DetailPaymentView extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    formatAngka.convertToIdr(
+                                    FormatAngka.convertToIdr(
                                         int.parse(
                                             event.totalPembayaran.toString()),
                                         2),

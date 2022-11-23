@@ -3,7 +3,7 @@ import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
-import '../../../utils/dateTime.dart';
+import '../../../utils/date_time.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/input_form.dart';
 import '../../../widgets/number_form.dart';
@@ -32,7 +32,10 @@ class AddEventView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      Get.back();
+                      controller.clearInput();
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios_rounded,
                       color: colorBlack,
@@ -52,7 +55,7 @@ class AddEventView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 4.h,
+                height: 6.h,
               ),
               Text(
                 "Paket Acara",
@@ -120,23 +123,21 @@ class AddEventView extends StatelessWidget {
               SizedBox(
                 height: 1.5.h,
               ),
-              DateTime(
-                // labelText: "Date",
-                valueText: controller.cekTgl != false || args == true
-                    ? controller.tanggal.toString()
-                    : "Tanggal Acara",
-                valueStyle: TextStyle(
-                  color: colorGrey,
-                  fontWeight: semiBold,
-                  fontSize: 14,
-                ),
-                onPressed: () {
-                  controller.dateTimePickerWidget(context);
-                },
-              ),
-              SizedBox(
-                height: 1.5.h,
-              ),
+              Obx(() => DateTime(
+                    // labelText: "Date",
+                    valueText:
+                        controller.isChekTime.value == true || args == true
+                            ? controller.tanggal.toString()
+                            : "Tanggal Acara",
+                    valueStyle: TextStyle(
+                      color: colorPrimary,
+                      fontWeight: semiBold,
+                      fontSize: 14,
+                    ),
+                    onPressed: () {
+                      controller.dateTimePicker(context);
+                    },
+                  )),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -145,7 +146,7 @@ class AddEventView extends StatelessWidget {
                 inputController: controller.totalBayarTextController,
               ),
               SizedBox(
-                height: 5.h,
+                height: 20.h,
               ),
               Button(
                 height: 6.h,

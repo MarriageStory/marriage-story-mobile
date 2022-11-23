@@ -23,15 +23,15 @@ class DateTime extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: InputDecorator(
-        decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
             borderRadius:
                 BorderRadius.all(Radius.circular(defaultBorderRadius)),
             borderSide: BorderSide(
               color: colorPrimary,
             ),
           ),
-          focusedBorder: const OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
             borderRadius:
                 BorderRadius.all(Radius.circular(defaultBorderRadius)),
             borderSide: BorderSide(

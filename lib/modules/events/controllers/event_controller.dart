@@ -6,9 +6,7 @@ import 'package:marriage_story_mobile/services/event_service.dart';
 import '../../../models/event_model.dart';
 import '../../../routes/app_pages.dart';
 
-import 'package:date_time_picker/date_time_picker.dart';
-
-import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 class EventController extends GetxController {
@@ -24,6 +22,7 @@ class EventController extends GetxController {
   var selected = [].obs;
   var selectedPackage = [].obs;
   var selectedEvent = 0.obs;
+  final isChekTime = false.obs;
 
   bool cekJam = false;
   bool cekTgl = false;
@@ -189,38 +188,45 @@ class EventController extends GetxController {
     }
   }
 
-  // Future<void> selectDate(BuildContext context) async {
-  //   // Initial DateTime FIinal Picked
-  //   final DateTime? picked = await showDatePicker(
-  //       context: context,
-  //       initialDate: tanggal,
-  //       firstDate: DateTime(2015),
-  //       lastDate: DateTime(2101));
+  // void dateTimePickerWidget(BuildContext context) {
+  //   return DatePicker.showDateTimePicker(
+  //     context,
 
-  //   if (picked != null && picked != tanggal) {
-  //     cekTgl = true;
-  //     dateTextController.text = picked.toString();
-  //     tanggal = picked;
-  //   }
+  //     dateFormat: 'dd MMMM yyyy HH:mm',
+  //     initialDateTime: tanggal,
+  //     minDateTime: DateTime(2000),
+  //     maxDateTime: DateTime(3000),
+  //     onMonthChangeStartWithFirstDate: true,
+  //     onConfirm: (dateTime, List<int> index) {
+  //       // DateTime selectdate = dateTime;
+  //       cekTgl = true;
+  //       dateTextController.text = dateTime.toString();
+  //       tanggal = dateTime;
+  //       final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
+  //       print(selIOS);
+  //     },
+
+  //   );
   // }
 
-  dateTimePickerWidget(BuildContext context) {
-    return DatePicker.showDatePicker(
+  Future<void> dateTimePicker(BuildContext context) {
+    isChekTime.value =false;
+    return DatePicker.showDateTimePicker(
       context,
-      dateFormat: 'dd MMMM yyyy HH:mm',
-      initialDateTime: tanggal,
-      minDateTime: DateTime(2000),
-      maxDateTime: DateTime(3000),
-      onMonthChangeStartWithFirstDate: true,
-      onConfirm: (dateTime, List<int> index) {
-        // DateTime selectdate = dateTime;
-        cekTgl = true;
-        dateTextController.text = dateTime.toString();
-        tanggal = dateTime;
-        final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
-        print(selIOS);
+      showTitleActions: true,
+      locale: LocaleType.id,
+      onConfirm: (date) {
+        log('confirm $date');
+        dateTextController.text = date.toString();
+        isChekTime.value = true;
+        tanggal = date;
       },
+      currentTime: DateTime.now(),
     );
+  }
+
+  Future<void> clearInput() async {
+    isChekTime.value = false;
   }
 
   Future<void> joinEvent() async {

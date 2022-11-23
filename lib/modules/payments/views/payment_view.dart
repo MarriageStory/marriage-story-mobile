@@ -14,7 +14,7 @@ import '../../events/controllers/event_controller.dart';
 import '../../home/home.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/utils/formatAngka.dart';
+import 'package:marriage_story_mobile/utils/format_angka.dart';
 
 class PaymentView extends StatelessWidget {
   PaymentView({super.key});
@@ -104,7 +104,7 @@ class PaymentView extends StatelessWidget {
                                       ),
                                       Text(
                                         eventController.events.isNotEmpty
-                                            ? formatAngka.convertToIdr(
+                                            ? FormatAngka.convertToIdr(
                                                 int.parse(eventController
                                                         .events.isEmpty
                                                     ? "0"
@@ -282,7 +282,7 @@ class PaymentView extends StatelessWidget {
                                         ),
                                         Flexible(
                                           child: Text(
-                                            formatAngka.convertToIdr(
+                                            FormatAngka.convertToIdr(
                                                 int.parse(eventController
                                                             .events.length ==
                                                         0
@@ -479,7 +479,7 @@ class PaymentView extends StatelessWidget {
                                               ? "-"
                                               : eventController.events[index]
                                                   .paket.first.deskripsi,
-                                          amount: formatAngka.convertToIdr(
+                                          amount: FormatAngka.convertToIdr(
                                               int.parse(eventController
                                                   .events[index].totalPembayaran
                                                   .toString()),
