@@ -97,7 +97,7 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat('dd-MMM-yyyy').format(payments.datetime),
+                DateFormat('dd MMM yyyy').format(payments.datetime),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
