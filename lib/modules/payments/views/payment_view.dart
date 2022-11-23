@@ -65,8 +65,10 @@ class PaymentView extends StatelessWidget {
                                       width: 10.w,
                                     ),
                                     IconButton(
-                                      onPressed: () => Get.toNamed(
-                                          RouteName.addTransactionClient),
+                                      onPressed: () =>
+                                          controller.formAddTransaction(),
+                                      // Get.toNamed(
+                                      //     RouteName.addTransactionClient),
                                       icon: const Icon(
                                         Icons.add_rounded,
                                         color: colorWhite,
@@ -282,7 +284,8 @@ class PaymentView extends StatelessWidget {
                                           child: Text(
                                             formatAngka.convertToIdr(
                                                 int.parse(eventController
-                                                        .events.isEmpty
+                                                            .events.length ==
+                                                        0
                                                     ? "0"
                                                     : eventController.events
                                                         .first.jumlahTerbayar

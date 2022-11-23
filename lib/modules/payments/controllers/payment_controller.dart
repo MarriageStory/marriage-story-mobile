@@ -18,8 +18,7 @@ class PaymentController extends GetxController {
 
   var paymentId = 0;
 
-  bool cekJam = false;
-  bool cekTgl = false;
+  final cekTgl = false.obs;
   DateTime tanggal = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
 
@@ -91,7 +90,7 @@ class PaymentController extends GetxController {
     totalPaymentTextController.text = "";
     dateTextController.text = "";
     detailPaymentTextController.text = "";
-    Get.toNamed(RouteName.addTransactionClient, arguments: false);
+    Get.toNamed(RouteName.addTransactionClient, arguments: true);
   }
 
   Future<void> updateTransaction() async {
@@ -138,6 +137,7 @@ class PaymentController extends GetxController {
     dateTextController.text = data.datetime.toString();
     detailPaymentTextController.text = data.detail;
     paymentId = data.id;
+    tanggal = data.datetime;
     Get.toNamed(RouteName.addTransactionClient, arguments: false);
   }
 
@@ -181,7 +181,7 @@ class PaymentController extends GetxController {
       onMonthChangeStartWithFirstDate: true,
       onConfirm: (dateTime, List<int> index) {
         // DateTime selectdate = dateTime;
-        cekTgl = true;
+        cekTgl.value = true;
         dateTextController.text = dateTime.toString();
         tanggal = dateTime;
         final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);

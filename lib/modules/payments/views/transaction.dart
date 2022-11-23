@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/models/payment_model.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -8,6 +9,7 @@ import '../../../constants/theme.dart';
 import '../../../widgets/button_outlined.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
+import 'package:marriage_story_mobile/utils/formatAngka.dart';
 
 class TransactionView extends StatelessWidget {
   TransactionView({super.key});
@@ -75,7 +77,8 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                payments.total.toString(),
+                formatAngka.convertToIdr(
+                    int.parse(payments.total.toString()), 2),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
@@ -94,7 +97,7 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                payments.datetime.toString(),
+                DateFormat('dd-MMM-yyyy').format(payments.datetime),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
@@ -113,7 +116,7 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                payments.datetime.toString(),
+                DateFormat('HH:mm').format(payments.datetime),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,

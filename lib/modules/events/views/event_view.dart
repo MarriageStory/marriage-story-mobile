@@ -134,8 +134,10 @@ class EventView extends StatelessWidget {
                                         RouteName.detailTask,
                                         arguments: events),
                                     label: events.namaKegiatan,
-                                    date: events.datetime.toString(),
-                                    time: events.datetime.toString(),
+                                    date: DateFormat('dd-MMM-yyyy')
+                                        .format(events.datetime),
+                                    time: DateFormat('HH:mm')
+                                        .format(events.datetime),
                                   ),
                                 );
                               },

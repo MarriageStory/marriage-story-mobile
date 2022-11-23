@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
@@ -160,8 +163,10 @@ class TaskView extends StatelessWidget {
                               onTap: () => Get.toNamed(RouteName.detailTask,
                                   arguments: controller.task[index]),
                                     label: controller.task[index].namaKegiatan,
-                              date: controller.task[index].datetime.toString(),
-                              time: controller.task[index].datetime.toString(),
+                                    date: DateFormat('dd-MMM-yyyy').format(
+                                        controller.task[index].datetime),
+                                    time: DateFormat('HH:mm').format(
+                                        controller.task[index].datetime),
                             ),
                           );
                         },

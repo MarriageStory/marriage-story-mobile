@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../models/event_model.dart';
@@ -83,9 +84,11 @@ class AddTransactionView extends StatelessWidget {
               ),
               DateTime(
                 // labelText: "Date",
-                valueText: controller.cekTgl != false || args == true
-                    ? controller.tanggal.toString()
+                valueText: controller.cekTgl != false || args == false
+                    ? DateFormat('dd-MMM-yyyy - HH:mm')
+                        .format(controller.tanggal)
                     : "Tanggal Acara",
+                    
                 valueStyle: TextStyle(
                   color: colorGrey,
                   fontWeight: semiBold,

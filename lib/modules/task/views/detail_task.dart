@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
@@ -74,7 +75,7 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        task.datetime.toString(),
+                        DateFormat('dd-MMM-yyyy').format(task.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: bold,
@@ -84,7 +85,7 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        task.datetime.toString(),
+                        DateFormat('HH:mm').format(task.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,
