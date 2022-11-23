@@ -13,6 +13,7 @@ import 'package:marriage_story_mobile/utils/formatAngka.dart';
 class DetailPaymentView extends StatelessWidget {
   DetailPaymentView({super.key});
   final controller = Get.find<PaymentController>();
+  // final controllerPayment = Get.find<PaymentController>();
   final EventDataModel event = Get.arguments;
   // final tes = Get.arguments;
 
@@ -52,7 +53,7 @@ class DetailPaymentView extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "Agenda Acara",
+                              "Detail Pembayaran",
                               style: fontNunito.copyWith(
                                 color: colorWhite,
                                 fontWeight: bold,
@@ -291,6 +292,29 @@ class DetailPaymentView extends StatelessWidget {
                     //   date: "23 April 2022",
                     //   amount: "Rp 30. 000 000 000 000",
                     // ),
+                    event.paymentDetails.length > 0
+                        ? ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            // scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(0),
+                            itemBuilder: (BuildContext context, int index) {
+                              // var paymentSort =
+                              //     controller.payments.reversed.toList();
+                              // var payment = paymentSort[index];
+                              return Container(
+                                margin: const EdgeInsets.symmetric(vertical: 5),
+                                child: CardTransaction(
+                                  onTap: () => Get.toNamed(
+                                      RouteName.transaction,
+                                      arguments: event),
+                                  data: event.paymentDetails[index],
+                                  cek: false,
+                                ),
+                              );
+                            },
+                            itemCount: event.paymentDetails.length)
+                        : Text("Belum Ada Transaksi")
                   ],
                 ),
               ),

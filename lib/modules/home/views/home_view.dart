@@ -266,7 +266,7 @@ class HomeView extends StatelessWidget {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           String tanggal =
-                                              DateFormat('dd-MMM-yyyy - HH:mm')
+                                              DateFormat('dd MMM yyyy')
                                                   .format(eventController
                                                       .events[index].datetime);
                                           return Container(

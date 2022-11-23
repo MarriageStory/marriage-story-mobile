@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
+import 'package:marriage_story_mobile/models/event_model.dart';
 import 'package:marriage_story_mobile/models/payment_model.dart';
 
 class CardTransaction extends StatelessWidget {
-  const CardTransaction({
+  CardTransaction({
     Key? key,
     required this.onTap,
     required this.data,
+    required this.cek,
   }) : super(key: key);
 
-  final PaymentDataModel data;
+  final data;
   final Function()? onTap;
+  final cek;
 
   @override
   Widget build(BuildContext context) {
+    PaymentDataModel? view;
+    PaymentDetail? viewDetail;
+    if (cek == true) {
+      view = data;
+    } else {
+      viewDetail = data;
+    }
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -35,7 +47,7 @@ class CardTransaction extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data.namaPayment,
+                      cek == true ? view!.namaPayment : viewDetail!.namaPayment,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       style: fontNunito.copyWith(
@@ -45,7 +57,9 @@ class CardTransaction extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      data.datetime.toString(),
+                      cek == true
+                          ? view!.datetime.toString()
+                          : viewDetail!.datetime.toString(),
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       style: fontNunito.copyWith(
@@ -60,7 +74,9 @@ class CardTransaction extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(
-                  data.total.toString(),
+                  cek == true
+                      ? view!.total.toString()
+                      : viewDetail!.total.toString(),
                   overflow: TextOverflow.ellipsis,
                   style: fontNunito.copyWith(
                     color: colorPrimary,

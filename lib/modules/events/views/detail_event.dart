@@ -75,7 +75,7 @@ class DetailEventView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        DateFormat('dd-MMM-yyyy - HH:mm')
+                        DateFormat('dd MMM yyyy - HH:mm')
                             .format(event.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
