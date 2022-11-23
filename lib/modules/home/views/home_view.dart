@@ -22,7 +22,6 @@ class HomeView extends StatelessWidget {
   final EventController eventController = Get.find();
   final TaskController taskController = Get.find();
   final controllerEvent = Get.find<EventController>();
-  int allTask = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -175,24 +174,6 @@ class HomeView extends StatelessWidget {
                                                   fontSize: 14,
                                                 ),
                                               ),
-                                              // Text(
-                                              //   taskController.task.length
-                                              //       .toString(),
-                                              //   style: fontNunito.copyWith(
-                                              //     color: colorWhite,
-                                              //     fontWeight: semiBold,
-                                              //     fontSize: 16,
-                                              //   ),
-                                              // ),
-                                              // Text(
-                                              //   allTask.toString(),
-                                              //   style: fontNunito.copyWith(
-                                              //     color: colorWhite,
-                                              //     fontWeight: semiBold,
-                                              //     fontSize: 16,
-                                              //   ),
-                                              // ),
-
                                               ListView.builder(
                                                 physics:
                                                     const NeverScrollableScrollPhysics(),
@@ -211,7 +192,8 @@ class HomeView extends StatelessWidget {
                                                         .schedules
                                                         .length;
                                                     return Text(
-                                                      allTask.toString(),
+                                                      controller.allTask
+                                                          .toString(),
                                                       style:
                                                           fontNunito.copyWith(
                                                         color: colorWhite,
@@ -220,17 +202,17 @@ class HomeView extends StatelessWidget {
                                                       ),
                                                     );
                                                   } else {
-                                                    allTask += eventController
-                                                        .events[index]
-                                                        .schedules
-                                                        .length;
-                                                    return SizedBox();
+                                                    controller.allTask.value +=
+                                                        eventController
+                                                            .events[index]
+                                                            .schedules
+                                                            .length;
+                                                    return const SizedBox();
                                                   }
                                                 },
                                                 itemCount: eventController
                                                     .events.length,
                                               ),
-
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.end,
@@ -771,38 +753,40 @@ class HomeView extends StatelessWidget {
                                     eventController.events.first.schedules
                                                 .length !=
                                             0
-                                        ?
-                                    ListView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      padding: const EdgeInsets.all(0),
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        var events = controllerEvent
-                                            .events.first.schedules[index];
-                                        return Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: CardTask(
-                                            onTap: () => Get.toNamed(
-                                                RouteName.detailTask,
-                                                arguments: events),
-                                            label: events.namaKegiatan,
+                                        ? ListView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            padding: const EdgeInsets.all(0),
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              var events = controllerEvent
+                                                  .events
+                                                  .first
+                                                  .schedules[index];
+                                              return Container(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5),
+                                                child: CardTask(
+                                                  onTap: () => Get.toNamed(
+                                                      RouteName.detailTask,
+                                                      arguments: events),
+                                                  label: events.namaKegiatan,
                                                   date: DateFormat(
                                                           'dd-MMM-yyyy')
                                                       .format(events.datetime),
                                                   time: DateFormat('HH:mm')
                                                       .format(events.datetime),
-                                          ),
-                                        );
-                                      },
-                                      itemCount:
-                                          controllerEvent.events.isNotEmpty
-                                              ? controllerEvent
-                                                  .events.first.schedules.length
-                                              : 0,
+                                                ),
+                                              );
+                                            },
+                                            itemCount: controllerEvent
+                                                    .events.isNotEmpty
+                                                ? controllerEvent.events.first
+                                                    .schedules.length
+                                                : 0,
                                           )
                                         : Text("Agenda Masih Kosong")
                                   ],
