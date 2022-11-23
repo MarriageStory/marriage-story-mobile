@@ -299,9 +299,6 @@ class DetailPaymentView extends StatelessWidget {
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(0),
                             itemBuilder: (BuildContext context, int index) {
-                              // var paymentSort =
-                              //     controller.payments.reversed.toList();
-                              // var payment = paymentSort[index];
                               return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: CardTransaction(

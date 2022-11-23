@@ -95,7 +95,7 @@ class TaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "8",
+                        event.schedules.length.toString(),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: bold,
@@ -156,12 +156,13 @@ class TaskView extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(0),
-                        itemBuilder: (BuildContext context, int index) {
+                              itemBuilder: (BuildContext context, int index) {  
                           return Container(
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             child: CardTask(
-                              onTap: () => Get.toNamed(RouteName.detailTask,
-                                  arguments: controller.task[index]),
+                                    onTap: () =>
+                                        controller.validationDetailTask(
+                                            event.schedules[index], true),
                                     label: controller.task[index].namaKegiatan,
                                     date: DateFormat('dd MMM yyyy').format(
                                         controller.task[index].datetime),

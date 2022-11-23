@@ -18,7 +18,8 @@ class DetailTaskView extends StatelessWidget {
   DetailTaskView({super.key});
   final controller = Get.find<TaskController>();
   final controllerHome = Get.find<HomeController>();
-  final EventScheduleDataModel task = Get.arguments;
+  // final EventScheduleDataModel task = Get.arguments;
+  final cek = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,11 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        DateFormat('dd MMM yyyy').format(task.datetime),
+                        cek == true
+                            ? DateFormat('dd MMM yyyy')
+                                .format(controller.view!.datetime)
+                            : DateFormat('dd MMM yyyy')
+                                .format(controller.viewTask!.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: bold,
@@ -85,7 +90,11 @@ class DetailTaskView extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        DateFormat('HH:mm').format(task.datetime),
+                        cek == true
+                            ? DateFormat('HH:mm')
+                                .format(controller.view!.datetime)
+                            : DateFormat('HH:mm')
+                                .format(controller.viewTask!.datetime),
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,
@@ -119,21 +128,27 @@ class DetailTaskView extends StatelessWidget {
                   children: [
                     DetailFormat(
                       keterangan: "Kegiatan :",
-                      label: task.namaKegiatan,
+                      label: cek == true
+                          ? controller.view!.namaKegiatan
+                          : controller.viewTask!.namaKegiatan,
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
                     DetailFormat(
                       keterangan: "Tempat :",
-                      label: task.tempat,
+                      label: cek == true
+                          ? controller.view!.tempat
+                          : controller.viewTask!.tempat,
                     ),
                     SizedBox(
                       height: 2.h,
                     ),
                     DetailFormat(
                       keterangan: "Detail Kegiatan :",
-                      label: task.detailKegiatan,
+                      label: cek == true
+                          ? controller.view!.detailKegiatan
+                          : controller.viewTask!.detailKegiatan,
                     ),
                     SizedBox(
                       height: 20.h,
@@ -147,7 +162,7 @@ class DetailTaskView extends StatelessWidget {
                                 width: 40.w,
                                 onTap: () {
                                   // Get.toNamed(RouteName.addTask, arguments: task);
-                                  controller.formEditTask(task);
+                                  controller.formEditTask(controller.view);
                                 },
                                 colorBg: colorPrimary,
                                 label: "Edit",
@@ -166,7 +181,7 @@ class DetailTaskView extends StatelessWidget {
                                   confirmTextColor: colorWhite,
                                   buttonColor: colorPrimary,
                                   onConfirm: () {
-                                    controller.deleteTask(task);
+                                    controller.deleteTask(controller.view);
                                   },
                                   textCancel: "Kembali",
                                   cancelTextColor: colorPrimary,

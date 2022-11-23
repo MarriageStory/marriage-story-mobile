@@ -16,6 +16,7 @@ class TaskController extends GetxController {
   final EventController eventController = Get.find();
   final isChecked = false.obs;
   final isLoading = false.obs;
+  final checkClass = false.obs;
 
   int? eventId;
   int? taskId;
@@ -29,7 +30,9 @@ class TaskController extends GetxController {
   bool cekJam = false;
   bool cekTgl = false;
   DateTime tanggal = DateTime.now();
-  TimeOfDay time = TimeOfDay.now();
+
+  EventScheduleDataModel? view;
+  ScheduleDataModel? viewTask;
 
   @override
   void onInit() {
@@ -48,6 +51,18 @@ class TaskController extends GetxController {
       print(e);
       isLoading.value = false;
     }
+  }
+
+  Future<void> validationDetailTask(final data, bool cek) async {
+    if (cek == true) {
+      view = data;
+      Get.toNamed(RouteName.detailTask, arguments: true);
+    } else {
+      viewTask = data;
+      Get.toNamed(RouteName.detailTask, arguments: false);
+    }
+
+    // Get.toNamed(RouteName.addTask, arguments: eventId);
   }
 
   Future<void> createTask(int eventId) async {
@@ -134,8 +149,8 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> formEditTask(EventScheduleDataModel data) async {
-    namaAgendaController.text = data.namaKegiatan;
+  Future<void> formEditTask(EventScheduleDataModel? data) async {
+    namaAgendaController.text = data!.namaKegiatan;
     detailAgendaController.text = data.detailKegiatan;
     dateAgendaController.text = data.datetime.toString();
     tanggal = data.datetime;
@@ -146,11 +161,11 @@ class TaskController extends GetxController {
     Get.toNamed(RouteName.addTask, arguments: false);
   }
 
-  Future<void> deleteTask(EventScheduleDataModel data) async {
+  Future<void> deleteTask(EventScheduleDataModel? data) async {
     try {
-      await taskService.deleteSchedule(data.eventId, data.id);
+      await taskService.deleteSchedule(data!.eventId, data.id);
 
-      Get.snackbar(
+      Get.snackbar( 
         'Berhasil Menghapus',
         'Agenda',
         backgroundColor: Colors.green,

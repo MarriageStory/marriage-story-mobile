@@ -206,6 +206,10 @@ class HomeView extends StatelessWidget {
                                                   if (index + 1 ==
                                                       eventController
                                                           .events.length) {
+                                                    allTask += eventController
+                                                        .events[index]
+                                                        .schedules
+                                                        .length;
                                                     return Text(
                                                       allTask.toString(),
                                                       style:
