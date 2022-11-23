@@ -17,6 +17,7 @@ class EventView extends StatelessWidget {
   final controller = Get.find<EventController>();
   final controllerHome = Get.find<HomeController>();
   final controllerEvent = Get.find<EventController>();
+  final controllerTask = Get.find<TaskController>();
 
   @override
   Widget build(BuildContext context) {
@@ -130,9 +131,11 @@ class EventView extends StatelessWidget {
                                   margin:
                                       const EdgeInsets.symmetric(vertical: 5),
                                   child: CardTask(
-                                    onTap: () => Get.toNamed(
-                                        RouteName.detailTask,
-                                        arguments: events),
+                                    onTap: () => controllerTask
+                                        .validationDetailTask(events, false),
+                                    // Get.toNamed(
+                                    //     RouteName.detailTask,
+                                    //     arguments: events),
                                     label: events.namaKegiatan,
                                     date: DateFormat('dd MMM yyyy')
                                         .format(events.datetime),

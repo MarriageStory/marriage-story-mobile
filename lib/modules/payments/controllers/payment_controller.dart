@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:marriage_story_mobile/models/schedule_model.dart';
 import 'package:marriage_story_mobile/modules/home/controllers/home_controller.dart';
 import 'package:marriage_story_mobile/modules/navigation/controllers/navigation_controller.dart';
 
+import '../../../models/event_model.dart';
 import '../../../models/payment_model.dart';
 import '../../../routes/app_pages.dart';
 import '../../../services/payment_service.dart';
@@ -14,6 +16,8 @@ class PaymentController extends GetxController {
   final totalPaymentTextController = TextEditingController();
   final dateTextController = TextEditingController();
   final detailPaymentTextController = TextEditingController();
+  EventScheduleDataModel? task;
+  ScheduleDataModel? taskView;
 
   var paymentId = 0;
 
