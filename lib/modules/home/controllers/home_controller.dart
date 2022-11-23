@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:marriage_story_mobile/models/event_model.dart';
 import 'package:marriage_story_mobile/services/auth_service.dart';
 import '../../../models/user_model.dart';
 import '../../../services/event_service.dart';
@@ -12,6 +10,7 @@ class HomeController extends GetxController {
   final eventService = Get.put(EventService());
 
   final eventId = 0.obs;
+  final allTask = 0.obs;
 
   final user = UserDataModel(
     id: 0,
