@@ -131,11 +131,11 @@ class EventView extends StatelessWidget {
                                   margin:
                                       const EdgeInsets.symmetric(vertical: 5),
                                   child: CardTask(
-                                    onTap: () => controllerTask
-                                        .validationDetailTask(events, false),
-                                    // Get.toNamed(
-                                    //     RouteName.detailTask,
-                                    //     arguments: events),
+                                    onTap: () =>
+                                        // controllerTask
+                                        //     .validationDetailTask(events, false),
+                                        Get.toNamed(RouteName.detailTask,
+                                            arguments: events),
                                     label: events.namaKegiatan,
                                     date: DateFormat('dd MMM yyyy')
                                         .format(events.datetime),

@@ -10,7 +10,7 @@ class HomeController extends GetxController {
   final eventService = Get.put(EventService());
 
   final eventId = 0.obs;
-  final allTask = 0.obs;
+  var allTaskk = 0.obs;
 
   final user = UserDataModel(
     id: 0,

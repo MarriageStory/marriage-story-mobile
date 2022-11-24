@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../utils/date_time.dart';
@@ -127,7 +128,8 @@ class AddEventView extends StatelessWidget {
                     // labelText: "Date",
                     valueText:
                         controller.isChekTime.value == true || args == true
-                            ? controller.tanggal.toString()
+                            ? DateFormat('dd MMM yyyy - HH:mm')
+                                .format(controller.tanggal)
                             : "Tanggal Acara",
                     valueStyle: TextStyle(
                       color: colorPrimary,

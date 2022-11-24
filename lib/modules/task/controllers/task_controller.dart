@@ -5,7 +5,7 @@ import 'package:marriage_story_mobile/services/schedule_service.dart';
 import '../../../models/event_model.dart';
 import '../../../models/schedule_model.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import '../../../routes/app_pages.dart';
 import '../../events/event.dart';
 
@@ -26,13 +26,14 @@ class TaskController extends GetxController {
   final dateAgendaController = TextEditingController();
   final tempatAgendaController = TextEditingController();
   final jamAgendaController = TextEditingController();
+  final isChekTime = false.obs;
 
   bool cekJam = false;
   bool cekTgl = false;
   DateTime tanggal = DateTime.now();
 
   EventScheduleDataModel? view;
-  ScheduleDataModel? viewTask;
+  EventScheduleDataModel? viewTask;
 
   @override
   void onInit() {
@@ -53,24 +54,22 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> validationDetailTask(final data, bool cek) async {
-    if (cek == true) {
-      view = data;
-      Get.toNamed(RouteName.detailTask, arguments: true);
-    } else {
-      viewTask = data;
-      Get.toNamed(RouteName.detailTask, arguments: false);
-    }
-
-    // Get.toNamed(RouteName.addTask, arguments: eventId);
-  }
+  // Future<void> validationDetailTask(final data, bool cek) async {
+  //   if (cek == true) {
+  //     view = data;
+  //     Get.toNamed(RouteName.detailTask, arguments: true);
+  //   } else {
+  //     viewTask = data;
+  //     Get.toNamed(RouteName.detailTask, arguments: false);
+  //   }
+  // }
 
   Future<void> createTask(int eventId) async {
     try {
       var input = <String, dynamic>{
         'nama_kegiatan': namaAgendaController.text,
         'detail_kegiatan': detailAgendaController.text,
-        'datetime': dateAgendaController.text,
+        'datetime': tanggal.toString(),
         'tempat': tempatAgendaController.text,
       };
 
@@ -191,19 +190,39 @@ class TaskController extends GetxController {
     }
   }
 
-  Future<void> selectDate(BuildContext context) async {
-    // Initial DateTime FIinal Picked
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: tanggal,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
+  // Future<void> selectDate(BuildContext context) async {
+  //   // Initial DateTime FIinal Picked
+  //   final DateTime? picked = await showDatePicker(
+  //       context: context,
+  //       initialDate: tanggal,
+  //       firstDate: DateTime(2015),
+  //       lastDate: DateTime(2101));
 
-    if (picked != null && picked != tanggal) {
-      cekTgl = true;
-      dateAgendaController.text = picked.toString();
-      tanggal = picked;
-    }
-    ;
+  //   if (picked != null && picked != tanggal) {
+  //     cekTgl = true;
+  //     dateAgendaController.text = picked.toString();
+  //     tanggal = picked;
+  //   }
+  //   ;
+  // }
+
+  Future<void> dateTimePicker(BuildContext context) {
+    isChekTime.value = false;
+    return DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true,
+      locale: LocaleType.id,
+      onConfirm: (date) {
+        log('confirm $date');
+        // dateTextController.text = date.toString();
+        isChekTime.value = true;
+        tanggal = date;
+      },
+      currentTime: DateTime.now(),
+    );
+  }
+
+  Future<void> clearInput() async {
+    isChekTime.value = false;
   }
 }

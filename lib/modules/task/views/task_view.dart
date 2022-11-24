@@ -161,8 +161,10 @@ class TaskView extends StatelessWidget {
                             margin: const EdgeInsets.symmetric(vertical: 5),
                             child: CardTask(
                                     onTap: () =>
-                                        controller.validationDetailTask(
-                                            event.schedules[index], true),
+                                        // controller.validationDetailTask(
+                                        //     event.schedules[index], true),
+                                        Get.toNamed(RouteName.detailTask,
+                                            arguments: event.schedules[index]),
                                     label: controller.task[index].namaKegiatan,
                                     date: DateFormat('dd MMM yyyy').format(
                                         controller.task[index].datetime),

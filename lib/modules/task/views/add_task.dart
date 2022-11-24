@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../models/event_model.dart';
@@ -34,7 +35,10 @@ class AddTaskView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      controller.clearInput();
+                      Get.back();
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios_rounded,
                       color: colorBlack,
@@ -80,20 +84,22 @@ class AddTaskView extends StatelessWidget {
               SizedBox(
                 height: 1.5.h,
               ),
-              DateTime(
-                // labelText: "Date",
-                valueText: controller.cekTgl != false || args == false
-                    ? controller.tanggal.toString()
-                    : "Tanggal Kegiatan",
-                valueStyle: TextStyle(
-                  color: colorGrey,
-                  fontWeight: semiBold,
-                  fontSize: 14,
-                ),
-                onPressed: () {
-                  controller.selectDate(context);
-                },
-              ),
+              Obx(() => DateTime(
+                    // labelText: "Date",
+                    valueText:
+                        controller.isChekTime.value == true || args == true
+                            ? DateFormat('dd MMM yyyy - HH:mm')
+                                .format(controller.tanggal)
+                            : "Tanggal Acara",
+                    valueStyle: TextStyle(
+                      color: colorPrimary,
+                      fontWeight: semiBold,
+                      fontSize: 14,
+                    ),
+                    onPressed: () {
+                      controller.dateTimePicker(context);
+                    },
+                  )),
               SizedBox(
                 height: 1.5.h,
               ),
