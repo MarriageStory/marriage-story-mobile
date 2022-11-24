@@ -169,41 +169,32 @@ class PaymentView extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: 70.w,
-                                  child:
-                                      // Wrap(
-                                      //   spacing: 5.0,
-                                      //   runSpacing: 5.0,
-                                      //   direction: Axis.horizontal,
-                                      //   children: [
-                                      // EventPack(label: "Pre Wedding"),
-                                      // EventPack(label: "Akad"),
-                                      // EventPack(label: "Akad"),
-                                      // EventPack(label: "Akad"),
-                                      // EventPack(label: "Akad"),
-                                      // EventPack(label: "Akad"),
-                                      ListView.builder(
+                                  height: 10.h,
+                                  child: GridView.builder(
                                     physics:
                                         const NeverScrollableScrollPhysics(),
-                                    // scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
                                     padding: const EdgeInsets.all(0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      var paket = eventController
-                                          .events.first.paket[index];
-                                      return Wrap(spacing: 5.0, runSpacing: 5.0,
-                                          // direction: Axis.horizontal,
-                                          children: [
-                                            EventPack(label: paket.deskripsi)
-                                          ]);
-                                    },
                                     itemCount: eventController.events.isEmpty
                                         ? 0
                                         : eventController
                                             .events.first.paket.length,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      crossAxisSpacing: 5.0,
+                                      mainAxisSpacing: 5.0,
+                                      childAspectRatio: 3,
+                                    ),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      var paket = eventController
+                                          .events.first.paket[index];
+                                      return EventPack(
+                                        label: paket.deskripsi,
+                                      );
+                                    },
                                   ),
-                                  //   ],
-                                  // ),
                                 ),
                               ],
                             ),
@@ -281,21 +272,23 @@ class PaymentView extends StatelessWidget {
                                           ),
                                         ),
                                         Flexible(
-                                          child: Text(
-                                            FormatAngka.convertToIdr(
-                                                int.parse(eventController
-                                                            .events.length ==
-                                                        0
-                                                    ? "0"
-                                                    : eventController.events
-                                                        .first.jumlahTerbayar
-                                                        .toString()),
-                                                2),
-                                            overflow: TextOverflow.ellipsis,
-                                            style: fontNunito.copyWith(
-                                              color: colorPrimary,
-                                              fontWeight: bold,
-                                              fontSize: 16,
+                                          child: FittedBox(
+                                            fit: BoxFit.none,
+                                            child: Text(
+                                              FormatAngka.convertToIdr(
+                                                  int.parse(eventController
+                                                          .events.isEmpty
+                                                      ? "0"
+                                                      : eventController.events
+                                                          .first.jumlahTerbayar
+                                                          .toString()),
+                                                  2),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: fontNunito.copyWith(
+                                                color: colorPrimary,
+                                                fontWeight: bold,
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -320,32 +313,44 @@ class PaymentView extends StatelessWidget {
                             SizedBox(
                               height: 1.h,
                             ),
-                            controller.payments.length > 0
-                                ?
-                            ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              // scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              padding: const EdgeInsets.all(0),
-                              itemBuilder: (BuildContext context, int index) {
-                                var paymentSort =
-                                    controller.payments.reversed.toList();
-                                var payment = paymentSort[index];
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: CardTransaction(
-                                    onTap: () => Get.toNamed(
-                                        RouteName.transaction,
-                                        arguments: payment),
-                                    data: payment,
-                                          cek: true,
-                                  ),
-                                );
-                              },
-                              itemCount: controller.payments.length,
+                            controller.payments.isNotEmpty
+                                ? ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    // scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.all(0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      var paymentSort =
+                                          controller.payments.reversed.toList();
+                                      var payment = paymentSort[index];
+                                      return Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: CardTransaction(
+                                          onTap: (() {
+                                            Get.toNamed(RouteName.transaction,
+                                                arguments: payment);
+                                          }),
+                                          label: controller
+                                              .payments[index].namaPayment,
+                                          date: DateFormat('dd MMM yyyy')
+                                              .format(controller
+                                                  .payments[index].datetime)
+                                              .toString(),
+                                          amount: FormatAngka.convertToIdr(
+                                              int.parse(controller
+                                                  .payments[index].total
+                                                  .toString()),
+                                              2),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: controller.payments.length,
                                   )
-                                : Text("Belum Ada Transaksi")
+                                : const Center(
+                                    child: Text("Belum Ada Transaksi"))
                           ],
                         ),
                       ),

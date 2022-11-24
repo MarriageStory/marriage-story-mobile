@@ -9,6 +9,7 @@ import '../../../constants/theme.dart';
 import '../../../models/event_model.dart';
 import '../../../routes/routes.dart';
 import '../../../widgets/event_pack.dart';
+import '../../home/home.dart';
 import '../event.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +17,7 @@ import 'package:intl/intl.dart';
 class DetailEventView extends StatelessWidget {
   DetailEventView({super.key});
   final controller = Get.find<EventController>();
+  final homeController = Get.find<HomeController>();
   final EventDataModel event = Get.arguments;
 
   @override
@@ -141,67 +143,69 @@ class DetailEventView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color:
-                                  colorPrimary, //                   <--- border color
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 7.w,
-                              vertical: 3.h,
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  event.schedules.length.toString(),
-                                  overflow: TextOverflow.ellipsis,
-                                  style: fontNunito.copyWith(
-                                    color: colorBlack,
-                                    fontWeight: bold,
-                                    fontSize: 16,
+                    homeController.user.value.roleId == 1
+                        ? const SizedBox()
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        colorPrimary, //                   <--- border color
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 7.w,
+                                    vertical: 3.h,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        event.schedules.length.toString(),
+                                        overflow: TextOverflow.ellipsis,
+                                        style: fontNunito.copyWith(
+                                          color: colorBlack,
+                                          fontWeight: bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Text(
+                                        "Jumlah Agenda",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: fontNunito.copyWith(
+                                          color: colorGrey,
+                                          fontWeight: semiBold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  "Jumlah Agenda",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: fontNunito.copyWith(
-                                    color: colorGrey,
-                                    fontWeight: semiBold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          child: GestureDetector(
-                            onTap: () =>
-                                Get.toNamed(RouteName.task, arguments: event),
-                            child: Text(
-                              "Lihat Agenda",
-                              overflow: TextOverflow.ellipsis,
-                              style: fontNunito.copyWith(
-                                color: colorPrimary,
-                                fontWeight: bold,
-                                fontSize: 16,
                               ),
-                            ),
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () => Get.toNamed(RouteName.task,
+                                      arguments: event),
+                                  child: Text(
+                                    "Lihat Agenda",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: fontNunito.copyWith(
+                                      color: colorPrimary,
+                                      fontWeight: bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                     SizedBox(
                       height: 3.h,
                     ),
@@ -305,51 +309,54 @@ class DetailEventView extends StatelessWidget {
                     SizedBox(
                       height: 3.h,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ButtonOutlined(
-                          height: 6.h,
-                          width: 40.w,
-                          onTap: () {
-                            controller.formEditEvent(event);
-                          },
-                          label: "Edit",
-                          textColor: colorPrimary,
-                        ),
-                        Button(
-                          colorBg: colorPrimary,
-                          height: 6.h,
-                          width: 40.w,
-                          label: "Hapus",
-                          textColor: colorWhite,
-                          onTap: () => Get.defaultDialog(
-                            title: "Hapus Event",
-                            titlePadding: const EdgeInsets.only(top: 30.0),
-                            textConfirm: "Hapus",
-                            confirmTextColor: colorWhite,
-                            buttonColor: colorPrimary,
-                            onConfirm: () {
-                              controller.deleteEvent(event.id);
-                            },
-                            textCancel: "Kembali",
-                            cancelTextColor: colorPrimary,
-                            radius: 15,
-                            contentPadding: const EdgeInsets.all(30),
-                            content: Center(
-                              child: Text(
-                                "Apakah Anda Ingin Menghapus Event Ini?",
-                                style: fontNunito.copyWith(
-                                  color: colorGrey,
-                                  fontWeight: semiBold,
-                                  fontSize: 16,
-                                ),
+                    homeController.user.value.roleId == 1
+                        ? const SizedBox()
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ButtonOutlined(
+                                height: 6.h,
+                                width: 40.w,
+                                onTap: () {
+                                  controller.formEditEvent(event);
+                                },
+                                label: "Edit",
+                                textColor: colorPrimary,
                               ),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
+                              Button(
+                                colorBg: colorPrimary,
+                                height: 6.h,
+                                width: 40.w,
+                                label: "Hapus",
+                                textColor: colorWhite,
+                                onTap: () => Get.defaultDialog(
+                                  title: "Hapus Event",
+                                  titlePadding:
+                                      const EdgeInsets.only(top: 30.0),
+                                  textConfirm: "Hapus",
+                                  confirmTextColor: colorWhite,
+                                  buttonColor: colorPrimary,
+                                  onConfirm: () {
+                                    controller.deleteEvent(event.id);
+                                  },
+                                  textCancel: "Kembali",
+                                  cancelTextColor: colorPrimary,
+                                  radius: 15,
+                                  contentPadding: const EdgeInsets.all(30),
+                                  content: Center(
+                                    child: Text(
+                                      "Apakah Anda Ingin Menghapus Event Ini?",
+                                      style: fontNunito.copyWith(
+                                        color: colorGrey,
+                                        fontWeight: semiBold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
                   ],
                 ),
               ),

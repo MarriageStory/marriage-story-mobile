@@ -19,12 +19,15 @@ class EventPack extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Text(
-          label,
-          style: fontNunito.copyWith(
-            color: colorPrimary,
-            fontWeight: semiBold,
-            fontSize: 11,
+        child: FittedBox(
+          fit: BoxFit.none,
+          child: Text(
+            label,
+            style: fontNunito.copyWith(
+              color: colorPrimary,
+              fontWeight: semiBold,
+              fontSize: 11,
+            ),
           ),
         ),
       ),

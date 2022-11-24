@@ -152,14 +152,15 @@ class TaskView extends StatelessWidget {
                               ),
                             )
                           : ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(0),
-                              itemBuilder: (BuildContext context, int index) {  
-                          return Container(
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            child: CardTask(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.all(0),
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: CardTask(
                                     onTap: () =>
                                         // controller.validationDetailTask(
                                         //     event.schedules[index], true),
@@ -170,11 +171,11 @@ class TaskView extends StatelessWidget {
                                         controller.task[index].datetime),
                                     time: DateFormat('HH:mm').format(
                                         controller.task[index].datetime),
+                                  ),
+                                );
+                              },
+                              itemCount: controller.task.length,
                             ),
-                          );
-                        },
-                        itemCount: controller.task.length,
-                      ),
                     ),
                   ],
                 ),

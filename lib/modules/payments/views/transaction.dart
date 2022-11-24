@@ -129,22 +129,22 @@ class TransactionView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Button(
+                  ButtonOutlined(
                     height: 6.h,
                     width: 40.w,
                     onTap: () {
                       // Get.toNamed(RouteName.addTask, arguments: task);
                       controller.formEditTransaction(payments);
                     },
-                    colorBg: colorPrimary,
                     label: "Edit",
-                    textColor: colorWhite,
+                    textColor: colorPrimary,
                   ),
-                  ButtonOutlined(
+                  Button(
                     height: 6.h,
                     width: 40.w,
+                    colorBg: colorPrimary,
                     label: "Hapus",
-                    textColor: colorPrimary,
+                    textColor: colorWhite,
                     onTap: () => Get.defaultDialog(
                       title: "Hapus Transaksi",
                       titlePadding: const EdgeInsets.only(top: 30.0),

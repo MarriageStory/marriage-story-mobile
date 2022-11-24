@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/card_transaction.dart';
@@ -287,31 +288,34 @@ class DetailPaymentView extends StatelessWidget {
                     SizedBox(
                       height: 1.h,
                     ),
-                    // CardTransaction(
-                    //   onTap: () => Get.toNamed(RouteName.transaction),
-                    //   date: "23 April 2022",
-                    //   amount: "Rp 30. 000 000 000 000",
-                    // ),
-                    event.paymentDetails.length > 0
+                    controller.payments.isNotEmpty
                         ? ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             // scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(0),
                             itemBuilder: (BuildContext context, int index) {
+                              var paymentSort =
+                                  controller.payments.reversed.toList();
+                              var payment = paymentSort[index];
                               return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: CardTransaction(
-                                  onTap: () => Get.toNamed(
-                                      RouteName.transaction,
-                                      arguments: event),
-                                  data: event.paymentDetails[index],
-                                  cek: false,
-                                ),
+                                    onTap: (() {
+                                      Get.toNamed(RouteName.transaction,
+                                          arguments: payment);
+                                    }),
+                                    label:
+                                        controller.payments[index].namaPayment,
+                                    date: DateFormat('dd MMM yyyy').format(
+                                        controller.payments[index].datetime),
+                                    amount: controller.payments[index].total
+                                        .toString()),
                               );
                             },
-                            itemCount: event.paymentDetails.length)
-                        : Text("Belum Ada Transaksi")
+                            itemCount: controller.payments.length,
+                          )
+                        : const Center(child: Text("Belum Ada Transaksi"))
                   ],
                 ),
               ),

@@ -265,15 +265,8 @@ class EventView extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            // CardEvent(
-                            //   label: "Pernikahan",
-                            //   date: "23 April 2022",
-                            //   allTask: "3",
-                            //   eventPack: "akad",
-                            //   onTap: () => Get.toNamed(RouteName.detailEvent),
-                            // )
-                            Obx(
-                              () => ListView.builder(
+                            
+                            ListView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
@@ -310,7 +303,7 @@ class EventView extends StatelessWidget {
                                 },
                                 itemCount: controller.events.length,
                               ),
-                            ),
+                            
                           ],
                         ),
                       ),
