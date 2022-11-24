@@ -204,11 +204,16 @@ class HomeView extends StatelessWidget {
                                                 if (index + 1 ==
                                                     eventController
                                                         .events.length) {
-                                                  controller.allTaskk +=
-                                                      eventController
-                                                          .events[index]
-                                                          .schedules
-                                                          .length;
+                                                  if (controller.allTaskNoted ==
+                                                      false) {
+                                                    controller.allTaskk +=
+                                                        eventController
+                                                            .events[index]
+                                                            .schedules
+                                                            .length;
+                                                    controller.allTaskNoted =
+                                                        true;
+                                                  }
                                                   return Text(
                                                     controller.allTaskk
                                                         .toString(),
@@ -219,11 +224,14 @@ class HomeView extends StatelessWidget {
                                                     ),
                                                   );
                                                 } else {
-                                                  controller.allTaskk +=
-                                                      eventController
-                                                          .events[index]
-                                                          .schedules
-                                                          .length;
+                                                  if (controller.allTaskNoted ==
+                                                      false) {
+                                                    controller.allTaskk +=
+                                                        eventController
+                                                            .events[index]
+                                                            .schedules
+                                                            .length;
+                                                  }
                                                   return SizedBox();
                                                 }
                                               },

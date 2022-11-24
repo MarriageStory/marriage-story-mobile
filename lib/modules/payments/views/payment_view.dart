@@ -405,7 +405,7 @@ class PaymentView extends StatelessWidget {
                             ),
                             Center(
                               child: Text(
-                                "3",
+                                eventController.events.length.toString(),
                                 style: fontNunito.copyWith(
                                   color: colorWhite,
                                   fontWeight: bold,
@@ -492,7 +492,8 @@ class PaymentView extends StatelessWidget {
                                     },
                                     itemCount: eventController.events.length,
                                   )
-                                : Text("Belum ada pembayaran")
+                                : const Center(
+                                    child: Text("Belum ada pembayaran"))
                           ],
                         ),
                       ),

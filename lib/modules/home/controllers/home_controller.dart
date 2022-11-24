@@ -11,6 +11,7 @@ class HomeController extends GetxController {
 
   final eventId = 0.obs;
   var allTaskk = 0.obs;
+  var allTaskNoted = false;
 
   final user = UserDataModel(
     id: 0,

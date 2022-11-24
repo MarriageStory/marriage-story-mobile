@@ -7,6 +7,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../models/event_model.dart';
 import '../../../widgets/event_pack.dart';
+import '../../events/event.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/utils/format_angka.dart';
@@ -14,6 +15,7 @@ import 'package:marriage_story_mobile/utils/format_angka.dart';
 class DetailPaymentView extends StatelessWidget {
   DetailPaymentView({super.key});
   final controller = Get.find<PaymentController>();
+  final EventController eventController = Get.find();
   // final controllerPayment = Get.find<PaymentController>();
   final EventDataModel event = Get.arguments;
   // final tes = Get.arguments;
@@ -150,36 +152,29 @@ class DetailPaymentView extends StatelessWidget {
                         ),
                         SizedBox(
                           width: 70.w,
-                          child:
-                              // Wrap(
-                              //   spacing: 5.0,
-                              //   runSpacing: 5.0,
-                              //   direction: Axis.horizontal,
-                              //   children: [
-                              // EventPack(label: "Pre Wedding"),
-                              // EventPack(label: "Akad"),
-                              // EventPack(label: "Akad"),
-                              // EventPack(label: "Akad"),
-                              // EventPack(label: "Akad"),
-                              // EventPack(label: "Akad"),
-                              ListView.builder(
+                          height: 10.h,
+                          child: GridView.builder(
                             physics: const NeverScrollableScrollPhysics(),
-                            // scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(0),
+                            itemCount: eventController.events.isEmpty
+                                ? 0
+                                : eventController.events.first.paket.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 5.0,
+                              mainAxisSpacing: 5.0,
+                              childAspectRatio: 3,
+                            ),
                             itemBuilder: (BuildContext context, int index) {
-                              return Wrap(spacing: 5.0, runSpacing: 5.0,
-                                  // direction: Axis.horizontal,
-                                  children: [
-                                    EventPack(
-                                      label: event.paket[index].deskripsi,
-                                    )
-                                  ]);
+                              var paket =
+                                  eventController.events.first.paket[index];
+                              return EventPack(
+                                label: paket.deskripsi,
+                              );
                             },
-                            itemCount: event.paket.length,
                           ),
-                          //   ],
-                          // ),
                         ),
                       ],
                     ),
@@ -257,7 +252,7 @@ class DetailPaymentView extends StatelessWidget {
                                   child: Text(
                                     FormatAngka.convertToIdr(
                                         int.parse(
-                                            event.totalPembayaran.toString()),
+                                            event.jumlahTerbayar.toString()),
                                         2),
                                     overflow: TextOverflow.ellipsis,
                                     style: fontNunito.copyWith(
@@ -288,31 +283,35 @@ class DetailPaymentView extends StatelessWidget {
                     SizedBox(
                       height: 1.h,
                     ),
-                    controller.payments.isNotEmpty
+                    event.paymentDetails.isNotEmpty
                         ? ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             // scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(0),
                             itemBuilder: (BuildContext context, int index) {
-                              
                               return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: CardTransaction(
-                                    onTap: (() {
-                                      Get.toNamed(RouteName.transaction,
-                                          arguments: controller.payments[index]);
-                                    }),
-                                    label:
-                                        controller.payments[index].namaPayment,
-                                    date: DateFormat('dd MMM yyyy').format(
-                                        controller.payments[index].datetime),
-                                    amount: controller.payments[index].total
-                                        .toString()),
+                                  onTap: () {},
+                                  // Get.toNamed(
+                                  //     RouteName.transaction,
+                                  //     arguments: event.paymentDetails[index]),
+                                  label:
+                                      event.paymentDetails[index].namaPayment,
+                                  date: DateFormat('dd MMM yyyy')
+                                      .format(
+                                          event.paymentDetails[index].datetime)
+                                      .toString(),
+                                  amount: FormatAngka.convertToIdr(
+                                      int.parse(event
+                                          .paymentDetails[index].total
+                                          .toString()),
+                                      2),
+                                ),
                               );
                             },
-                            itemCount: controller.payments.length,
-                          )
+                            itemCount: event.paymentDetails.length)
                         : const Center(child: Text("Belum Ada Transaksi"))
                   ],
                 ),

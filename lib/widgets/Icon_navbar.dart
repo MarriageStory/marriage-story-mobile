@@ -21,41 +21,44 @@ class IconNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: SizedBox(
-        width: 20.w,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              child: selected
-                  ? Image.asset(
-                      iconEnable,
-                      width: 20,
-                      height: 20,
+      child: FittedBox(
+        fit: BoxFit.none,
+        child: SizedBox(
+          width: 20.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                child: selected
+                    ? Image.asset(
+                        iconEnable,
+                        width: 20,
+                        height: 20,
+                      )
+                    : Image.asset(
+                        iconDisable,
+                        width: 20,
+                        height: 20,
+                      ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              selected
+                  ? Text(
+                      text,
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: semiBold,
+                          color: colorPrimary),
                     )
-                  : Image.asset(
-                      iconDisable,
-                      width: 20,
-                      height: 20,
-                    ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            selected
-                ? Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: semiBold,
-                        color: colorPrimary),
-                  )
-                : Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: 10, fontWeight: semiBold, color: colorGrey),
-                  )
-          ],
+                  : Text(
+                      text,
+                      style: TextStyle(
+                          fontSize: 10, fontWeight: semiBold, color: colorGrey),
+                    )
+            ],
+          ),
         ),
       ),
     );

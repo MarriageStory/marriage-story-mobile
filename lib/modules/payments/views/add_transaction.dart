@@ -82,22 +82,22 @@ class AddTransactionView extends StatelessWidget {
               SizedBox(
                 height: 3.h,
               ),
-              DateTime(
-                // labelText: "Date",
-                valueText: controller.cekTgl != false || args == false
-                    ? DateFormat('dd-MMM-yyyy - HH:mm')
-                        .format(controller.tanggal)
-                    : "Tanggal Acara",
-                    
-                valueStyle: TextStyle(
-                  color: colorGrey,
-                  fontWeight: semiBold,
-                  fontSize: 14,
-                ),
-                onPressed: () {
-                  // controller.dateTimePickerWidget(context);
-                },
-              ),
+              Obx(() => DateTime(
+                    // labelText: "Date",
+                    valueText:
+                        controller.isChekTime.value == true || args == false
+                            ? DateFormat('dd MMM yyyy - HH:mm')
+                                .format(controller.tanggal)
+                            : "Tanggal Acara",
+                    valueStyle: TextStyle(
+                      color: colorPrimary,
+                      fontWeight: semiBold,
+                      fontSize: 14,
+                    ),
+                    onPressed: () {
+                      controller.dateTimePicker(context);
+                    },
+                  )),
               SizedBox(
                 height: 3.h,
               ),

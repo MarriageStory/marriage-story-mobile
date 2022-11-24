@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/models/schedule_model.dart';
@@ -18,6 +21,7 @@ class PaymentController extends GetxController {
   final detailPaymentTextController = TextEditingController();
   EventScheduleDataModel? task;
   ScheduleDataModel? taskView;
+  final isChekTime = false.obs;
 
   var paymentId = 0;
 
@@ -172,6 +176,26 @@ class PaymentController extends GetxController {
       );
       print(e);
     }
+  }
+
+  Future<void> dateTimePicker(BuildContext context) {
+    isChekTime.value = false;
+    return DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true,
+      locale: LocaleType.id,
+      onConfirm: (date) {
+        log('confirm $date');
+        // dateTextController.text = date.toString();
+        isChekTime.value = true;
+        tanggal = date;
+      },
+      currentTime: DateTime.now(),
+    );
+  }
+
+  Future<void> clearInput() async {
+    isChekTime.value = false;
   }
 
   // dateTimePickerWidget(BuildContext context) {
