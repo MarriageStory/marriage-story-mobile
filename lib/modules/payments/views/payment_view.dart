@@ -322,16 +322,14 @@ class PaymentView extends StatelessWidget {
                                     padding: const EdgeInsets.all(0),
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      var paymentSort =
-                                          controller.payments.reversed.toList();
-                                      var payment = paymentSort[index];
                                       return Container(
                                         margin: const EdgeInsets.symmetric(
                                             vertical: 5),
                                         child: CardTransaction(
                                           onTap: (() {
                                             Get.toNamed(RouteName.transaction,
-                                                arguments: payment);
+                                                arguments:
+                                                    controller.payments[index]);
                                           }),
                                           label: controller
                                               .payments[index].namaPayment,
