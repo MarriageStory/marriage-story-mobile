@@ -293,7 +293,10 @@ class DetailPaymentView extends StatelessWidget {
                               return Container(
                                 margin: const EdgeInsets.symmetric(vertical: 5),
                                 child: CardTransaction(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(RouteName.transaction,
+                                        arguments: event.paymentDetails[index]);
+                                  },
                                   // Get.toNamed(
                                   //     RouteName.transaction,
                                   //     arguments: event.paymentDetails[index]),
