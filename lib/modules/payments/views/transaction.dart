@@ -6,7 +6,9 @@ import 'package:marriage_story_mobile/models/payment_model.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
+import '../../../models/event_model.dart';
 import '../../../widgets/button_outlined.dart';
+import '../../home/controllers/home_controller.dart';
 import '../payment.dart';
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/utils/format_angka.dart';
@@ -14,10 +16,18 @@ import 'package:marriage_story_mobile/utils/format_angka.dart';
 class TransactionView extends StatelessWidget {
   TransactionView({super.key});
   final controller = Get.find<PaymentController>();
-  final PaymentDataModel payments = Get.arguments;
+  final HomeController homeController = Get.find();
+  final data = Get.arguments;
+  PaymentDataModel? payments;
+  PaymentDetail? paymentsView;
 
   @override
   Widget build(BuildContext context) {
+    if (homeController.user.value.roleId == 3) {
+      paymentsView = data;
+    } else {
+      payments = data;
+    }
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -77,8 +87,12 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
+                payments != null
+                    ?
                 FormatAngka.convertToIdr(
-                    int.parse(payments.total.toString()), 2),
+                        int.parse(payments!.total.toString()), 2)
+                    : FormatAngka.convertToIdr(
+                        int.parse(paymentsView!.total.toString()), 2),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
@@ -97,7 +111,9 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat('dd MMM yyyy').format(payments.datetime),
+                payments != null
+                    ? DateFormat('dd MMM yyyy').format(payments!.datetime)
+                    : DateFormat('dd MMM yyyy').format(paymentsView!.datetime),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
@@ -116,7 +132,9 @@ class TransactionView extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat('HH:mm').format(payments.datetime),
+                payments != null
+                    ? DateFormat('HH:mm').format(payments!.datetime)
+                    : DateFormat('HH:mm').format(paymentsView!.datetime),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
@@ -126,6 +144,8 @@ class TransactionView extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
+              homeController.user.value.roleId == 1
+                  ?
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -134,7 +154,7 @@ class TransactionView extends StatelessWidget {
                     width: 40.w,
                     onTap: () {
                       // Get.toNamed(RouteName.addTask, arguments: task);
-                      controller.formEditTransaction(payments);
+                            controller.formEditTransaction(payments!);
                     },
                     label: "Edit",
                     textColor: colorPrimary,
@@ -152,7 +172,7 @@ class TransactionView extends StatelessWidget {
                       confirmTextColor: colorWhite,
                       buttonColor: colorPrimary,
                       onConfirm: () {
-                        controller.deleteTransaction(payments);
+                              controller.deleteTransaction(payments!);
                       },
                       textCancel: "Kembali",
                       cancelTextColor: colorPrimary,
@@ -171,7 +191,8 @@ class TransactionView extends StatelessWidget {
                     ),
                   )
                 ],
-              )
+                    )
+                  : SizedBox()
             ],
           ),
         ),
