@@ -14,6 +14,7 @@ class AddEventView extends StatelessWidget {
   AddEventView({super.key});
   final EventController controller = Get.find();
   final args = Get.arguments;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +86,7 @@ class AddEventView extends StatelessWidget {
                   selectedDecoration: BoxDecoration(
                       color: colorPrimary,
                       border: Border.all(color: colorPrimary),
-                      borderRadius: BorderRadius.circular(5)),
+                      borderRadius: BorderRadius.circular(20)),
                 ),
                 items: [
                   MultiSelectCard(value: 'Pre-Wedding', label: 'Pre-Wedding'),
@@ -115,7 +116,7 @@ class AddEventView extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 3.h,
+                height: 2.h,
               ),
               InputForm(
                 label: "Nama Pengantin",
@@ -124,22 +125,31 @@ class AddEventView extends StatelessWidget {
               SizedBox(
                 height: 1.5.h,
               ),
-              Obx(() => DateTime(
-                    // labelText: "Date",
-                    valueText:
-                        controller.isChekTime.value == true || args == true
-                            ? DateFormat('dd MMM yyyy - HH:mm')
-                                .format(controller.tanggal)
-                            : "Tanggal Acara",
-                    valueStyle: TextStyle(
-                      color: colorPrimary,
-                      fontWeight: semiBold,
-                      fontSize: 14,
-                    ),
-                    onPressed: () {
-                      controller.dateTimePicker(context);
-                    },
-                  )),
+              Obx(
+                () => DateTime(
+                  valueText: controller.isChekTime.value == true || args == true
+                      ? DateFormat('dd MMMM yyyy - HH:mm')
+                          .format(controller.tanggal)
+                      : "Tanggal Acara",
+                  valueStyle: TextStyle(
+                    color: controller.isChekTime.value == true || args == true
+                        ? colorBlack
+                        : colorPrimary,
+                    fontWeight: medium,
+                    fontSize: 16,
+                  ),
+                  onPressed: () {
+                    controller.dateTimePicker(context);
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 1.5.h,
+              ),
+              InputForm(
+                label: "Tempat Acara",
+                inputController: controller.tempatTextController,
+              ),
               SizedBox(
                 height: 1.5.h,
               ),
@@ -148,7 +158,14 @@ class AddEventView extends StatelessWidget {
                 inputController: controller.totalBayarTextController,
               ),
               SizedBox(
-                height: 20.h,
+                height: 1.5.h,
+              ),
+              InputForm(
+                label: "Catatan",
+                inputController: controller.catatanTextController,
+              ),
+              SizedBox(
+                height: 10.h,
               ),
               Button(
                 height: 6.h,

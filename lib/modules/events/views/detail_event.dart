@@ -3,11 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/button_outlined.dart';
-import 'package:marriage_story_mobile/widgets/vendor_pack.dart';
+import 'package:marriage_story_mobile/widgets/detail_format.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../models/event_model.dart';
 import '../../../routes/routes.dart';
+import '../../../utils/format_angka.dart';
 import '../../../widgets/event_pack.dart';
 import '../../home/home.dart';
 import '../event.dart';
@@ -22,8 +23,6 @@ class DetailEventView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final event = ModalRoute.of(context)!.settings.arguments as EventDataModel;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -73,16 +72,15 @@ class DetailEventView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 8.h,
+                      height: 6.h,
                     ),
                     Center(
                       child: Text(
-                        DateFormat('dd MMM yyyy - HH:mm')
-                            .format(event.datetime),
+                        "Pernikahan",
                         style: fontNunito.copyWith(
                           color: colorWhite,
                           fontWeight: semiBold,
-                          fontSize: 16,
+                          fontSize: 18,
                         ),
                       ),
                     ),
@@ -91,8 +89,21 @@ class DetailEventView extends StatelessWidget {
                         event.namaClient,
                         style: fontNunito.copyWith(
                           color: colorWhite,
-                          fontWeight: semiBold,
-                          fontSize: 18,
+                          fontWeight: bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 1.h,
+                    ),
+                    Center(
+                      child: Text(
+                        DateFormat('dd MMMM yyyy').format(event.datetime),
+                        style: fontNunito.copyWith(
+                          color: colorWhite,
+                          fontWeight: medium,
+                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -102,7 +113,7 @@ class DetailEventView extends StatelessWidget {
                     Center(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: colorWhite.withOpacity(0.2),
+                          color: colorWhite.withOpacity(0.25),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Padding(
@@ -124,6 +135,7 @@ class DetailEventView extends StatelessWidget {
               ),
             ),
             Container(
+              width: 100.w,
               margin: EdgeInsets.only(top: 40.h),
               decoration: const BoxDecoration(
                 color: colorWhite,
@@ -136,7 +148,7 @@ class DetailEventView extends StatelessWidget {
                 padding: EdgeInsets.only(
                   right: defaultPadding,
                   left: defaultPadding,
-                  top: 5.h,
+                  top: 4.h,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -148,44 +160,49 @@ class DetailEventView extends StatelessWidget {
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        colorPrimary, //                   <--- border color
-                                    width: 1,
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: colorPrimary,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 7.w,
-                                    vertical: 3.h,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        event.schedules.length.toString(),
-                                        overflow: TextOverflow.ellipsis,
-                                        style: fontNunito.copyWith(
-                                          color: colorBlack,
-                                          fontWeight: bold,
-                                          fontSize: 16,
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 2.5.h,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          event.schedules.length.toString(),
+                                          overflow: TextOverflow.ellipsis,
+                                          style: fontNunito.copyWith(
+                                            color: colorBlack,
+                                            fontWeight: bold,
+                                            fontSize: 18,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text(
-                                        "Jumlah Agenda",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: fontNunito.copyWith(
-                                          color: colorGrey,
-                                          fontWeight: semiBold,
-                                          fontSize: 16,
+                                        SizedBox(
+                                          width: 5.w,
                                         ),
-                                      ),
-                                    ],
+                                        Flexible(
+                                          child: Text(
+                                            "Jumlah Agenda ",
+                                            overflow: TextOverflow.ellipsis,
+                                            style: fontNunito.copyWith(
+                                              color: colorGrey,
+                                              fontWeight: semiBold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -207,107 +224,60 @@ class DetailEventView extends StatelessWidget {
                             ],
                           ),
                     SizedBox(
-                      height: 3.h,
+                      height: 2.h,
                     ),
                     Text(
                       "Paket Acara",
                       overflow: TextOverflow.ellipsis,
                       style: fontNunito.copyWith(
-                        color: colorBlack,
+                        color: colorGrey,
                         fontWeight: medium,
                         fontSize: 16,
                       ),
                     ),
                     SizedBox(
-                      width: 70.w,
-                      height: 10.h,
-                      child: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(0),
-                        itemCount: event.paket.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 5.0,
-                          mainAxisSpacing: 5.0,
-                          childAspectRatio: 3.2,
+                      height: 1.h,
+                    ),
+                    FittedBox(
+                      fit: BoxFit.fill,
+                      child: SizedBox(
+                        width: 70.w,
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(0),
+                          itemCount: event.paket.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 5.0,
+                            mainAxisSpacing: 5.0,
+                            childAspectRatio: 3.2,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return EventPack(
+                              label: event.paket[index].deskripsi,
+                            );
+                          },
                         ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return EventPack(
-                            label: event.paket[index].deskripsi,
-                          );
-                        },
                       ),
                     ),
                     SizedBox(
-                      height: 3.h,
+                      height: 2.h,
                     ),
-                    Text(
-                      "Vendor",
-                      overflow: TextOverflow.ellipsis,
-                      style: fontNunito.copyWith(
-                        color: colorBlack,
-                        fontWeight: medium,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  log("message");
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    color: colorPrimary.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Icon(
-                                    Icons.add_rounded,
-                                    color: colorPrimary,
-                                    size: 7.w,
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "Tambah",
-                                overflow: TextOverflow.ellipsis,
-                                style: fontNunito.copyWith(
-                                  color: colorBlack,
-                                  fontWeight: regular,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 11.h,
-                          width: 70.w,
-                          child: ListView(
-                            physics: const BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.all(5),
-                            children: [
-                              VendorPack(
-                                label: "label",
-                                onTap: (() {}),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    DetailFormat(
+                      keterangan: "Waktu Acara",
+                      label: DateFormat('HH : mm').format(event.datetime),
                     ),
                     SizedBox(
-                      height: 3.h,
+                      height: 2.h,
+                    ),
+                    DetailFormat(
+                        label: FormatAngka.convertToIdr(
+                            int.parse(event.totalPembayaran.toString()), 2),
+                        keterangan: "Total Pembayaran :"),
+                    SizedBox(
+                      height: 7.h,
                     ),
                     homeController.user.value.roleId == 1
                         ? const SizedBox()
@@ -316,7 +286,7 @@ class DetailEventView extends StatelessWidget {
                             children: [
                               ButtonOutlined(
                                 height: 6.h,
-                                width: 40.w,
+                                width: 42.w,
                                 onTap: () {
                                   controller.formEditEvent(event);
                                 },
@@ -326,7 +296,7 @@ class DetailEventView extends StatelessWidget {
                               Button(
                                 colorBg: colorPrimary,
                                 height: 6.h,
-                                width: 40.w,
+                                width: 42.w,
                                 label: "Hapus",
                                 textColor: colorWhite,
                                 onTap: () => Get.defaultDialog(

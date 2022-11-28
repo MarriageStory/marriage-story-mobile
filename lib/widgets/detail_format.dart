@@ -26,8 +26,8 @@ class DetailFormat extends StatelessWidget {
           label,
           style: fontNunito.copyWith(
             color: colorBlack,
-            fontWeight: semiBold,
-            fontSize: 16,
+            fontWeight: extraBold,
+            fontSize: 18,
           ),
         ),
       ],

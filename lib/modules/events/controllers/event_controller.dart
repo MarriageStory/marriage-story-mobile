@@ -7,7 +7,6 @@ import '../../../models/event_model.dart';
 import '../../../routes/app_pages.dart';
 
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:intl/intl.dart';
 
 class EventController extends GetxController {
   var events = <EventDataModel>[].obs;
@@ -23,12 +22,9 @@ class EventController extends GetxController {
   var selectedPackage = [].obs;
   var selectedEvent = 0.obs;
   final isChekTime = false.obs;
-
-  bool cekJam = false;
-  bool cekTgl = false;
-  DateTime tanggal = DateTime.now();
-  TimeOfDay time = TimeOfDay.now();
   int? idEvent;
+  DateTime tanggal = DateTime.now();
+  final isLoading = false.obs;
 
   @override
   void onInit() {
@@ -48,46 +44,24 @@ class EventController extends GetxController {
   }
 
   Future<void> getAllEvent() async {
+    isLoading.value = true;
     try {
       final dataEvent = await eventService.getEvent();
       if (dataEvent != null) {
         events.assignAll(dataEvent);
       }
+      isLoading.value = false;
     } catch (e) {
+      isLoading.value = false;
       e.toString();
     }
   }
 
   Future<void> createEvent() async {
-    try {
-      var input = <String, dynamic>{
-        'nama_client': namaClientTextController.text,
-        'datetime': dateTextController.text,
-        'tempat': tempatTextController.text,
-        'total_pembayaran': totalBayarTextController.text,
-        'status_pembayaran': "pending",
-        'jumlah_terbayar': 0,
-        'note': catatanTextController.text,
-        'paket': selected.toList(),
-      };
-
-      await eventService.createEvent(input);
-
-      Get.snackbar(
-        'Sukses !',
-        'Berhasil Menambahkan Event Baru',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-      Get.offAllNamed(RouteName.navigation);
-    } catch (e) {
+    if (selected.toList().isEmpty) {
       Get.snackbar(
         'Gagal Menambahkan Event !',
-        '$e',
+        'Masukkan Paket Terlebih Dahulu',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -95,6 +69,59 @@ class EventController extends GetxController {
           color: Colors.white,
         ),
       );
+    } else if (namaClientTextController.text == "" ||
+        dateTextController.text == "" ||
+        tempatTextController.text == "" ||
+        totalBayarTextController.text == "" ||
+        catatanTextController.text == "") {
+      Get.snackbar(
+        'Gagal Menambahkan Event !',
+        'Tidak boleh ada yang kosong',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    } else {
+      try {
+        var input = <String, dynamic>{
+          'nama_client': namaClientTextController.text,
+          'datetime': dateTextController.text,
+          'tempat': tempatTextController.text,
+          'total_pembayaran': totalBayarTextController.text,
+          'status_pembayaran': "pending",
+          'jumlah_terbayar': 0,
+          'note': catatanTextController.text,
+          'paket': selected.toList(),
+        };
+
+        await eventService.createEvent(input);
+
+        Get.snackbar(
+          'Sukses !',
+          'Berhasil Menambahkan Event Baru',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+        Get.offAllNamed(RouteName.navigation);
+      } catch (e) {
+        Get.snackbar(
+          'Gagal Menambahkan Event !',
+          '$e',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 
@@ -108,35 +135,10 @@ class EventController extends GetxController {
   }
 
   Future<void> updateEvent() async {
-    try {
-      var input = <String, dynamic>{
-        'nama_client': namaClientTextController.text,
-        'datetime': tanggal.toString(),
-        'tempat': tempatTextController.text,
-        'total_pembayaran': totalBayarTextController.text,
-        'status_pembayaran': "pending",
-        'jumlah_terbayar': jumlahTerbayarTextController.text,
-        'note': catatanTextController.text,
-        'paket': selected.toList(),
-      };
-
-      await eventService.updateEvent(input, idEvent!);
-
+    if (selected.toList().isEmpty) {
       Get.snackbar(
-        'Sukses !',
-        'Berhasil Mengedit Event ',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-      Get.offAllNamed(RouteName.navigation);
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Mengupdate Event !',
-        '$e',
+        'Gagal Menambahkan Event !',
+        'Masukkan Paket Terlebih Dahulu',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -144,17 +146,69 @@ class EventController extends GetxController {
           color: Colors.white,
         ),
       );
+    } else if (namaClientTextController.text == "" ||
+        dateTextController.text == "" ||
+        tempatTextController.text == "" ||
+        totalBayarTextController.text == "" ||
+        catatanTextController.text == "") {
+      Get.snackbar(
+        'Gagal Menambahkan Event !',
+        'Tidak boleh ada yang kosong',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.white,
+        ),
+      );
+    } else {
+      try {
+        var input = <String, dynamic>{
+          'nama_client': namaClientTextController.text,
+          'datetime': dateTextController.text,
+          'tempat': tempatTextController.text,
+          'total_pembayaran': totalBayarTextController.text,
+          'status_pembayaran': "pending",
+          'jumlah_terbayar': jumlahTerbayarTextController.text,
+          'note': catatanTextController.text,
+          'paket': selected.toList(),
+        };
+
+        await eventService.updateEvent(input, idEvent!);
+
+        Get.snackbar(
+          'Sukses !',
+          'Berhasil Mengedit Event ',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+        Get.offAllNamed(RouteName.navigation);
+      } catch (e) {
+        Get.snackbar(
+          'Gagal Mengupdate Event !',
+          '$e',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 
   Future<void> formEditEvent(EventDataModel data) async {
     namaClientTextController.text = data.namaClient;
-    tanggal = data.datetime;
+    dateTextController.text = data.datetime.toString();
     tempatTextController.text = data.tempat;
     totalBayarTextController.text = data.totalPembayaran.toString();
     jumlahTerbayarTextController.text = data.jumlahTerbayar.toString();
     catatanTextController.text = data.note;
-    //  selected.toList(),
     idEvent = data.id;
     Get.toNamed(RouteName.addEvent, arguments: true);
   }
@@ -188,29 +242,8 @@ class EventController extends GetxController {
     }
   }
 
-  // void dateTimePickerWidget(BuildContext context) {
-  //   return DatePicker.showDateTimePicker(
-  //     context,
-
-  //     dateFormat: 'dd MMMM yyyy HH:mm',
-  //     initialDateTime: tanggal,
-  //     minDateTime: DateTime(2000),
-  //     maxDateTime: DateTime(3000),
-  //     onMonthChangeStartWithFirstDate: true,
-  //     onConfirm: (dateTime, List<int> index) {
-  //       // DateTime selectdate = dateTime;
-  //       cekTgl = true;
-  //       dateTextController.text = dateTime.toString();
-  //       tanggal = dateTime;
-  //       final selIOS = DateFormat('dd-MMM-yyyy - HH:mm').format(tanggal);
-  //       print(selIOS);
-  //     },
-
-  //   );
-  // }
-
   Future<void> dateTimePicker(BuildContext context) {
-    isChekTime.value =false;
+    isChekTime.value = false;
     return DatePicker.showDateTimePicker(
       context,
       showTitleActions: true,

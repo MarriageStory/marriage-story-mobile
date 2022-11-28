@@ -10,7 +10,6 @@ import '../../../routes/app_pages.dart';
 import '../../events/event.dart';
 
 class TaskController extends GetxController {
-  // final EventDataModel event = Get.arguments;
   var task = <ScheduleDataModel>[].obs;
   final taskService = Get.put(ScheduleService());
   final EventController eventController = Get.find();
@@ -28,8 +27,6 @@ class TaskController extends GetxController {
   final jamAgendaController = TextEditingController();
   final isChekTime = false.obs;
 
-  bool cekJam = false;
-  bool cekTgl = false;
   DateTime tanggal = DateTime.now();
 
   EventScheduleDataModel? view;
@@ -49,47 +46,19 @@ class TaskController extends GetxController {
       }
       isLoading.value = false;
     } catch (e) {
-      print(e);
+      e.toString();
       isLoading.value = false;
     }
   }
 
-  // Future<void> validationDetailTask(final data, bool cek) async {
-  //   if (cek == true) {
-  //     view = data;
-  //     Get.toNamed(RouteName.detailTask, arguments: true);
-  //   } else {
-  //     viewTask = data;
-  //     Get.toNamed(RouteName.detailTask, arguments: false);
-  //   }
-  // }
-
   Future<void> createTask(int eventId) async {
-    try {
-      var input = <String, dynamic>{
-        'nama_kegiatan': namaAgendaController.text,
-        'detail_kegiatan': detailAgendaController.text,
-        'datetime': tanggal.toString(),
-        'tempat': tempatAgendaController.text,
-      };
-
-      await taskService.createSchedule(input, eventId);
-
+    if (namaAgendaController.text == "" ||
+        detailAgendaController.text == "" ||
+        dateAgendaController.text == "" ||
+        tempatAgendaController.text == "") {
       Get.snackbar(
-        'Berhasil Menambahkan',
-        'Event Baru',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-      Get.offAllNamed(RouteName.navigation);
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Masuk !',
-        '$e',
+        'Gagal Menambahkan Event !',
+        'Tidak boleh ada yang kosong',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -97,7 +66,40 @@ class TaskController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
+    } else {
+      try {
+        var input = <String, dynamic>{
+          'nama_kegiatan': namaAgendaController.text,
+          'detail_kegiatan': detailAgendaController.text,
+          'datetime': dateAgendaController.text,
+          'tempat': tempatAgendaController.text,
+        };
+
+        await taskService.createSchedule(input, eventId);
+
+        Get.snackbar(
+          'Sukses !',
+          'Berhasil Menambahkan Agneda Baru',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+        Get.offAllNamed(RouteName.navigation);
+      } catch (e) {
+        Get.snackbar(
+          'Gagal Menambahkan Agenda !',
+          '$e',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 
@@ -111,32 +113,13 @@ class TaskController extends GetxController {
   }
 
   Future<void> updateTask() async {
-    try {
-      var input = <String, dynamic>{
-        'nama_kegiatan': namaAgendaController.text,
-        'detail_kegiatan': detailAgendaController.text,
-        'datetime': tanggal.toString(),
-        'tempat': tempatAgendaController.text,
-      };
-
-      // await ScheduleService.createNewSchedule(idTask, input);
-      await taskService.updateSchedule(input, eventId!, taskId!);
-
+    if (namaAgendaController.text == "" ||
+        detailAgendaController.text == "" ||
+        dateAgendaController.text == "" ||
+        tempatAgendaController.text == "") {
       Get.snackbar(
-        'Berhasil Mengedit',
-        'Agenda',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-      Get.offAllNamed(RouteName.navigation);
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Masuk !',
-        '$e',
+        'Gagal Menambahkan Event !',
+        'Tidak boleh ada yang kosong',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -144,7 +127,40 @@ class TaskController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
+    } else {
+      try {
+        var input = <String, dynamic>{
+          'nama_kegiatan': namaAgendaController.text,
+          'detail_kegiatan': detailAgendaController.text,
+          'datetime': tanggal.toString(),
+          'tempat': tempatAgendaController.text,
+        };
+
+        await taskService.updateSchedule(input, eventId!, taskId!);
+
+        Get.snackbar(
+          'Sukses !!',
+          'Berhasil Mengubah Agenda',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+        Get.offAllNamed(RouteName.navigation);
+      } catch (e) {
+        Get.snackbar(
+          'Gagal Mengubah Agenda !',
+          '$e',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 
@@ -164,9 +180,9 @@ class TaskController extends GetxController {
     try {
       await taskService.deleteSchedule(data!.eventId, data.id);
 
-      Get.snackbar( 
-        'Berhasil Menghapus',
-        'Agenda',
+      Get.snackbar(
+        'Sukses !',
+        'Berhasil Menghapus Agenda',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -177,7 +193,7 @@ class TaskController extends GetxController {
       Get.offAllNamed(RouteName.navigation);
     } catch (e) {
       Get.snackbar(
-        'Gagal Masuk !',
+        'Gagal Menghapus Agenda !',
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -186,25 +202,8 @@ class TaskController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
-
-  // Future<void> selectDate(BuildContext context) async {
-  //   // Initial DateTime FIinal Picked
-  //   final DateTime? picked = await showDatePicker(
-  //       context: context,
-  //       initialDate: tanggal,
-  //       firstDate: DateTime(2015),
-  //       lastDate: DateTime(2101));
-
-  //   if (picked != null && picked != tanggal) {
-  //     cekTgl = true;
-  //     dateAgendaController.text = picked.toString();
-  //     tanggal = picked;
-  //   }
-  //   ;
-  // }
 
   Future<void> dateTimePicker(BuildContext context) {
     isChekTime.value = false;
@@ -214,7 +213,7 @@ class TaskController extends GetxController {
       locale: LocaleType.id,
       onConfirm: (date) {
         log('confirm $date');
-        // dateTextController.text = date.toString();
+        dateAgendaController.text = date.toString();
         isChekTime.value = true;
         tanggal = date;
       },

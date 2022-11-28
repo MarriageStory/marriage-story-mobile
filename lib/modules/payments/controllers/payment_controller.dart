@@ -33,11 +33,9 @@ class PaymentController extends GetxController {
   final HomeController homeController = Get.find();
 
   var payments = <PaymentDataModel>[].obs;
-  // var task = <TransactionDataModel>[].obs;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getPayments();
     super.onInit();
   }
@@ -50,38 +48,18 @@ class PaymentController extends GetxController {
         payments.assignAll(dataEvent);
       }
     } catch (e) {
-      print(e);
+      e.toString();
     }
   }
 
   Future<void> createTransaction() async {
-    try {
-      final eventId = await homeController.getEventId();
-      var input = <String, dynamic>{
-        "nama_payment": namaPaymentTextController.text,
-        "total": totalPaymentTextController.text,
-        "datetime": dateTextController.text,
-        "detail": detailPaymentTextController.text
-      };
-
-      await paymentService.createPayment(input, eventId);
-
-      Get.back();
-      getPayments();
-      Get.snackbar(
-        'Sukses !',
-        'Berhasil Menambahkan Transaksi Baru',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-    } catch (e) {
+    if (namaPaymentTextController.text == "" ||
+        totalPaymentTextController.text == "" ||
+        dateTextController.text == "" ||
+        detailPaymentTextController.text == "") {
       Get.snackbar(
         'Gagal Menambahkan Transaksi !',
-        '$e',
+        'Tidak Boleh ada yang Kosong',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -89,6 +67,42 @@ class PaymentController extends GetxController {
           color: Colors.white,
         ),
       );
+    } else {
+      try {
+        final eventId = await homeController.getEventId();
+        var input = <String, dynamic>{
+          "nama_payment": namaPaymentTextController.text,
+          "total": totalPaymentTextController.text,
+          "datetime": dateTextController.text,
+          "detail": detailPaymentTextController.text
+        };
+
+        await paymentService.createPayment(input, eventId);
+
+        Get.back();
+        getPayments();
+        Get.snackbar(
+          'Sukses !',
+          'Berhasil Menambahkan Transaksi Baru',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+      } catch (e) {
+        Get.snackbar(
+          'Gagal Menambahkan Transaksi !',
+          '$e',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 
@@ -101,32 +115,13 @@ class PaymentController extends GetxController {
   }
 
   Future<void> updateTransaction() async {
-    try {
-      final eventId = await homeController.getEventId();
-      var input = <String, dynamic>{
-        "nama_payment": namaPaymentTextController.text,
-        "total": totalPaymentTextController.text,
-        "datetime": dateTextController.text,
-        "detail": detailPaymentTextController.text
-      };
-
-      await paymentService.updatePayment(input, eventId, paymentId);
-
+    if (namaPaymentTextController.text == "" ||
+        totalPaymentTextController.text == "" ||
+        dateTextController.text == "" ||
+        detailPaymentTextController.text == "") {
       Get.snackbar(
-        'Berhasil Mengedit',
-        'Transaksi',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        icon: const Icon(
-          Icons.check,
-          color: Colors.white,
-        ),
-      );
-      Get.offAllNamed(RouteName.navigation);
-    } catch (e) {
-      Get.snackbar(
-        'Gagal Edit !',
-        '$e',
+        'Gagal Mengedit Transaksi !',
+        'Tidak Boleh ada yang Kosong',
         backgroundColor: Colors.red,
         colorText: Colors.white,
         icon: const Icon(
@@ -134,7 +129,42 @@ class PaymentController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
+    } else {
+      try {
+        log("message");
+        final eventId = await homeController.getEventId();
+        var input = <String, dynamic>{
+          "nama_payment": namaPaymentTextController.text,
+          "total": totalPaymentTextController.text,
+          "datetime": dateTextController.text,
+          "detail": detailPaymentTextController.text
+        };
+
+        await paymentService.updatePayment(input, eventId, paymentId);
+
+        Get.snackbar(
+          'Sukses !',
+          'Berhasil Mengedit Transaksi',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.check,
+            color: Colors.white,
+          ),
+        );
+        Get.offAllNamed(RouteName.navigation);
+      } catch (e) {
+        Get.snackbar(
+          'Gagal Mengedit Transaksi !',
+          '$e',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: const Icon(
+            Icons.cancel,
+            color: Colors.white,
+          ),
+        );
+      }
     }
   }
 
@@ -153,8 +183,8 @@ class PaymentController extends GetxController {
       await paymentService.deletePayment(data.eventId, data.id);
 
       Get.snackbar(
-        'Berhasil Menghapus',
-        'Transaksi',
+        'Sukses',
+        'Berhasil Menghapus Transaksi',
         backgroundColor: Colors.green,
         colorText: Colors.white,
         icon: const Icon(
@@ -165,7 +195,7 @@ class PaymentController extends GetxController {
       Get.offAllNamed(RouteName.navigation);
     } catch (e) {
       Get.snackbar(
-        'Gagal Hapus !',
+        'Gagal Menghapus Transaksi !',
         '$e',
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -174,7 +204,6 @@ class PaymentController extends GetxController {
           color: Colors.white,
         ),
       );
-      print(e);
     }
   }
 
@@ -186,7 +215,7 @@ class PaymentController extends GetxController {
       locale: LocaleType.id,
       onConfirm: (date) {
         log('confirm $date');
-        // dateTextController.text = date.toString();
+        dateTextController.text = date.toString();
         isChekTime.value = true;
         tanggal = date;
       },
@@ -197,23 +226,4 @@ class PaymentController extends GetxController {
   Future<void> clearInput() async {
     isChekTime.value = false;
   }
-
-  // dateTimePickerWidget(BuildContext context) {
-  //   return DatePicker.showDatePicker(
-  //     context,
-  //     dateFormat: 'dd MMMM yyyy HH:mm',
-  //     initialDateTime: tanggal,
-  //     minDateTime: DateTime(2000),
-  //     maxDateTime: DateTime(3000),
-  //     onMonthChangeStartWithFirstDate: true,
-  //     onConfirm: (dateTime, List<int> index) {
-  //       // DateTime selectdate = dateTime;
-  //       cekTgl.value = true;
-  //       dateTextController.text = dateTime.toString();
-  //       tanggal = dateTime;
-  //       final selIOS = DateFormat('dd MMM yyyy - HH:mm').format(tanggal);
-  //       print(selIOS);
-  //     },
-  //   );
-  // }
 }

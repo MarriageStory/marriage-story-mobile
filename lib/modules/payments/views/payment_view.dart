@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
-import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/card_payment.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
-import '../../../models/event_model.dart';
-import '../../../widgets/button.dart';
-import '../../../widgets/card_event.dart';
 import '../../../widgets/card_transaction.dart';
 import '../../../widgets/event_pack.dart';
 import '../../events/controllers/event_controller.dart';
@@ -64,16 +60,22 @@ class PaymentView extends StatelessWidget {
                                     SizedBox(
                                       width: 10.w,
                                     ),
-                                    IconButton(
-                                      onPressed: () =>
-                                          controller.formAddTransaction(),
-                                      // Get.toNamed(
-                                      //     RouteName.addTransactionClient),
-                                      icon: const Icon(
-                                        Icons.add_rounded,
-                                        color: colorWhite,
-                                      ),
-                                    ),
+                                    eventController.events.isEmpty
+                                        ? IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                              Icons.add_rounded,
+                                              color: Colors.transparent,
+                                            ),
+                                          )
+                                        : IconButton(
+                                            onPressed: () =>
+                                                controller.formAddTransaction(),
+                                            icon: const Icon(
+                                              Icons.add_rounded,
+                                              color: colorWhite,
+                                            ),
+                                          ),
                                   ],
                                 ),
                               ],
@@ -99,20 +101,18 @@ class PaymentView extends StatelessWidget {
                                         style: fontNunito.copyWith(
                                           color: colorWhite,
                                           fontWeight: medium,
-                                          fontSize: 14,
+                                          fontSize: 16,
                                         ),
                                       ),
                                       Text(
-                                        eventController.events.isNotEmpty
-                                            ? FormatAngka.convertToIdr(
-                                                int.parse(eventController
-                                                        .events.isEmpty
+                                        FormatAngka.convertToIdr(
+                                            int.parse(
+                                                eventController.events.isEmpty
                                                     ? "0"
                                                     : eventController.events
                                                         .first.totalPembayaran
                                                         .toString()),
-                                                2)
-                                            : "0",
+                                            2),
                                         overflow: TextOverflow.ellipsis,
                                         style: fontNunito.copyWith(
                                           color: colorWhite,
@@ -130,7 +130,7 @@ class PaymentView extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 35.h),
+                      margin: EdgeInsets.only(top: 32.h),
                       decoration: const BoxDecoration(
                         color: colorWhite,
                         borderRadius: BorderRadius.only(
@@ -142,215 +142,260 @@ class PaymentView extends StatelessWidget {
                         padding: EdgeInsets.only(
                           right: defaultPadding,
                           left: defaultPadding,
-                          top: 6.h,
+                          top: 5.h,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  eventController.events.isEmpty
-                                      ? "-"
-                                      : eventController.events.first.namaClient,
-                                  softWrap: false,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: fontNunito.copyWith(
-                                    color: colorPrimary,
-                                    fontWeight: semiBold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                SizedBox(
-                                  width: 70.w,
-                                  height: 10.h,
-                                  child: GridView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    padding: const EdgeInsets.all(0),
-                                    itemCount: eventController.events.isEmpty
-                                        ? 0
-                                        : eventController
-                                            .events.first.paket.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 3,
-                                      crossAxisSpacing: 5.0,
-                                      mainAxisSpacing: 5.0,
-                                      childAspectRatio: 3,
-                                    ),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      var paket = eventController
-                                          .events.first.paket[index];
-                                      return EventPack(
-                                        label: paket.deskripsi,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Container(
-                              width: 100.w,
-                              decoration: BoxDecoration(
-                                color: colorPrimary.withOpacity(0.3),
-                                borderRadius:
-                                    BorderRadius.circular(defaultBorderRadius),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(35),
+                        child: eventController.events.isEmpty
+                            ? Container(
+                                margin: EdgeInsets.only(top: 3.h),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      "Detail Transaksi ",
-                                      overflow: TextOverflow.ellipsis,
-                                      softWrap: false,
-                                      style: fontNunito.copyWith(
-                                        color: colorPrimary,
-                                        fontWeight: bold,
-                                        fontSize: 18,
+                                    Image.asset(
+                                      "assets/images/empty.png",
+                                      height: 50.w,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        "Masukan Kode Terlebih Dahulu",
+                                        style: fontNunito.copyWith(
+                                          color: colorBlack,
+                                          fontWeight: semiBold,
+                                          fontSize: 16,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            "Jumlah Transaksi :",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: fontNunito.copyWith(
-                                              color: colorPrimary,
-                                              fontWeight: medium,
-                                              fontSize: 14,
+                                    )
+                                  ],
+                                ),
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Pernikahan ${eventController.events.first.namaClient}",
+                                        softWrap: false,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: fontNunito.copyWith(
+                                          color: colorPrimary,
+                                          fontWeight: semiBold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
+                                      FittedBox(
+                                        fit: BoxFit.fill,
+                                        child: SizedBox(
+                                          width: 70.w,
+                                          child: GridView.builder(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            padding: const EdgeInsets.all(0),
+                                            itemCount: eventController
+                                                .events.first.paket.length,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 3,
+                                              crossAxisSpacing: 5.0,
+                                              mainAxisSpacing: 5.0,
+                                              childAspectRatio: 3,
                                             ),
+                                            itemBuilder: (BuildContext context,
+                                                int index) {
+                                              var paket = eventController
+                                                  .events.first.paket[index];
+                                              return EventPack(
+                                                label: paket.deskripsi,
+                                              );
+                                            },
                                           ),
                                         ),
-                                        Flexible(
-                                          child: Text(
-                                            controller.payments.length
-                                                .toString(),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 3.h,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: colorPrimary.withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(
+                                          defaultBorderRadius),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 3.h, horizontal: 10.w),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Detail Transaksi ",
                                             overflow: TextOverflow.ellipsis,
+                                            softWrap: false,
                                             style: fontNunito.copyWith(
                                               color: colorPrimary,
                                               fontWeight: bold,
-                                              fontSize: 16,
+                                              fontSize: 18,
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            height: 2.h,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  "Jumlah Transaksi :",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: fontNunito.copyWith(
+                                                    color: colorPrimary,
+                                                    fontWeight: medium,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                              Flexible(
+                                                child: Text(
+                                                  controller.payments.length
+                                                      .toString(),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: fontNunito.copyWith(
+                                                    color: colorPrimary,
+                                                    fontWeight: bold,
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  "Total Transaksi :",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: fontNunito.copyWith(
+                                                    color: colorPrimary,
+                                                    fontWeight: medium,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                              Flexible(
+                                                child: FittedBox(
+                                                  fit: BoxFit.none,
+                                                  child: Text(
+                                                    FormatAngka.convertToIdr(
+                                                        int.parse(
+                                                            eventController
+                                                                .events
+                                                                .first
+                                                                .jumlahTerbayar
+                                                                .toString()),
+                                                        2),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: fontNunito.copyWith(
+                                                      color: colorPrimary,
+                                                      fontWeight: bold,
+                                                      fontSize: 18,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            "Total Transaksi :",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: fontNunito.copyWith(
-                                              color: colorPrimary,
-                                              fontWeight: medium,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                        Flexible(
-                                          child: FittedBox(
-                                            fit: BoxFit.none,
+                                  ),
+                                  SizedBox(
+                                    height: 3.h,
+                                  ),
+                                  Text(
+                                    "Semua Transaksi",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: fontNunito.copyWith(
+                                      color: colorGrey,
+                                      fontWeight: medium,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  controller.payments.isNotEmpty
+                                      ? ListView.builder(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,
+                                          padding: const EdgeInsets.all(0),
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5),
+                                              child: CardTransaction(
+                                                onTap: (() {
+                                                  Get.toNamed(
+                                                      RouteName.transaction,
+                                                      arguments: controller
+                                                          .payments[index]);
+                                                }),
+                                                label: controller
+                                                    .payments[index]
+                                                    .namaPayment,
+                                                date: DateFormat('dd MMM yyyy')
+                                                    .format(controller
+                                                        .payments[index]
+                                                        .datetime)
+                                                    .toString(),
+                                                amount:
+                                                    FormatAngka.convertToIdr(
+                                                        int.parse(controller
+                                                            .payments[index]
+                                                            .total
+                                                            .toString()),
+                                                        2),
+                                              ),
+                                            );
+                                          },
+                                          itemCount: controller.payments.length,
+                                        )
+                                      : Padding(
+                                          padding: const EdgeInsets.all(
+                                              defaultPadding),
+                                          child: Center(
                                             child: Text(
-                                              FormatAngka.convertToIdr(
-                                                  int.parse(eventController
-                                                          .events.isEmpty
-                                                      ? "0"
-                                                      : eventController.events
-                                                          .first.jumlahTerbayar
-                                                          .toString()),
-                                                  2),
-                                              overflow: TextOverflow.ellipsis,
+                                              "Belum ada Transaksi",
                                               style: fontNunito.copyWith(
-                                                color: colorPrimary,
-                                                fontWeight: bold,
+                                                color: colorGrey,
+                                                fontWeight: semiBold,
                                                 fontSize: 16,
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 3.h,
-                            ),
-                            Text(
-                              "Semua Transaksi",
-                              overflow: TextOverflow.ellipsis,
-                              style: fontNunito.copyWith(
-                                color: colorBlack,
-                                fontWeight: medium,
-                                fontSize: 14,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            controller.payments.isNotEmpty
-                                ? ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    // scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    padding: const EdgeInsets.all(0),
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Container(
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 5),
-                                        child: CardTransaction(
-                                          onTap: (() {
-                                            Get.toNamed(RouteName.transaction,
-                                                arguments:
-                                                    controller.payments[index]);
-                                          }),
-                                          label: controller
-                                              .payments[index].namaPayment,
-                                          date: DateFormat('dd MMM yyyy')
-                                              .format(controller
-                                                  .payments[index].datetime)
-                                              .toString(),
-                                          amount: FormatAngka.convertToIdr(
-                                              int.parse(controller
-                                                  .payments[index].total
-                                                  .toString()),
-                                              2),
-                                        ),
-                                      );
-                                    },
-                                    itemCount: controller.payments.length,
-                                  )
-                                : const Center(
-                                    child: Text("Belum Ada Transaksi"))
-                          ],
-                        ),
                       ),
                     ),
                   ],
@@ -418,7 +463,6 @@ class PaymentView extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      width: 100.w,
                       margin: EdgeInsets.only(top: 35.h),
                       decoration: const BoxDecoration(
                         color: colorWhite,
@@ -448,13 +492,6 @@ class PaymentView extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            // CardPayment(
-                            //   onTap: () => Get.toNamed(RouteName.detailPayment),
-                            //   label: "Pernikahan Semuanya",
-                            //   date: "23 April ",
-                            //   eventPack: "Pack",
-                            //   amount: "Rp 30.000.000",
-                            // ),
                             eventController.events.isNotEmpty
                                 ? ListView.builder(
                                     physics:
@@ -474,14 +511,41 @@ class PaymentView extends StatelessWidget {
                                                   .events[index]),
                                           label: eventController
                                               .events[index].namaClient,
-                                          date: DateFormat('dd MMM yyyy')
+                                          date: DateFormat('dd MMMM yyyy')
                                               .format(eventController
                                                   .events[index].datetime),
-                                          eventPack: eventController
-                                                  .events[index].paket.isEmpty
-                                              ? "-"
-                                              : eventController.events[index]
-                                                  .paket.first.deskripsi,
+                                          eventPack: FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: SizedBox(
+                                              width: 70.w,
+                                              child: GridView.builder(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                itemCount: eventController
+                                                    .events[index].paket.length,
+                                                gridDelegate:
+                                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 3,
+                                                  crossAxisSpacing: 5.0,
+                                                  mainAxisSpacing: 5.0,
+                                                  childAspectRatio: 3.2,
+                                                ),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index2) {
+                                                  return EventPack(
+                                                    label: eventController
+                                                        .events[index]
+                                                        .paket[index2]
+                                                        .deskripsi,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
                                           amount: FormatAngka.convertToIdr(
                                               int.parse(eventController
                                                   .events[index].totalPembayaran
@@ -492,8 +556,27 @@ class PaymentView extends StatelessWidget {
                                     },
                                     itemCount: eventController.events.length,
                                   )
-                                : const Center(
-                                    child: Text("Belum ada pembayaran"))
+                                : Padding(
+                                    padding: EdgeInsets.only(top: 3.h),
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/empty.png",
+                                          height: 50.w,
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            "Pembayaran Kosong",
+                                            style: fontNunito.copyWith(
+                                              color: colorBlack,
+                                              fontWeight: semiBold,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
                           ],
                         ),
                       ),

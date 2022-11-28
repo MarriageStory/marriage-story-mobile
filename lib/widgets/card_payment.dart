@@ -13,7 +13,7 @@ class CardPayment extends StatelessWidget {
       required this.amount});
 
   final String label;
-  final String eventPack;
+  final Widget eventPack;
   final String date;
   final String amount;
 
@@ -24,7 +24,6 @@ class CardPayment extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 100.w,
         decoration: BoxDecoration(
           color: colorPrimary.withOpacity(0.3),
           borderRadius: BorderRadius.circular(defaultBorderRadius),
@@ -36,13 +35,13 @@ class CardPayment extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                label,
+                "Pernikahan $label",
                 overflow: TextOverflow.ellipsis,
                 softWrap: false,
                 style: fontNunito.copyWith(
                   color: colorPrimary,
                   fontWeight: semiBold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               Text(
@@ -51,60 +50,48 @@ class CardPayment extends StatelessWidget {
                 style: fontNunito.copyWith(
                   color: colorPrimary,
                   fontWeight: medium,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
               SizedBox(
                 height: 1.h,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: colorPrimary,
-                  ),
-                ),
-                child: Text(
-                  eventPack,
-                  style: fontNunito.copyWith(
-                    color: colorPrimary,
-                    fontWeight: semiBold,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Flexible(
-                    child: Text(
-                      "Total Pembayaran :",
-                      overflow: TextOverflow.ellipsis,
-                      style: fontNunito.copyWith(
-                        color: colorPrimary,
-                        fontWeight: medium,
-                        fontSize: 14,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "Total Pembayaran :",
+                          overflow: TextOverflow.ellipsis,
+                          style: fontNunito.copyWith(
+                            color: colorPrimary,
+                            fontWeight: semiBold,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Flexible(
-                    child: Text(
-                      amount,
-                      overflow: TextOverflow.ellipsis,
-                      style: fontNunito.copyWith(
-                        color: colorPrimary,
-                        fontWeight: bold,
-                        fontSize: 16,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          amount,
+                          overflow: TextOverflow.ellipsis,
+                          style: fontNunito.copyWith(
+                            color: colorPrimary,
+                            fontWeight: bold,
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    ],
+                  )
                 ],
-              )
+              ),
             ],
           ),
         ),

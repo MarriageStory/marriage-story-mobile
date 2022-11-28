@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.marriage_story_mobile">
+    <uses-permission android:name="android.permission.INTERNET" /> 
    <application
         android:label="marriage_story_mobile"
         android:name="${applicationName}"

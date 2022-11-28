@@ -64,7 +64,6 @@ class ScheduleService extends BaseService {
 
   Future<bool> deleteSchedule(int eventId, int scheduleId) async {
     try {
-      print("masuk siniii");
       final response =
           await delete("events/$eventId/schedules/delete/$scheduleId");
 

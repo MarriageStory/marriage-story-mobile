@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,11 +14,6 @@ class TaskView extends StatelessWidget {
   TaskView({super.key});
   final controller = Get.find<TaskController>();
   final EventDataModel event = Get.arguments;
-
-  // @override
-  // onInit() {
-  //   controller.getAllSchedule(event.id);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -137,45 +130,65 @@ class TaskView extends StatelessWidget {
                     SizedBox(
                       height: 2.h,
                     ),
-                    // CardTask(
-                    //   onTap: () => Get.toNamed(RouteName.detailTask),
-                    //   label: "Meeting dengan Wo",
-                    //   date: "23 April 2022",
-                    //   time: "17:00",
-                    // ),
                     Obx(
                       () => controller.isLoading.value
-                          ? Center(
-                              child: LoadingAnimationWidget.fourRotatingDots(
-                                color: colorPrimary,
-                                size: 7.h,
+                          ? Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Center(
+                                child: LoadingAnimationWidget.waveDots(
+                                  color: colorPrimary,
+                                  size: 7.h,
+                                ),
                               ),
                             )
-                          : ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              padding: const EdgeInsets.all(0),
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: CardTask(
-                                    onTap: () =>
-                                        // controller.validationDetailTask(
-                                        //     event.schedules[index], true),
-                                        Get.toNamed(RouteName.detailTask,
-                                            arguments: event.schedules[index]),
-                                    label: controller.task[index].namaKegiatan,
-                                    date: DateFormat('dd MMM yyyy').format(
-                                        controller.task[index].datetime),
-                                    time: DateFormat('HH:mm').format(
-                                        controller.task[index].datetime),
+                          : controller.task.isEmpty
+                              ? Padding(
+                                  padding: EdgeInsets.only(top: 3.h),
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/empty.png",
+                                        height: 50.w,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          "Agenda Kosong",
+                                          style: fontNunito.copyWith(
+                                            color: colorBlack,
+                                            fontWeight: semiBold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                              },
-                              itemCount: controller.task.length,
-                            ),
+                                )
+                              : ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.all(0),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 5),
+                                      child: CardTask(
+                                        onTap: () => Get.toNamed(
+                                            RouteName.detailTask,
+                                            arguments: event.schedules[index]),
+                                        label:
+                                            controller.task[index].namaKegiatan,
+                                        date: DateFormat('EEEE, dd MMMM yyyy')
+                                            .format(controller
+                                                .task[index].datetime),
+                                        time: DateFormat('HH:mm').format(
+                                            controller.task[index].datetime),
+                                      ),
+                                    );
+                                  },
+                                  itemCount: controller.task.length,
+                                ),
                     ),
                   ],
                 ),

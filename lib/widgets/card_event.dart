@@ -13,7 +13,7 @@ class CardEvent extends StatelessWidget {
       required this.eventPack});
 
   final String label;
-  final String eventPack;
+  final Widget eventPack;
   final String date;
   final String allTask;
   final Function()? onTap;
@@ -43,13 +43,13 @@ class CardEvent extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          label,
+                          "Pernikahan $label",
                           overflow: TextOverflow.ellipsis,
                           softWrap: false,
                           style: fontNunito.copyWith(
                             color: colorPrimary,
                             fontWeight: semiBold,
-                            fontSize: 16,
+                            fontSize: 18,
                           ),
                         ),
                         Text(
@@ -58,7 +58,7 @@ class CardEvent extends StatelessWidget {
                           style: fontNunito.copyWith(
                             color: colorPrimary,
                             fontWeight: medium,
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -71,7 +71,8 @@ class CardEvent extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
                         child: Text(
                           allTask,
                           overflow: TextOverflow.ellipsis,
@@ -87,26 +88,9 @@ class CardEvent extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 1.h,
+                height: 2.h,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: colorPrimary,
-                  ),
-                ),
-                child: Text(
-                  eventPack,
-                  style: fontNunito.copyWith(
-                    color: colorPrimary,
-                    fontWeight: semiBold,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
+              eventPack,
             ],
           ),
         ),

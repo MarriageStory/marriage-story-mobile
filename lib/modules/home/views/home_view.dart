@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:marriage_story_mobile/modules/events/controllers/event_controller.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
@@ -14,7 +13,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../routes/routes.dart';
-import '../../../widgets/card_event.dart';
 import '../../task/task.dart';
 import '../home.dart';
 
@@ -29,305 +27,13 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       body: Obx(() => controller.isLoading.value
           ? Center(
-              child: LoadingAnimationWidget.fourRotatingDots(
+              child: LoadingAnimationWidget.waveDots(
                 color: colorPrimary,
                 size: 7.h,
               ),
             )
-          : controller.user.value.roleId == 3
+          : controller.user.value.roleId == 1
               ? SingleChildScrollView(
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        height: 20.h,
-                        decoration: BoxDecoration(gradient: colorGradient),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            right: defaultPadding,
-                            left: defaultPadding,
-                            top: 6.h,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Hallo,",
-                                    style: fontNunito.copyWith(
-                                      color: colorWhite,
-                                      fontWeight: semiBold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  Text(
-                                    controller.user.value.fullname ?? "-",
-                                    style: fontNunito.copyWith(
-                                      color: colorWhite,
-                                      fontWeight: bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Image.asset(
-                                "assets/images/user-profile.png",
-                                height: 13.w,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 17.h),
-                        decoration: const BoxDecoration(
-                          color: colorWhite,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(defaultBorderRadius2),
-                            topRight: Radius.circular(defaultBorderRadius2),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            right: defaultPadding,
-                            left: defaultPadding,
-                            top: 6.h,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: colorPrimary,
-                                        borderRadius: BorderRadius.circular(
-                                            defaultBorderRadius),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(25),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Pernikahan",
-                                              style: fontNunito.copyWith(
-                                                color: colorWhite,
-                                                fontWeight: medium,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            Text(
-                                              eventController.events.length
-                                                  .toString(),
-                                              style: fontNunito.copyWith(
-                                                color: colorWhite,
-                                                fontWeight: semiBold,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Image.asset(
-                                                  "assets/images/pernikahan.png",
-                                                  width: 16.w,
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 2.w,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: colorSecondary,
-                                        borderRadius: BorderRadius.circular(
-                                            defaultBorderRadius),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(25),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Kegiatan",
-                                              style: fontNunito.copyWith(
-                                                color: colorWhite,
-                                                fontWeight: medium,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            // Text(
-                                            //   taskController.task.length
-                                            //       .toString(),
-                                            //   style: fontNunito.copyWith(
-                                            //     color: colorWhite,
-                                            //     fontWeight: semiBold,
-                                            //     fontSize: 16,
-                                            //   ),
-                                            // ),
-                                            // Text(
-                                            //   allTask.toString(),
-                                            //   style: fontNunito.copyWith(
-                                            //     color: colorWhite,
-                                            //     fontWeight: semiBold,
-                                            //     fontSize: 16,
-                                            //   ),
-                                            // ),
-
-                                            ListView.builder(
-                                              physics:
-                                                  const NeverScrollableScrollPhysics(),
-                                              scrollDirection: Axis.vertical,
-                                              shrinkWrap: true,
-                                              padding: const EdgeInsets.all(0),
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                if (index + 1 ==
-                                                    eventController
-                                                        .events.length) {
-                                                  if (controller.allTaskNoted ==
-                                                      false) {
-                                                    controller.allTaskk +=
-                                                        eventController
-                                                            .events[index]
-                                                            .schedules
-                                                            .length;
-                                                    controller.allTaskNoted =
-                                                        true;
-                                                  }
-                                                  return Text(
-                                                    controller.allTaskk
-                                                        .toString(),
-                                                    style: fontNunito.copyWith(
-                                                      color: colorWhite,
-                                                      fontWeight: semiBold,
-                                                      fontSize: 16,
-                                                    ),
-                                                  );
-                                                } else {
-                                                  if (controller.allTaskNoted ==
-                                                      false) {
-                                                    controller.allTaskk +=
-                                                        eventController
-                                                            .events[index]
-                                                            .schedules
-                                                            .length;
-                                                  }
-                                                  return SizedBox();
-                                                }
-                                              },
-                                              itemCount:
-                                                  eventController.events.length,
-                                            ),
-
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Image.asset(
-                                                  "assets/images/kegiatan.png",
-                                                  width: 16.w,
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 3.h),
-                              Text(
-                                "Semua Acara",
-                                style: fontNunito.copyWith(
-                                  color: colorBlack,
-                                  fontWeight: semiBold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              eventController.events.isNotEmpty
-                                  ? ListView.builder(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      padding: const EdgeInsets.all(0),
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        String tanggal =
-                                            DateFormat('dd-MMM-yyyy - HH:mm')
-                                                .format(eventController
-                                                    .events[index].datetime);
-                                        return Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: CardEventHome(
-                                            onTap: () => Get.toNamed(
-                                                RouteName.detailEvent,
-                                                arguments: eventController
-                                                    .events[index]),
-                                            label: eventController
-                                                .events[index].namaClient,
-                                            date: tanggal,
-                                            task: eventController
-                                                .events[index].schedules.length
-                                                .toString(),
-                                          ),
-                                        );
-                                      },
-                                      itemCount: eventController.events.length,
-                                    )
-                                  : Center(
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/empty.png",
-                                            height: 50.w,
-                                          ),
-                                          Center(
-                                            child: Text(
-                                              "Acara Kosong",
-                                              style: fontNunito.copyWith(
-                                                color: colorWhite,
-                                                fontWeight: semiBold,
-                                                fontSize: 18,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : SingleChildScrollView(
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: [
@@ -452,21 +158,23 @@ class HomeView extends StatelessWidget {
                                                           style: fontNunito
                                                               .copyWith(
                                                             color: colorBlack,
-                                                            fontWeight:
-                                                                semiBold,
-                                                            fontSize: 14,
+                                                            fontWeight: bold,
+                                                            fontSize: 16,
                                                           ),
                                                         ),
                                                         Text(
-                                                          "23",
+                                                          DateFormat('dd').format(
+                                                              eventController
+                                                                  .events[0]
+                                                                  .datetime),
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           style: fontNunito
                                                               .copyWith(
-                                                            color: colorPink4,
+                                                            color: colorPink,
                                                             fontWeight:
                                                                 extraBold,
-                                                            fontSize: 14,
+                                                            fontSize: 16,
                                                           ),
                                                         ),
                                                       ],
@@ -532,9 +240,7 @@ class HomeView extends StatelessWidget {
                                                                 .start,
                                                         children: [
                                                           Obx(() => Text(
-                                                                eventController
-                                                                    .events[0]
-                                                                    .namaClient,
+                                                                "Pernikhan ${eventController.events[0].namaClient}",
                                                                 softWrap: false,
                                                                 overflow:
                                                                     TextOverflow
@@ -545,53 +251,56 @@ class HomeView extends StatelessWidget {
                                                                       colorBlack,
                                                                   fontWeight:
                                                                       semiBold,
-                                                                  fontSize: 14,
+                                                                  fontSize: 16,
                                                                 ),
                                                               )),
                                                           SizedBox(
                                                             height: 1.h,
                                                           ),
-                                                          SizedBox(
-                                                            width: 70.w,
-                                                            height: 7.h,
-                                                            child: GridView
-                                                                .builder(
-                                                              physics:
-                                                                  const NeverScrollableScrollPhysics(),
-                                                              shrinkWrap: true,
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                      .all(0),
-                                                              itemCount:
-                                                                  eventController
-                                                                      .events
-                                                                      .first
-                                                                      .paket
-                                                                      .length,
-                                                              gridDelegate:
-                                                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                                                crossAxisCount:
-                                                                    3,
-                                                                crossAxisSpacing:
-                                                                    5.0,
-                                                                mainAxisSpacing:
-                                                                    5.0,
-                                                                childAspectRatio:
-                                                                    3,
+                                                          FittedBox(
+                                                            fit: BoxFit.fill,
+                                                            child: SizedBox(
+                                                              width: 70.w,
+                                                              child: GridView
+                                                                  .builder(
+                                                                physics:
+                                                                    const NeverScrollableScrollPhysics(),
+                                                                shrinkWrap:
+                                                                    true,
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(0),
+                                                                itemCount:
+                                                                    eventController
+                                                                        .events
+                                                                        .first
+                                                                        .paket
+                                                                        .length,
+                                                                gridDelegate:
+                                                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                                                  crossAxisCount:
+                                                                      3,
+                                                                  crossAxisSpacing:
+                                                                      5.0,
+                                                                  mainAxisSpacing:
+                                                                      5.0,
+                                                                  childAspectRatio:
+                                                                      3,
+                                                                ),
+                                                                itemBuilder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        int index) {
+                                                                  return EventPack(
+                                                                    label: eventController
+                                                                        .events
+                                                                        .first
+                                                                        .paket[
+                                                                            index]
+                                                                        .deskripsi,
+                                                                  );
+                                                                },
                                                               ),
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int index) {
-                                                                return EventPack(
-                                                                  label: eventController
-                                                                      .events
-                                                                      .first
-                                                                      .paket[
-                                                                          index]
-                                                                      .deskripsi,
-                                                                );
-                                                              },
                                                             ),
                                                           ),
                                                         ],
@@ -738,6 +447,295 @@ class HomeView extends StatelessWidget {
                                     ),
                                   ],
                                 ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : SingleChildScrollView(
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        height: 20.h,
+                        decoration: BoxDecoration(gradient: colorGradient),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            right: defaultPadding,
+                            left: defaultPadding,
+                            top: 6.h,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Hallo,",
+                                    style: fontNunito.copyWith(
+                                      color: colorWhite,
+                                      fontWeight: semiBold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    controller.user.value.fullname,
+                                    style: fontNunito.copyWith(
+                                      color: colorWhite,
+                                      fontWeight: bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Image.asset(
+                                "assets/images/user-profile.png",
+                                height: 13.w,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 17.h),
+                        decoration: const BoxDecoration(
+                          color: colorWhite,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(defaultBorderRadius2),
+                            topRight: Radius.circular(defaultBorderRadius2),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            right: defaultPadding,
+                            left: defaultPadding,
+                            top: 6.h,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: colorPrimary,
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(25),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Pernikahan",
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: medium,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              eventController.events.length
+                                                  .toString(),
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: bold,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Image.asset(
+                                                  "assets/images/pernikahan.png",
+                                                  width: 16.w,
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 2.w,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: colorSecondary,
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(25),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Kegiatan",
+                                              style: fontNunito.copyWith(
+                                                color: colorWhite,
+                                                fontWeight: medium,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            eventController.events.isNotEmpty
+                                                ? ListView.builder(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    shrinkWrap: true,
+                                                    padding:
+                                                        const EdgeInsets.all(0),
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      if (index + 1 ==
+                                                          eventController
+                                                              .events.length) {
+                                                        if (controller
+                                                                .allTaskNoted ==
+                                                            false) {
+                                                          controller.allTaskk +=
+                                                              eventController
+                                                                  .events[index]
+                                                                  .schedules
+                                                                  .length;
+                                                          controller
+                                                                  .allTaskNoted =
+                                                              true;
+                                                        }
+                                                        return Text(
+                                                          controller.allTaskk
+                                                              .toString(),
+                                                          style: fontNunito
+                                                              .copyWith(
+                                                            color: colorWhite,
+                                                            fontWeight: bold,
+                                                            fontSize: 16,
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        if (controller
+                                                                .allTaskNoted ==
+                                                            false) {
+                                                          controller.allTaskk +=
+                                                              eventController
+                                                                  .events[index]
+                                                                  .schedules
+                                                                  .length;
+                                                        }
+                                                        return const SizedBox();
+                                                      }
+                                                    },
+                                                    itemCount: eventController
+                                                        .events.length,
+                                                  )
+                                                : Text(
+                                                    "0",
+                                                    style: fontNunito.copyWith(
+                                                      color: colorWhite,
+                                                      fontWeight: bold,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Image.asset(
+                                                  "assets/images/kegiatan.png",
+                                                  width: 16.w,
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 3.h),
+                              Text(
+                                "Semua Acara",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: semiBold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              eventController.events.isNotEmpty
+                                  ? ListView.builder(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(0),
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        String tanggal =
+                                            DateFormat('dd MMMM yyyy - HH:mm')
+                                                .format(eventController
+                                                    .events[index].datetime);
+                                        return Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: CardEventHome(
+                                            onTap: () => Get.toNamed(
+                                                RouteName.detailEvent,
+                                                arguments: eventController
+                                                    .events[index]),
+                                            label: eventController
+                                                .events[index].namaClient,
+                                            date: tanggal,
+                                            task: eventController
+                                                .events[index].schedules.length
+                                                .toString(),
+                                          ),
+                                        );
+                                      },
+                                      itemCount: eventController.events.length,
+                                    )
+                                  : Padding(
+                                      padding: EdgeInsets.only(top: 3.h),
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/empty.png",
+                                            height: 50.w,
+                                          ),
+                                          Center(
+                                            child: Text(
+                                              "Acara Kosong",
+                                              style: fontNunito.copyWith(
+                                                color: colorBlack,
+                                                fontWeight: semiBold,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

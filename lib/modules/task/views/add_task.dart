@@ -12,7 +12,6 @@ import '../../../utils/date_time.dart';
 
 class AddTaskView extends StatelessWidget {
   AddTaskView({super.key});
-  // final EventDataModel event = Get.arguments;
   final args = Get.arguments;
   final controller = Get.find<TaskController>();
 
@@ -58,20 +57,14 @@ class AddTaskView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 4.h,
-              ),
-              SizedBox(
-                height: 1.h,
-              ),
-              SizedBox(
-                height: 4.h,
+                height: 10.h,
               ),
               Text(
                 "Kelengkapan Acara",
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: semiBold,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
               SizedBox(
@@ -87,14 +80,17 @@ class AddTaskView extends StatelessWidget {
               Obx(() => DateTime(
                     // labelText: "Date",
                     valueText:
-                        controller.isChekTime.value == true || args == true
-                            ? DateFormat('dd MMM yyyy - HH:mm')
+                        controller.isChekTime.value == true || args == false
+                            ? DateFormat('dd MMMM yyyy - HH:mm')
                                 .format(controller.tanggal)
                             : "Tanggal Acara",
                     valueStyle: TextStyle(
-                      color: colorPrimary,
+                      color:
+                          controller.isChekTime.value == true || args == false
+                              ? colorBlack
+                              : colorPrimary,
                       fontWeight: semiBold,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                     onPressed: () {
                       controller.dateTimePicker(context);
@@ -115,7 +111,7 @@ class AddTaskView extends StatelessWidget {
                 inputController: controller.detailAgendaController,
               ),
               SizedBox(
-                height: 5.h,
+                height: 25.h,
               ),
               Button(
                 height: 6.h,

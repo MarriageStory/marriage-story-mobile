@@ -36,13 +36,13 @@ class CardEventHome extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      label,
+                      "Pernikahan $label",
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
                       style: fontNunito.copyWith(
                         color: colorPrimary,
                         fontWeight: semiBold,
-                        fontSize: 16,
+                        fontSize: 18,
                       ),
                     ),
                     Text(
@@ -51,7 +51,7 @@ class CardEventHome extends StatelessWidget {
                       style: fontNunito.copyWith(
                         color: colorPrimary,
                         fontWeight: medium,
-                        fontSize: 14,
+                        fontSize: 16,
                       ),
                     ),
                   ],
@@ -64,7 +64,8 @@ class CardEventHome extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 10),
                     child: Text(
                       task,
                       overflow: TextOverflow.ellipsis,

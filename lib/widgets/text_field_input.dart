@@ -10,11 +10,11 @@ class TextFieldInput extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: colorPink3, width: 1),
+          borderSide: const BorderSide(color: colorPink, width: 1),
           borderRadius: BorderRadius.circular(defaultBorderRadius),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: colorPink2, width: 0.5),
+          borderSide: const BorderSide(color: colorPink, width: 0.5),
           borderRadius: BorderRadius.circular(defaultBorderRadius),
         ),
         hintText: title,

@@ -21,7 +21,7 @@ class NumberForm extends StatelessWidget {
       decoration: InputDecoration(
         labelStyle: TextStyle(
           color: colorPrimary,
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: medium,
         ),
         labelText: label,

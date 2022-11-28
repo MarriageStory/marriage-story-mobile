@@ -6,6 +6,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/card_event.dart';
+import '../../../widgets/event_pack.dart';
 import '../../home/home.dart';
 import '../../task/task.dart';
 import '../event.dart';
@@ -119,36 +120,58 @@ class EventView extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              padding: const EdgeInsets.all(0),
-                              itemBuilder: (BuildContext context, int index) {
-                                var events = controllerEvent
-                                    .events.first.schedules[index];
-                                return Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 5),
-                                  child: CardTask(
-                                    onTap: () =>
-                                        // controllerTask
-                                        //     .validationDetailTask(events, false),
-                                        Get.toNamed(RouteName.detailTask,
-                                            arguments: events),
-                                    label: events.namaKegiatan,
-                                    date: DateFormat('dd MMM yyyy')
-                                        .format(events.datetime),
-                                    time: DateFormat('HH:mm')
-                                        .format(events.datetime),
-                                  ),
-                                );
-                              },
-                              itemCount: controllerEvent.events.isNotEmpty
-                                  ? controllerEvent
-                                      .events.first.schedules.length
-                                  : 0,
-                            ),
+                            controllerEvent.events.isNotEmpty
+                                ? ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.all(0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      var events = controllerEvent
+                                          .events.first.schedules[index];
+                                      return Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: CardTask(
+                                          onTap: () =>
+                                              // controllerTask
+                                              //     .validationDetailTask(events, false),
+                                              Get.toNamed(RouteName.detailTask,
+                                                  arguments: events),
+                                          label: events.namaKegiatan,
+                                          date: DateFormat('dd MMM yyyy')
+                                              .format(events.datetime),
+                                          time: DateFormat('HH:mm')
+                                              .format(events.datetime),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: controllerEvent.events.isNotEmpty
+                                        ? controllerEvent
+                                            .events.first.schedules.length
+                                        : 0,
+                                  )
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/empty.png",
+                                        height: 50.w,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          "Masukan Kode Terlebih Dahulu",
+                                          style: fontNunito.copyWith(
+                                            color: colorBlack,
+                                            fontWeight: semiBold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
                           ],
                         ),
                       ),
@@ -204,14 +227,12 @@ class EventView extends StatelessWidget {
                               height: 1.h,
                             ),
                             Center(
-                              child: Obx(
-                                () => Text(
-                                  controller.events.length.toString(),
-                                  style: fontNunito.copyWith(
-                                    color: colorWhite,
-                                    fontWeight: bold,
-                                    fontSize: 30,
-                                  ),
+                              child: Text(
+                                controller.events.length.toString(),
+                                style: fontNunito.copyWith(
+                                  color: colorWhite,
+                                  fontWeight: bold,
+                                  fontSize: 30,
                                 ),
                               ),
                             ),
@@ -223,7 +244,6 @@ class EventView extends StatelessWidget {
                                 height: 6.h,
                                 width: 75.w,
                                 onTap: () {
-                                  // Get.toNamed(RouteName.addEvent);
                                   controller.formAddEvent();
                                 },
                                 colorBg: colorWhite.withOpacity(0.25),
@@ -265,45 +285,97 @@ class EventView extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            
-                            ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.all(0),
-                                itemBuilder: (BuildContext context, int index) {
-                                  String tanggal =
-                                      DateFormat('dd MMM yyyy')
-                                      .format(
-                                          controller
+                            controller.events.isEmpty
+                                ? Padding(
+                                    padding: EdgeInsets.only(top: 3.h),
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/empty.png",
+                                          height: 50.w,
+                                        ),
+                                        Center(
+                                          child: Text(
+                                            "Acara Kosong",
+                                            style: fontNunito.copyWith(
+                                              color: colorBlack,
+                                              fontWeight: semiBold,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.all(0),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      String tanggal =
+                                          DateFormat('dd MMMM yyyy').format(
+                                              controller
+                                                  .events[controller
+                                                      .selectedEvent
+                                                      .value = index]
+                                                  .datetime);
+                                      return Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: CardEvent(
+                                          label: controller
                                               .events[controller
                                                   .selectedEvent.value = index]
-                                              .datetime);
-                                  return Container(
-                                    margin:
-                                        const EdgeInsets.symmetric(vertical: 5),
-                                    child: CardEvent(
-                                      label: controller
-                                          .events[controller
-                                              .selectedEvent.value = index]
-                                          .namaClient,
-                                      date: tanggal,
-                                      allTask: controller
-                                          .events[index].schedules.length
-                                          .toString(),
-                                      eventPack: controller
-                                          .events[index].paket.first.deskripsi,
-                                      onTap: () => Get.toNamed(
-                                          RouteName.detailEvent,
-                                          arguments: controller.events[
-                                              controller.selectedEvent.value =
-                                                  index]),
-                                    ),
-                                  );
-                                },
-                                itemCount: controller.events.length,
-                              ),
-                            
+                                              .namaClient,
+                                          date: tanggal,
+                                          allTask: controller
+                                              .events[index].schedules.length
+                                              .toString(),
+                                          onTap: () => Get.toNamed(
+                                              RouteName.detailEvent,
+                                              arguments: controller.events[
+                                                  controller.selectedEvent
+                                                      .value = index]),
+                                          eventPack: FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: SizedBox(
+                                              width: 70.w,
+                                              child: GridView.builder(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                shrinkWrap: true,
+                                                padding:
+                                                    const EdgeInsets.all(0),
+                                                itemCount: controller
+                                                    .events[index].paket.length,
+                                                gridDelegate:
+                                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 3,
+                                                  crossAxisSpacing: 5.0,
+                                                  mainAxisSpacing: 5.0,
+                                                  childAspectRatio: 3.2,
+                                                ),
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index2) {
+                                                  return EventPack(
+                                                    label: controller
+                                                        .events[index]
+                                                        .paket[index2]
+                                                        .deskripsi,
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: controller.events.length,
+                                  ),
                           ],
                         ),
                       ),

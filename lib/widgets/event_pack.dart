@@ -13,7 +13,7 @@ class EventPack extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 6),
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: colorPrimary,
         ),
@@ -26,7 +26,7 @@ class EventPack extends StatelessWidget {
             style: fontNunito.copyWith(
               color: colorPrimary,
               fontWeight: semiBold,
-              fontSize: 11,
+              fontSize: 12,
             ),
           ),
         ),

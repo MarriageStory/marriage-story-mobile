@@ -35,7 +35,10 @@ class AddTransactionView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      controller.clearInput();
+                      Get.back();
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios_rounded,
                       color: colorBlack,
@@ -55,14 +58,14 @@ class AddTransactionView extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 9.h,
+                height: 10.h,
               ),
               Text(
                 "Kelengkapan Transaksi",
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: semiBold,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
               SizedBox(
@@ -73,40 +76,43 @@ class AddTransactionView extends StatelessWidget {
                 inputController: controller.namaPaymentTextController,
               ),
               SizedBox(
-                height: 3.h,
+                height: 1.5.h,
               ),
-              InputForm(
+              NumberForm(
                 label: "Total Pembayaran",
                 inputController: controller.totalPaymentTextController,
               ),
               SizedBox(
-                height: 3.h,
+                height: 1.5.h,
               ),
               Obx(() => DateTime(
                     // labelText: "Date",
                     valueText:
                         controller.isChekTime.value == true || args == false
-                            ? DateFormat('dd MMM yyyy - HH:mm')
+                            ? DateFormat('dd MMMM yyyy - HH:mm')
                                 .format(controller.tanggal)
                             : "Tanggal Acara",
                     valueStyle: TextStyle(
-                      color: colorPrimary,
+                      color:
+                          controller.isChekTime.value == true || args == false
+                              ? colorBlack
+                              : colorPrimary,
                       fontWeight: semiBold,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                     onPressed: () {
                       controller.dateTimePicker(context);
                     },
                   )),
               SizedBox(
-                height: 3.h,
+                height: 1.5.h,
               ),
               InputForm(
                 label: "Detail Pembayaran",
                 inputController: controller.detailPaymentTextController,
               ),
               SizedBox(
-                height: 5.h,
+                height: 25.h,
               ),
               Button(
                 height: 6.h,
