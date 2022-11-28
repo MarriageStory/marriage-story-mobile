@@ -29,9 +29,6 @@ class TaskController extends GetxController {
 
   DateTime tanggal = DateTime.now();
 
-  EventScheduleDataModel? view;
-  EventScheduleDataModel? viewTask;
-
   @override
   void onInit() {
     super.onInit();

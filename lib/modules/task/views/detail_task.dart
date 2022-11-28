@@ -163,7 +163,7 @@ class DetailTaskView extends StatelessWidget {
                                   confirmTextColor: colorWhite,
                                   buttonColor: colorPrimary,
                                   onConfirm: () {
-                                    controller.deleteTask(controller.view);
+                                    controller.deleteTask(task);
                                   },
                                   textCancel: "Kembali",
                                   cancelTextColor: colorPrimary,

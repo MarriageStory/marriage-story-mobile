@@ -219,17 +219,17 @@ class DetailPaymentView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Obx(() => Flexible(
-                                      child: Text(
-                                        event.paymentDetails.length.toString(),
-                                        overflow: TextOverflow.ellipsis,
-                                        style: fontNunito.copyWith(
-                                          color: colorPrimary,
-                                          fontWeight: bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    )),
+                                Flexible(
+                                  child: Text(
+                                    event.paymentDetails.length.toString(),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: fontNunito.copyWith(
+                                      color: colorPrimary,
+                                      fontWeight: bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                             Row(
