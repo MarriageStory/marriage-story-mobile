@@ -277,7 +277,7 @@ class DetailEventView extends StatelessWidget {
                             int.parse(event.totalPembayaran.toString()), 2),
                         keterangan: "Total Pembayaran :"),
                     SizedBox(
-                      height: 7.h,
+                      height: 10.h,
                     ),
                     homeController.user.value.roleId == 1
                         ? const SizedBox()
