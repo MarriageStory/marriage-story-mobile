@@ -3,11 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/models/schedule_model.dart';
 import 'package:marriage_story_mobile/modules/home/controllers/home_controller.dart';
-import 'package:marriage_story_mobile/modules/navigation/controllers/navigation_controller.dart';
-
 import '../../../models/event_model.dart';
 import '../../../models/payment_model.dart';
 import '../../../routes/app_pages.dart';

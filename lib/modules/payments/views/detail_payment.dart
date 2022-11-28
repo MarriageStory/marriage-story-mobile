@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
-import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/card_transaction.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
@@ -220,17 +219,17 @@ class DetailPaymentView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Flexible(
-                                  child: Text(
-                                    controller.payments.length.toString(),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: fontNunito.copyWith(
-                                      color: colorPrimary,
-                                      fontWeight: bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
+                                Obx(() => Flexible(
+                                      child: Text(
+                                        event.paymentDetails.length.toString(),
+                                        overflow: TextOverflow.ellipsis,
+                                        style: fontNunito.copyWith(
+                                          color: colorPrimary,
+                                          fontWeight: bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    )),
                               ],
                             ),
                             Row(

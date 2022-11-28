@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
-import 'package:marriage_story_mobile/routes/app_pages.dart';
 import 'package:marriage_story_mobile/widgets/button.dart';
 import 'package:marriage_story_mobile/widgets/button_outlined.dart';
-import 'package:marriage_story_mobile/widgets/card_task.dart';
 import 'package:marriage_story_mobile/widgets/detail_format.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../../../models/event_model.dart';
-import '../../../models/schedule_model.dart';
 import '../../home/home.dart';
 import '../task.dart';
 

@@ -23,10 +23,10 @@ class TransactionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (homeController.user.value.roleId == 3) {
-      paymentsView = data;
-    } else {
+    if (homeController.user.value.roleId == 1) {
       payments = data;
+    } else {
+      paymentsView = data;
     }
     return Scaffold(
       body: SingleChildScrollView(
@@ -67,36 +67,35 @@ class TransactionView extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              Text(
-                "Bukti Transaksi",
-                style: fontNunito.copyWith(
-                  color: colorBlack,
-                  fontWeight: semiBold,
-                  fontSize: 14,
-                ),
-              ),
-              SizedBox(
-                height: 3.h,
-              ),
+              // Text(
+              //   "Bukti Transaksi",
+              //   style: fontNunito.copyWith(
+              //     color: colorBlack,
+              //     fontWeight: semiBold,
+              //     fontSize: 14,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 3.h,
+              // ),
               Text(
                 "Total Transaksi :",
                 style: fontNunito.copyWith(
                   color: colorGrey,
                   fontWeight: medium,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
               Text(
                 payments != null
-                    ?
-                FormatAngka.convertToIdr(
+                    ? FormatAngka.convertToIdr(
                         int.parse(payments!.total.toString()), 2)
                     : FormatAngka.convertToIdr(
                         int.parse(paymentsView!.total.toString()), 2),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(
@@ -107,28 +106,30 @@ class TransactionView extends StatelessWidget {
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: semiBold,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
               Text(
                 payments != null
-                    ? DateFormat('dd MMM yyyy').format(payments!.datetime)
-                    : DateFormat('dd MMM yyyy').format(paymentsView!.datetime),
+                    ? DateFormat('EEEE, dd MMMM yyyy')
+                        .format(payments!.datetime)
+                    : DateFormat('EEEE, dd MMMM yyyy')
+                        .format(paymentsView!.datetime),
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(
                 height: 3.h,
               ),
               Text(
-                "Jam :",
+                "Jam Transaksi :",
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: semiBold,
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
               Text(
@@ -138,61 +139,60 @@ class TransactionView extends StatelessWidget {
                 style: fontNunito.copyWith(
                   color: colorBlack,
                   fontWeight: bold,
-                  fontSize: 16,
+                  fontSize: 18,
                 ),
               ),
               SizedBox(
-                height: 20.h,
+                height: 40.h,
               ),
               homeController.user.value.roleId == 1
-                  ?
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ButtonOutlined(
-                    height: 6.h,
-                    width: 40.w,
-                    onTap: () {
-                      // Get.toNamed(RouteName.addTask, arguments: task);
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ButtonOutlined(
+                          height: 6.h,
+                          width: 43.w,
+                          onTap: () {
+                            // Get.toNamed(RouteName.addTask, arguments: task);
                             controller.formEditTransaction(payments!);
-                    },
-                    label: "Edit",
-                    textColor: colorPrimary,
-                  ),
-                  Button(
-                    height: 6.h,
-                    width: 40.w,
-                    colorBg: colorPrimary,
-                    label: "Hapus",
-                    textColor: colorWhite,
-                    onTap: () => Get.defaultDialog(
-                      title: "Hapus Transaksi",
-                      titlePadding: const EdgeInsets.only(top: 30.0),
-                      textConfirm: "Hapus",
-                      confirmTextColor: colorWhite,
-                      buttonColor: colorPrimary,
-                      onConfirm: () {
-                              controller.deleteTransaction(payments!);
-                      },
-                      textCancel: "Kembali",
-                      cancelTextColor: colorPrimary,
-                      radius: 15,
-                      contentPadding: const EdgeInsets.all(30),
-                      content: Center(
-                        child: Text(
-                          "Apakah Anda Ingin Menghapus Agenda Ini?",
-                          style: fontNunito.copyWith(
-                            color: colorGrey,
-                            fontWeight: semiBold,
-                            fontSize: 16,
-                          ),
+                          },
+                          label: "Edit",
+                          textColor: colorPrimary,
                         ),
-                      ),
-                    ),
-                  )
-                ],
+                        Button(
+                          height: 6.h,
+                          width: 43.w,
+                          colorBg: colorPrimary,
+                          label: "Hapus",
+                          textColor: colorWhite,
+                          onTap: () => Get.defaultDialog(
+                            title: "Hapus Transaksi",
+                            titlePadding: const EdgeInsets.only(top: 30.0),
+                            textConfirm: "Hapus",
+                            confirmTextColor: colorWhite,
+                            buttonColor: colorPrimary,
+                            onConfirm: () {
+                              controller.deleteTransaction(payments!);
+                            },
+                            textCancel: "Kembali",
+                            cancelTextColor: colorPrimary,
+                            radius: 15,
+                            contentPadding: const EdgeInsets.all(30),
+                            content: Center(
+                              child: Text(
+                                "Apakah Anda Ingin Menghapus Agenda Ini?",
+                                style: fontNunito.copyWith(
+                                  color: colorGrey,
+                                  fontWeight: semiBold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     )
-                  : SizedBox()
+                  : const SizedBox()
             ],
           ),
         ),

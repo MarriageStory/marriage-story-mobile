@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:marriage_story_mobile/constants/theme.dart';
 
 class DateTime extends StatelessWidget {
-  // final String labelText;
   final String valueText;
   final TextStyle valueStyle;
   final VoidCallback onPressed;
-  // final Widget child;
 
   const DateTime({
     Key? key,
-    // required this.labelText,
     required this.valueText,
     required this.valueStyle,
     required this.onPressed,
   }) : super(key: key);
 
-  // const DateDropDown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

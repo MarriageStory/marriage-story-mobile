@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../constants/theme.dart';
-import '../../../models/event_model.dart';
 import '../../../widgets/button.dart';
 import '../../../widgets/input_form.dart';
 import '../../../widgets/number_form.dart';
-
 import '../payment.dart';
 import '../../../utils/date_time.dart';
 
