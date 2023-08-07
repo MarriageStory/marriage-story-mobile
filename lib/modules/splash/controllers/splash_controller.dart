@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:marriage_story_mobile/routes/app_pages.dart';
+import 'package:marriage_story_mobile/utils/storage.dart';
 
 class SplashController extends GetxController {
   @override
@@ -13,6 +14,8 @@ class SplashController extends GetxController {
       const Duration(seconds: 3),
       () {},
     );
-    Get.offAllNamed(RouteName.role);
+    Storage.hasData('token')
+        ? Get.offAllNamed(RouteName.navigation)
+        : Get.offAllNamed(RouteName.landing);
   }
 }

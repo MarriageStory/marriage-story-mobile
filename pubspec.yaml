@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.17.1 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,10 +31,14 @@ dependencies:
     sdk: flutter
   responsive_sizer: ^3.1.1
   get: ^4.6.5
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  get_storage: ^2.0.3
   cupertino_icons: ^1.0.2
+  flutter_multi_select_items: ^0.4.2
+  loading_animation_widget: ^1.2.0+3
+  image_picker: ^0.8.6
+  flutter_datetime_picker: ^1.5.1
+  intl: ^0.17.0
+  
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +50,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.11.0
 
+flutter_icons:
+  android: "launcher_icon"
+  image_path: "assets/icons/icon2.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

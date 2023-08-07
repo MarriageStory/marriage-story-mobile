@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:marriage_story_mobile/constants/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'routes/routes.dart';
 
-
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -20,18 +22,19 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return ResponsiveSizer(
-      builder: (context,orientation, screenType) {
+      builder: (context, orientation, screenType) {
         return GetMaterialApp(
           title: 'Marriage Story',
           theme: ThemeData(
-            fontFamily: 'Nunito'
+            fontFamily: 'Nunito',
+            primarySwatch: Colors.purple,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: AppPages.initial,
+          // initialRoute: AppPages.initial,
           getPages: AppPages.pages,
+          initialRoute: AppPages.initial,
         );
-      }
+      },
     );
   }
 }
-
